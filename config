@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/organized-thot/NixOS
+	fetch = +refs/heads/HEAD:refs/remotes/origin/HEAD
+	gh-resolved = base
