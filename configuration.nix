@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -90,17 +91,70 @@
     ];
   };
 
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Install firefox.
   programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+    "python3.12-django-3.1.14"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  ###  NIX
+    home-manager
+    flatpak
+  ###  SYSTEM
+    nodejs
+    wayland
+    #libsForQt5.qt5.qtwayland
+    #nil
+  ###  UTILITIES
+    bitwarden
+    ferdium
+    proxychains
+  ###  GIT
+    gh
+    eget
+    github-desktop
+    sublime-merge
+  ###  DEV
+    vscodium
+    #eclipse-theia
+    docker
+    podman-desktop
+    pods
+    distrobox
+    xpipe
+  ###  TEXT
+    #sublimetext4
+    obsidian
+    logseq
+    affine
+    silverbullet
+    nb
+  ###  CLI WEB
+    curl
+    wget
+    httpie
+    aria2
+    #htttrack
+  ###  WEB
+    nyxt
+    archivebox
+  ### AI
+    ollama
+    lmstudio
+    local-ai
+    n8n
+    open-webui
+    #librechat
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -112,6 +166,7 @@
   # };
 
   # List services that you want to enable:
+  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
