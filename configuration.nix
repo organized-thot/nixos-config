@@ -2,8 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, lib, nixpkgs, home-manager, ... }: {
+  imports = [ home-manager.nixosModules.default ];
+  ...
+}
 {
   imports =
     [ # Include the results of the hardware scan.
