@@ -1,35 +1,15 @@
 {
-  description = "My NixOS system with Home Manager and Garuda module";
+  description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
-
-    # Garuda module (assuming this is what you mean)
-    garuda.url = "github:garuda-linux/garuda-nixos-config";
-    garuda.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  
-  outputs = { self, nixpkgs, home-manager, garuda, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        ./hardware-configuration.nix
+  outputs = { self, nixpkgs }: {
 
-        # Home Manager as a module
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useUserPackages = true;
-          home-manager.users.nix = import ./home.nix;
-        }
+    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
-        # Garuda module (if it exports a nixos module)
-        garuda.nixosModules.default
-      ];
-    };
+    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+
   };
 }
