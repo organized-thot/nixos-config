@@ -2,15 +2,22 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, nixpkgs, home-manager, ... }: {
-  imports = [ home-manager.nixosModules.default ];
-  ...
-}
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    home-manager.nixosModules.home-manager
+  ];
+
+  # Enable flakes
+  nix.settings.experimental-features = "nix-command" "flakes"
+
+  # Enable Garuda NixOS module
+  garuda.enable = true;
+
+  # Enable ChaoticNyx repository
+  chaotic = {
+    enable = true;
+    enableNyx = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -92,9 +99,6 @@
     ];
   };
 
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -120,8 +124,10 @@
     bitwarden
     ferdium
     proxychains
+    rsync
   ###  GIT
     gh
+    hub
     eget
     github-desktop
     sublime-merge
@@ -140,6 +146,8 @@
     affine
     silverbullet
     nb
+    marksman # Required for Kate "Compile and Run cpp" external tool
+    nil # Required for Kate "Compile and Run cpp" external tool
   ###  CLI WEB
     curl
     wget
@@ -149,6 +157,7 @@
   ###  WEB
     nyxt
     archivebox
+    brave
   ### AI
     ollama
     lmstudio
