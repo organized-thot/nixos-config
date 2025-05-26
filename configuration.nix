@@ -8,7 +8,7 @@
   ];
 
   # Enable flakes
-  nix.settings.experimental-features = "nix-command" "flakes"
+  nix.settings.experimental-features = nix-command flakes
 
   # Enable Garuda NixOS module
   garuda.enable = true;
@@ -116,10 +116,14 @@
     home-manager
     flatpak
   ###  SYSTEM
+    fwupdmgr
+    dmidecode
     nodejs
     wayland
     #libsForQt5.qt5.qtwayland
     #nil
+  ### PLASMA
+    appstream
   ###  UTILITIES
     bitwarden
     ferdium
@@ -131,6 +135,9 @@
     eget
     github-desktop
     sublime-merge
+    gitkraken
+    ungit
+    git-extras
   ###  DEV
     vscodium
     #eclipse-theia
