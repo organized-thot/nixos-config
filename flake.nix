@@ -1,35 +1,28 @@
 {
-  description = "Garuda Linux NixOS module flake";
+  description = "NixOS configuration with Garuda, Home Manager, and Chaotic Nyx";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    garuda.url = "github:garuda-linux/garuda-nix";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { garuda, nixpkgs, chaotic, ... }: {
-    nixosConfigurations = {
-      nixos = garuda.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          ./garuda-configuration.nix # Your system configuration.
-          chaotic.nixosModules.default 
-        ];
-      };
+  outputs = { self, nixpkgs, home-manager, garuda, chaotic }: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hardware-configuration.nix
+        ./configuration.nix
+        garuda.nixosModules.default
+        chaotic.nixosModules.chaotic-nyx
+      ];
     };
-    homeConfigurations = {
-      configName = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          ./home-manager-modules/default.nix
-          chaotic.homeManagerModules.default
-        ];
-      };
+
+    homeConfigurations.nix = home-manager.lib.homeConfiguration {
+      system = "x86_64-linux";
+      username = "nix";
+      configuration = import ~/.config/nixpkgs/home.nix;
     };
   };
 }
