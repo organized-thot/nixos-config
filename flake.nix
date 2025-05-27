@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    garuda.url = "github:garuda-linux/garuda-nix";
+    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
@@ -14,15 +14,16 @@
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix
-        garuda.nixosModules.default
+        garuda.nixosModules.garuda
         chaotic.nixosModules.chaotic-nyx
+        home-manager.nixosModules.home-manager
       ];
     };
 
     homeConfigurations.nix = home-manager.lib.homeConfiguration {
       system = "x86_64-linux";
       username = "nix";
-      configuration = import ~/.config/nixpkgs/home.nix;
+      configuration = import /home/nix/.config/nixpkgs/home.nix;
     };
   };
 }
