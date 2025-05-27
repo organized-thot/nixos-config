@@ -1,24 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{
-  imports = [
-    home-manager.nixosModules.home-manager
-  ];
-
-  # Enable flakes
-  nix.settings.experimental-features = nix-command flakes
-
-  # Enable Garuda NixOS module
-  garuda.enable = true;
-
-  # Enable ChaoticNyx repository
-  chaotic = {
-    enable = true;
-    enableNyx = true;
-  };
-
+{ config, lib, pkgs, ... }: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -52,19 +35,33 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # Enable flakes
+  nix.settings.experimental-features.enable = [ "nix-command" "flakes" ];
+
+  imports = [];
+
+  # Enable Garuda NixOS module
+  garuda.enable = true;
+
+  # Enable ChaoticNyx repository
+  chaotic = {
+    enable = true;
+    enableNyx = true;
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Enable the X11 windowing system
+  services.xserver.enable = true;
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+
+  services.wayland.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -93,14 +90,7 @@
     isNormalUser = true;
     description = "nix";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -111,67 +101,18 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ###  NIX
+  environment.systemPackages.pkgs = [
     home-manager
-    flatpak
-  ###  SYSTEM
-    fwupdmgr
-    dmidecode
-    nodejs
-    wayland
-    #libsForQt5.qt5.qtwayland
-    #nil
-  ### PLASMA
-    appstream
-  ###  UTILITIES
-    bitwarden
-    ferdium
-    proxychains
+    chaotic-nyx
+    git
     rsync
-  ###  GIT
-    gh
-    hub
-    eget
-    github-desktop
-    sublime-merge
-    gitkraken
-    ungit
-    git-extras
-  ###  DEV
-    vscodium
-    #eclipse-theia
-    docker
-    podman-desktop
-    pods
-    distrobox
-    xpipe
-  ###  TEXT
-    #sublimetext4
-    obsidian
-    logseq
-    affine
-    silverbullet
-    nb
-    marksman # Required for Kate "Compile and Run cpp" external tool
-    nil # Required for Kate "Compile and Run cpp" external tool
-  ###  CLI WEB
+    proxychains
     curl
     wget
-    httpie
-    aria2
-    #htttrack
-  ###  WEB
-    nyxt
-    archivebox
-    brave
-  ### AI
-    ollama
-    lmstudio
-    local-ai
-    n8n
-    open-webui
-    #librechat
+    fwupdmgr
+    dmidecode
+    wayland
+    #libsForQt5.qt5.qtwayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -181,9 +122,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -201,5 +139,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
