@@ -1,22 +1,36 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, lib, pkgs, ... }: {
-  # Bootloader.
+{ config, lib, pkgs, ... }:
+let
+  username = "nix";
+in
+{
+# BOOTLOADER
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.devices = [ "/dev/nvme0n1" "/dev/nvme1n1" ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-af0953e8-4082-4b8e-be3b-d147df43a908".device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+# NETWORKING
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # Set hostname
+  networking.hostName = "nixos";
+
+  # Enable wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
+# LOCALE AND TIME ZONE
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -35,34 +49,42 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+# NIXOS OPTIONS
   # Enable flakes
   nix.settings.experimental-features.enable = [ "nix-command" "flakes" ];
-
-  imports = [];
 
   # Enable Garuda NixOS module
   garuda.enable = true;
 
   # Enable ChaoticNyx repository
-  chaotic = {
-    enable = true;
-    enableNyx = true;
-  };
+  chaotic.enable = true;
+  chaotic.enableNyx = true;
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+    "python3.12-django-3.1.14"
+  ];
+
+# DESKTOP ENVIRONMENT
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Enable the X11 windowing system
   services.xserver.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
+  # Enable Wayland
   services.wayland.enable = true;
 
+# HARDWARE AND DEVICES
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -85,33 +107,36 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+# USERS
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nix = {
+    passwd = "lazulinux";
     isNormalUser = true;
     description = "nix";
     extraGroups = [ "networkmanager" "wheel" ];
+    homeManager.enable = true;
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-    "python3.12-django-3.1.14"
-  ];
-
+# SYSTEM PACKAGES
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages.pkgs = [
-    home-manager
-    chaotic-nyx
-    git
-    rsync
-    proxychains
-    curl
-    wget
-    fwupdmgr
-    dmidecode
-    wayland
+  environment.systemPackages = [
+    pkgs.home-manager
+    pkgs.tailscale
+    pkgs.nixfmt-tree
+    pkgs.rippkgs
+    pkgs.rippkgs-index
+    pkgs.nixpkgs-manual
+    pkgs.git
+    pkgs.rsync
+    pkgs.proxychains
+    pkgs.curl
+    pkgs.wget
+    pkgs.fwupd
+    pkgs.dmidecode
+    pkgs.kdePackages.wayland
+    pkgs.kdePackages.plasma-wayland-protocols
+    pkgs.wayland-utils
     #libsForQt5.qt5.qtwayland
   ];
 
