@@ -1,5 +1,6 @@
 {
   "nodes": {
+<<<<<<< HEAD
     "catppuccin": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -482,17 +483,29 @@
         "lastModified": 1748026106,
         "narHash": "sha256-6m1Y3/4pVw1RWTsrkAK2VMYSzG4MMIj7sqUy7o8th1o=",
         "owner": "NixOS",
+=======
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1748026106,
+        "narHash": "sha256-6m1Y3/4pVw1RWTsrkAK2VMYSzG4MMIj7sqUy7o8th1o=",
+        "owner": "nixos",
+>>>>>>> 369badd25 (Initial commit)
         "repo": "nixpkgs",
         "rev": "063f43f2dbdef86376cc29ad646c45c46e93234c",
         "type": "github"
       },
       "original": {
+<<<<<<< HEAD
         "owner": "NixOS",
+=======
+        "owner": "nixos",
+>>>>>>> 369badd25 (Initial commit)
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "nixpkgs_5": {
       "locked": {
         "lastModified": 1748190013,
@@ -577,6 +590,11 @@
         "ref": "nightly",
         "repo": "rust-analyzer",
         "type": "github"
+=======
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+>>>>>>> 369badd25 (Initial commit)
       }
     }
   },
