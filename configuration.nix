@@ -7,14 +7,15 @@ let
 in
 {
 # BOOTLOADER
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.devices = [ "/dev/nvme0n1" "/dev/nvme1n1" ];
+  boot.loader.grub.devices = [ "nodev" ];
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.useOSProber = true;
+#  boot.loader.systemd-boot.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.initrd.luks.devices."luks-af0953e8-4082-4b8e-be3b-d147df43a908".device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
+#  boot.initrd.luks.devices."luks-af0953e8-4082-4b8e-be3b-d147df43a908".device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
 
 # NETWORKING
   # Enable networking
@@ -122,34 +123,31 @@ in
   # $ nix search wget
   environment.systemPackages = [
     pkgs.home-manager
-    pkgs.tailscale
     pkgs.nixfmt-tree
     pkgs.rippkgs
     pkgs.rippkgs-index
     pkgs.nixpkgs-manual
     pkgs.git
-    pkgs.rsync
-    pkgs.proxychains
-    pkgs.curl
-    pkgs.wget
+    pkgs.dbus-launch
     pkgs.fwupd
     pkgs.dmidecode
     pkgs.kdePackages.wayland
     pkgs.kdePackages.plasma-wayland-protocols
     pkgs.wayland-utils
-    #libsForQt5.qt5.qtwayland
+    pkgs.libsForQt5.qt5.qtwayland
+    pkgs.gdb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
