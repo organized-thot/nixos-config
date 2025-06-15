@@ -13,28 +13,41 @@
 
     # Chaotic Nyx module
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
   };
 
-  outputs = { self, nixpkgs, home-manager, garuda, chaotic }: {
-    # Define NixOS system configuration
-    nixosConfigurations.nixos = {
-      nixos = nixpkgs.lib.nixosSystem;
-      garuda = garuda.lib.garudaSystem;
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        ./hardware-configuration.nix
-        home-manager.nixosModules.home-manager
-        chaotic.nixosModules.chaotic-nyx
-      ];
+  outputs = { self, nixpkgs, home-manager, garuda, chaotic, ... }:
+  let
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hardware-configuration.nix
+          ./configuration.nix
+          chaotic.nixosModules.chaotic-nyx
+        ];
+      };
+
+      # Optionally define a Garuda configuration
+      garuda = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          garuda.nixosModules.default
+          ./configuration.nix
+        ];
+      };
     };
 
     # Define Home Manager configuration
-    homeConfigurations.nix = home-manager.lib.homeConfiguration {
-      system = "x86_64-linux";
-      username = "nix";
-      configuration = import /home/nix/.config/nixpkgs/home.nix;
+    homeConfigurations = {
+      nix = home-manager.lib.homeManagerConfiguration {
+        inherit system;
+        username = "nix";
+        homeDirectory = "/home/nix";
+        configuration = import ./home.nix;
+        pkgs = import nixpkgs { inherit system; };
+      };
     };
   };
 }
