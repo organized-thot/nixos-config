@@ -5,16 +5,21 @@
 let
   username = "nix";
 in
-{
 # BOOTLOADER
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-#  boot.loader.systemd-boot.enable = true;
+{
+  boot.loader = {
+    systemd-boot.enable = false;  # Ensure systemd-boot is off
+    grub = {
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      devices = [ "nodev" ];  # Use nodev for EFI systems
+      useOSProber = true;    # Enables Windows detection
+    };
+  };
+}
 
+#  boot.loader.efi.canTouchEfiVariables = true;
 #  boot.initrd.luks.devices."luks-af0953e8-4082-4b8e-be3b-d147df43a908".device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
 
 # NETWORKING
@@ -122,6 +127,7 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
+    pkgs.os-prober
     pkgs.home-manager
     pkgs.nixfmt-tree
     pkgs.rippkgs
