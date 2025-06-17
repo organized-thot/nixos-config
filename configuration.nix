@@ -1,12 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, lib, pkgs, ... }:
-let
-  username = "nix";
-in
-# BOOTLOADER
+{ config, lib, pkgs,... }:
+
 {
+  # BOOTLOADER
   boot.loader = {
     systemd-boot.enable = false;  # Ensure systemd-boot is off
     grub = {
@@ -17,12 +12,8 @@ in
       useOSProber = true;    # Enables Windows detection
     };
   };
-}
 
-#  boot.loader.efi.canTouchEfiVariables = true;
-#  boot.initrd.luks.devices."luks-af0953e8-4082-4b8e-be3b-d147df43a908".device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
-
-# NETWORKING
+  # NETWORKING
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -36,7 +27,7 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-# LOCALE AND TIME ZONE
+  # LOCALE AND TIME ZONE
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -55,16 +46,19 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-# NIXOS OPTIONS
+  # NIXOS OPTIONS
   # Enable flakes
-  nix.settings.experimental-features.enable = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable Garuda NixOS module
-  garuda.enable = true;
+#  garuda.enable = true;
 
-  # Enable ChaoticNyx repository
-  chaotic.enable = true;
-  chaotic.enableNyx = true;
+  # Enable Chaotic AUR
+  services.chaotic.enable = true;
+  services.chaotic.mirror = {
+    country = "usa";
+    branch = "stable";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -73,7 +67,7 @@ in
     "python3.12-django-3.1.14"
   ];
 
-# DESKTOP ENVIRONMENT
+  # DESKTOP ENVIRONMENT
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -90,7 +84,7 @@ in
   # Enable Wayland
   services.wayland.enable = true;
 
-# HARDWARE AND DEVICES
+  # HARDWARE AND DEVICES
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -113,7 +107,7 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-# USERS
+  # USERS
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nix = {
     passwd = "lazulinux";
@@ -123,7 +117,7 @@ in
     homeManager.enable = true;
   };
 
-# SYSTEM PACKAGES
+  # SYSTEM PACKAGES
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
@@ -156,8 +150,8 @@ in
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [... ];
+  # networking.firewall.allowedUDPPorts = [... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -167,5 +161,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
