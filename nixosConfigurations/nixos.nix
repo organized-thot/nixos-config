@@ -19,12 +19,20 @@ let
         chaotic.nixosModules.default
       ];
       ;
+      users = {
+        users = {
+          nix = {
+            isNormalUser = true;
+            password = "lazulinux";
+          };
+        };
       };
-      };
-      in
-      inputs.nixpkgs.lib.nixosSystem {
-      modules = [
-        nixosModule
-      ];
-      system = "x86_64-linux";
-    }
+    };
+  };
+in
+inputs.nixpkgs.lib.nixosSystem {
+  modules = [
+    nixosModule
+  ];
+  system = "x86_64-linux";
+}
