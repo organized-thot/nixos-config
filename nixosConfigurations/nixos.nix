@@ -25,9 +25,17 @@ let
     };
   };
 in
-inputs.nixpkgs.lib.nixosSystem {
-  modules = [
-    nixosModule
-  ];
-  system = "x86_64-linux";
+	inputs.nixpkgs.lib.nixosSystem {
+	  modules = [
+	    nixosModule
+	  ];
+	  system = "x86_64-linux";
+	};
+	inputs.garuda.lib.garudaSystem {
+	  system = "x86_64-linux";
+	  modules = [
+	    configuration.nix
+	  ];
+	};
+      };
 }
