@@ -50,7 +50,7 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Enable Garuda NixOS module
+  # Enable Garuda NixOS module - Removed from here, handled in nixos.md via imports
 #  garuda.enable = true;
 
   # Enable Chaotic AUR
