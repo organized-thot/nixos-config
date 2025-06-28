@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "flake:nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    garuda.url = "github:garuda-linux/garuda-nix-subsystem/stable";
+    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
   outputs = inputs:

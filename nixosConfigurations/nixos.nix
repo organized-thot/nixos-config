@@ -18,14 +18,9 @@ let
         # Enable Chaotic Nyx repository
         chaotic.nixosModules.default
       ];
-      ;
-      users = {
-        users = {
-          nix = {
-            isNormalUser = true;
-            password = "lazulinux";
-          };
-        };
+      users.users.nix = {
+        isNormalUser = true;
+        password = "lazulinux";
       };
     };
   };
