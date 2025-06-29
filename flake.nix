@@ -14,7 +14,7 @@
           modules = [
             # Pass all inputs to the module
             ({ ... }: { inherit inputs; })
-            ./nixos.md # This now imports your main NixOS configuration module
+            ./nixos.nix # This now imports your main NixOS configuration module
           ];
         };
       };
