@@ -85,15 +85,104 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  services.flatpak.enable = true;
+
+  services = {
+    ollama.enable = true;  
+    
+    n8n = {
+      enable = true;
+      openFirewall = true;
+    };
+    
+    neo4j.enable = true;
+    open-webui.enable = true;
+
+    mongodb = {
+      enable = true;
+      user = "nix";
+    };
+
+    tiddlywiki.enable = true;
+  };
+
 # PACKAGES
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     os-prober
-    git
-    wget
+    disko
+    timeshift
+    phantomsocks
     bat    
+    git
+    python
+    python313Packages.yarg
+    nodejs_24
+    pnpm
+    packagekit
+    libappimage
+    appimage-run 
+    appimageupdate
+    wget
+    eget
+    curl
+    curlie
+    wcurl
+    curl-impersonate
+    httpie
+    python313Packages.markitdown    
+    kdePackages.kbookmarks
+    kdePackages.keditbookmarks
+    kdePackages.baloo
+    kdePackages.milou
+    kdePackages.akonadi
+    kdePackages.zanshin
+    kdePackages.yakuake
+    kdePackages.purpose
+    kdePackages.discover
+    kdePackages.umbrello
+    kdePackages.libkgapi
+    kdePackages.plasma-nm
+    kdePackages.konqueror
+    vivaldi
+    screen-pipe
+    ollama
+    local-ai
+    n8n
+    fabric-ai
+    neo4j
+    neo4j-desktop   
+    python313Packages.graphrag
+    open-webui
+    mongodb
+    python313Packages.huggingface-hub
+    python313Packages.langchain-huggingface
+    python313Packages.llama-index-embeddings-huggingface
+    python313Packages.langchain
+    python313Packages.llama-index
+    obsidian
+    logseq
+    affine
+    tana
+    katana
+    scraper
+    schemacrawler
+    python313Packages.firecrawl.py
+    xcrawl3r
+    crawley
+    archivebox
+    nodePackages.tiddlywiki
+    distrobox
+    distrobox-tui
+    podman
+    podman-tui
+    podman-desktop
+    docker
+    telegram-desktop
+    protege-distribution
+    home-assistant
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -104,6 +193,13 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  virtualisation.podman.enable = true;
 
   nix.settings = {
     substituters = [
