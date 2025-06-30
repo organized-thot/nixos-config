@@ -1,165 +1,134 @@
-{ config, lib, pkgs,... }:
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{ config, pkgs, ... }:
 
 {
-  # BOOTLOADER
+  # Bootloader for Windows dual boot (GRUB + EFI)
   boot.loader = {
-    systemd-boot.enable = false;  # Ensure systemd-boot is off
+    efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
       version = 2;
       efiSupport = true;
-      devices = [ "nodev" ];  # Use nodev for EFI systems
-      useOSProber = true;    # Enables Windows detection
+      devices = [ "nodev" ];
+      useOSProber = true;
     };
   };
 
-  # NETWORKING
+  # Users
+  users.users.nix = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+#   packages = with pkgs; [
+#     tree
+#   ];
+
+  };
+
+  # Set your time zone.
+  time.timeZone = "America/Chicago";
+
+  # Internationalisation
+  il8n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
+
   # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set hostname
+  networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
   networking.hostName = "nixos";
-
-  # Enable wireless support via wpa_supplicant.
-  # networking.wireless.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # LOCALE AND TIME ZONE
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # NIXOS OPTIONS
-  # Enable flakes
+  # Enable flakes and nix-command
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Enable Garuda NixOS module - Removed from here, handled in nixos.md via imports
-#  garuda.enable = true;
-
-  # Enable Chaotic AUR
-  services.chaotic.enable = true;
-  services.chaotic.mirror = {
-    country = "usa";
-    branch = "stable";
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-    "python3.12-django-3.1.14"
-  ];
 
-  # DESKTOP ENVIRONMENT
-  # Enable the KDE Plasma Desktop Environment.
+  # Desktop environment
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.xserver.enable = true; # Enable the X11 windowing system
+  services.xserver.xkb.layout = "us"; # Configure X11 keymap
 
-  # Enable the X11 windowing system
-  services.xserver.enable = true;
+  # Enable Garuda dr460nized desktop
+  garuda.dr460nized.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable Wayland
-  services.wayland.enable = true;
-
-  # HARDWARE AND DEVICES
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
+  # Enable Pipewire audio
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
+
+# SERVICES
+
+  # Enable CUPS to print documents
+  services.printing.enable = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # services.libinput.enable = true;
 
-  # USERS
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nix = {
-    passwd = "lazulinux";
-    isNormalUser = true;
-    description = "nix";
-    extraGroups = [ "networkmanager" "wheel" ];
-    homeManager.enable = true;
-  };
+# PACKAGES
 
-  # SYSTEM PACKAGES
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-    pkgs.os-prober
-    pkgs.home-manager
-    pkgs.nixfmt-tree
-    pkgs.rippkgs
-    pkgs.rippkgs-index
-    pkgs.nixpkgs-manual
-    pkgs.git
-    pkgs.dbus-launch
-    pkgs.fwupd
-    pkgs.dmidecode
-    pkgs.kdePackages.wayland
-    pkgs.kdePackages.plasma-wayland-protocols
-    pkgs.wayland-utils
-    pkgs.libsForQt5.qt5.qtwayland
-    pkgs.gdb
+  environment.systemPackages = with pkgs; [
+    os-prober
+    git
+    wget
+    bat    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
+  programs.firefox.enable = true;
+  # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [... ];
-  # networking.firewall.allowedUDPPorts = [... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
+
 }
+
