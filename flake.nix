@@ -12,7 +12,7 @@
   outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }:
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        nixos = garuda.lib.garudaSystem {
           system = "x86_64-linux";
           modules = [
 	    ./hardware-configuration.nix
@@ -20,7 +20,6 @@
 	    ./home-manager.nix
 	    home-manager.nixosModules.home-manager
 	    chaotic.nixosModules.default
-	    garuda.nixosModules.garudaLinux
 	  ];
 	  specialArgs = { inherit home-manager chaotic garuda; };
         };
