@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  # Bootloader for Windows dual boot (GRUB + EFI)
+# Bootloader for Windows dual boot (GRUB + EFI)
   boot.loader = {
     efi.canTouchEfiVariables = true;
     grub = {
@@ -16,28 +16,13 @@
     };
   };
 
-  # Users
-  users.users.nix = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-#   packages = with pkgs; [
-#     tree
-#   ];
+# Locale
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  };
-
-  # Set your time zone.
+# Time zone
   time.timeZone = "America/Chicago";
 
-  # Internationalisation
-  i18n.defaultLocale = "en_US.UTF-8";
-#  console = {
-#    font = "Lat2-Terminus16";
-#    keyMap = "us";
-#    useXkbConfig = true; # use xkb.options in tty.
-#  };
-
-  # Enable networking
+# Networking
   networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
   networking.hostName = "nixos";
 
@@ -51,159 +36,15 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Enable flakes and nix-command
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Desktop environment
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.xserver.enable = true; # Enable the X11 windowing system
-  services.xserver.xkb.layout = "us"; # Configure X11 keymap
-
-  # Enable Garuda dr460nized desktop
-  garuda.dr460nized.enable = true;
-
-  # Enable Pipewire audio
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+# Virtualisation
+  virtualisation = {
+    podman.enable = true;
+    docker.enable = true;
   };
 
-# SERVICES
-
-  # Enable CUPS to print documents
-  services.printing.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  services.flatpak.enable = true;
-
-  services = {
-    ollama.enable = true;  
-    
-    n8n = {
-      enable = true;
-      openFirewall = true;
-    };
-    
-    neo4j.enable = true;
-    open-webui.enable = true;
-
-    mongodb = {
-      enable = true;
-      user = "nix";
-    };
-
-    tiddlywiki.enable = true;
-  };
-
-# PACKAGES
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    os-prober
-    disko
-    timeshift
-    phantomsocks
-    bat    
-    git
-    python312
-    python313
-    python313Packages.yarg
-    nodejs_24
-    pnpm
-    packagekit
-    libappimage
-    appimage-run 
-    appimageupdate
-    wget
-    eget
-    curl
-    curlie
-    wcurl
-    curl-impersonate
-    httpie
-    python313Packages.markitdown    
-    kdePackages.kbookmarks
-    kdePackages.keditbookmarks
-    kdePackages.baloo
-    kdePackages.milou
-    kdePackages.akonadi
-    kdePackages.zanshin
-    kdePackages.yakuake
-    kdePackages.purpose
-    kdePackages.discover
-    # kdePackages.umbrello # marked as broken
-    kdePackages.libkgapi
-    kdePackages.plasma-nm
-    kdePackages.konqueror
-    vivaldi
-    screen-pipe
-    ollama
-    local-ai
-    n8n
-    fabric-ai
-    neo4j
-    neo4j-desktop   
-    python313Packages.gensim
-    python313Packages.graphrag
-    open-webui
-    mongodb
-    python313Packages.huggingface-hub
-    python313Packages.langchain-huggingface
-    python313Packages.llama-index-embeddings-huggingface
-    python313Packages.langchain
-    python313Packages.llama-index
-    obsidian
-    logseq
-    affine
-    tana
-    katana
-    scraper
-    schemacrawler
-    python313Packages.firecrawl-py
-    xcrawl3r
-    crawley
-    archivebox
-    nodePackages.tiddlywiki
-    distrobox
-    distrobox-tui
-    podman
-    podman-tui
-    podman-desktop
-    docker
-    telegram-desktop
-    protege-distribution
-    home-assistant
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.firefox.enable = true;
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-
-  virtualisation.podman.enable = true;
-
+# Nix Settings
   nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
     substituters = [
       "https://nix-community.cachix.org"
       "https://chaotic-nyx.cachix.org"
@@ -216,6 +57,207 @@
       "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
     ];
   };
+
+# Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+# System Packages
+  environment.systemPackages = with pkgs; [
+    docker
+    meilisearch
+
+  # Command-line tools
+    git
+    gh
+    bat
+    wget
+    phantomsocks
+    docker
+
+  # Disk management    
+    os-prober
+    disko
+    timeshift
+
+  # Package sources
+    python313
+    python313Packages.yarg
+    nodejs_24
+    pnpm
+    flatpak
+    packagekit
+    libappimage
+    appimage-run 
+    appimageupdate
+
+  # KDE Packages
+    kdePackages = [
+      baloo
+      milou
+      yakuake
+      discover
+      plasma-nm
+      konqueror
+    ]; 
+  ];
+
+# Users
+  users.users.nix = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+
+  # User Packages
+    packages = with pkgs; [
+      vivaldi
+      telegram-desktop
+      protege-distribution
+      home-assistant
+
+    # KDE Software
+      kdePackages = [
+        kbookmarks
+        keditbookmarks
+        akonadi
+        zanshin
+        purpose
+        # umbrello # marked as broken      
+        libkgapi
+      ];
+
+    # PKM Tools
+      obsidian
+      logseq
+      affine
+      tana
+      karakeep
+ 
+    # Web Scraping
+      eget
+      curl
+      curlie
+      wcurl
+      curl-impersonate
+      httpie
+      katana
+      scraper
+      schemacrawler
+      xcrawl3r
+      crawley
+      python313Packages.firecrawl-py    
+      archivebox
+      nodePackages.tiddlywiki
+    
+    # AI
+      ollama
+      local-ai
+      n8n
+      fabric-ai
+      neo4j
+      neo4j-desktop   
+      open-webui
+      mongodb
+      
+    # PyPi Packages
+      python313Packages = [
+        markitdown
+        # AI Tools
+        huggingface-hub
+        langchain
+        langchain-huggingface
+        llama-index
+        llama-index-embeddings-huggingface
+        firecrawl-py
+        gensim
+        graphrag
+        screen-pipe
+      ];
+
+    # Containerization
+      distrobox
+      distrobox-tui
+      podman
+      podman-tui
+      podman-desktop
+    ];
+  };
+
+# Some programs need SUID wrappers, can be configured further or are started in user sessions.
+
+  programs.firefox.enable = true;
+
+  # programs.mtr.enable = true;
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+# Enable Garuda dr460nized desktop
+  garuda.dr460nized.enable = true;
+
+# Services
+  services = {
+  # Desktop environment
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+    xserver = {
+      enable = true; # Enable the X11 windowing system
+      xkb.layout = "us"; # Configure X11 keymap
+    };
+
+  # Audio
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+  # Touchpad support (enabled default in most desktopManager).
+    # services.libinput.enable = true;
+  
+  # Printing via CUPS
+    printing.enable = true;
+
+  # OpenSSH daemon
+    openssh.enable = true;
+
+  # Flatpak support
+    flatpak.enable = true;
+
+  # Meilisearch
+    meilisearch.enable = true;
+
+  # AI Tools
+    mongodb = {
+      enable = true;
+      user = "nix";
+    };
+
+    n8n = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    neo4j.enable = true;
+
+    ollama.enable = true;  
+
+    open-webui.enable = true;
+
+  # TiddlyWiki
+    tiddlywiki.enable = true;
+
+  # Karakeep
+    karakeep.enable = true;
+  };
+
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
