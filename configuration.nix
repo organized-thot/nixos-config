@@ -169,7 +169,7 @@
     katana
     scraper
     schemacrawler
-    python313Packages.firecrawl.py
+    python313Packages.firecrawl-py
     xcrawl3r
     crawley
     archivebox
