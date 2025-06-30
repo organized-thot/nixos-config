@@ -20,7 +20,6 @@
 	    ./home-manager.nix
 	    home-manager.nixosModules.home-manager
 	    chaotic.nixosModules.default
-	    garuda.nixosModules.garudaLinux
 	  ];
 	  specialArgs = { inherit home-manager chaotic garuda; };
         };
