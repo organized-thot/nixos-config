@@ -117,7 +117,7 @@
     phantomsocks
     bat    
     git
-    python
+    python313
     python313Packages.yarg
     nodejs_24
     pnpm
