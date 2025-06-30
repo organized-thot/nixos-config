@@ -142,7 +142,7 @@
     kdePackages.yakuake
     kdePackages.purpose
     kdePackages.discover
-    kdePackages.umbrello
+    # kdePackages.umbrello # marked as broken
     kdePackages.libkgapi
     kdePackages.plasma-nm
     kdePackages.konqueror
