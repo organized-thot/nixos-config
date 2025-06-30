@@ -2,7 +2,7 @@
   description = "NixOS configuration with Home Manager, Chaotic Nyx, and Garuda Linux NixOS submodule enabled.";
 
   inputs = {
-    nixpkgs.url = "github:nixpkgs/nixos-unstable"; # Use nixpkgs-unstable for latest
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Use nixpkgs-unstable for latest
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
