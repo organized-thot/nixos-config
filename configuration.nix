@@ -105,6 +105,20 @@
     enableSSHSupport = true;
   };
 
+  nix.settings = {
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://chaotic-nyx.cachix.org"
+      "https://nyx.chaotic.cx"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      # Existing keys...
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+    ];
+  };
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
