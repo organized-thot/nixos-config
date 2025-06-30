@@ -155,7 +155,7 @@
     fabric-ai
     neo4j
     neo4j-desktop   
-    python313Packages.graphrag
+    python312Packages.graphrag
     open-webui
     mongodb
     python313Packages.huggingface-hub
