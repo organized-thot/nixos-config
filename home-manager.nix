@@ -3,12 +3,19 @@
 
 {
   home-manager.users.nix = { pkgs, ... }: {
-    home.stateVersion = "25.05";
+    imports = config.garuda.home-manager.modules or [];
+
+# Custom Home Manager settings
+
     programs.zsh.enable = true;
     programs.git = {
       enable = true;
       userName = "Organized Thot";
       userEmail = "189394231+organized-thot@users.noreply.github.com";
     };
+
+    # Additional custom Home Manager modules and settings
+
+    home.stateVersion = "25.05";
   };
 }
