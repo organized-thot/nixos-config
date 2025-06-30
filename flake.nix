@@ -17,7 +17,6 @@
           modules = [
 	    ./hardware-configuration.nix
 	    ./configuration.nix
-	    home-manager.nixosModules.home-manager
 	  ];
 	  specialArgs = { inherit home-manager chaotic garuda; };
         };
