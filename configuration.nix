@@ -32,11 +32,11 @@
 
   # Internationalisation
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
+#  console = {
+#    font = "Lat2-Terminus16";
+#    keyMap = "us";
+#    useXkbConfig = true; # use xkb.options in tty.
+#  };
 
   # Enable networking
   networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
