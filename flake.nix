@@ -1,21 +1,28 @@
 {
   description = "NixOS configuration with Home Manager, Chaotic Nyx, and Garuda Linux NixOS submodule enabled.";
+
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable"; # Use nixpkgs-unstable for latest
+    nixpkgs.url = "github:nixpkgs/nixos-unstable"; # Use nixpkgs-unstable for latest
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
+
   outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }:
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            # Pass all inputs to the module
-            ({ ... }: { inherit inputs; })
-            ./nixos.nix # This now imports your main NixOS configuration module
-          ];
+	    ./hardware-configuration.nix
+	    ./configuration.nix
+	    ./home-manager.nix
+	    home-manager.nixosModules.home-manager
+	    chaotic.nixosModules.default
+	    garuda.nixosModules.garudaLinux
+	  ];
+	  specialArgs = { inherit home-manager chaotic garuda; };
         };
       };
     };
