@@ -117,6 +117,7 @@
   # Display and desktop environment
     kdePackages.wayland
     kdePackages.plasma-wayland-protocols
+    libsforQt5.qt5.qtwayland
     wayland-utils
   # Desktop Utilities
     kdePackages.plasma-nm
