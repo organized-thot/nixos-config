@@ -88,7 +88,6 @@
     disko
     nixfmt-tree
     rippkgs
-    rippkgs-index
     nixpkgs-manual
   # Libraries and other dependencies
     dbus-launch
