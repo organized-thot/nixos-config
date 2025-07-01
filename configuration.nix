@@ -90,7 +90,6 @@
     rippkgs
     nixpkgs-manual
   # Libraries and other dependencies
-    dbus-launch
     dmidecode
     fwupd
     ffmpeg-full
