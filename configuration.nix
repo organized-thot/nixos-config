@@ -95,7 +95,6 @@
     ffmpeg-full
     gdb
   # Package sources
-    octopi
     # Python
     python313
     python313Packages.yarg
