@@ -18,7 +18,20 @@
   };
 
 # Locale
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
 
 # Time zone
   time.timeZone = "America/Chicago";
@@ -62,15 +75,57 @@
 # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python3.13-django-3.1.14" ];
+    permittedInsecurePackages = [ 
+      "python3.13-django-3.1.14"
+      "electron-27.3.11"
+    ];
   };
 
 # System Packages
   environment.systemPackages = with pkgs; [
-    docker
-    meilisearch
+  # Nix-related tools
+    home-manager
+    disko
+    nixfmt-tree
+    rippkgs
+    rippkgs-index
+    nixpkgs-manual
+  # Libraries and other dependencies
+    dbus-launch
+    dmidecode
+    fwupd
     ffmpeg-full
-
+    gdb
+  # Package sources
+    octopi
+    # Python
+    python313
+    python313Packages.yarg
+    # Node.js
+    nodejs_24
+    pnpm
+    # Flatpak
+    flatpak
+    kdePackages.discover
+    # PackageKit
+    packagekit
+    # AppImage
+    libappimage
+    appimage-run 
+    appimageupdate
+  # Disk management    
+    os-prober
+    disko
+    timeshift
+  # Display and desktop environment
+    kdePackages.wayland
+    kdePackages.plasma-wayland-protocols
+    libsforQt5.qt5.qtwayland
+    wayland-utils
+  # Desktop Utilities
+    kdePackages.plasma-nm
+    kdePackages.yakuake
+    kdePackages.konqueror
   # Command-line tools
     git
     gh
@@ -78,45 +133,23 @@
     wget
     phantomsocks
     docker
-
-  # Disk management    
-    os-prober
-    disko
-    timeshift
-
-  # Package sources
-#    python312
-    python313
-    python313Packages.yarg
-    nodejs_24
-    pnpm
-    flatpak
-    packagekit
-    libappimage
-    appimage-run 
-    appimageupdate
-
-  # KDE Packages
+    tldr
+  # Search
     kdePackages.baloo
     kdePackages.milou
-    kdePackages.yakuake
-    kdePackages.discover
-    kdePackages.plasma-nm
-    kdePackages.konqueror
+    meilisearch
   ];
 
 # Users
   users.users.nix = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-
-  # User Packages
     packages = with pkgs; [
+    # User Packages
       vivaldi
       telegram-desktop
       protege-distribution
       home-assistant
-
     # KDE Software
       kdePackages.kbookmarks
       kdePackages.keditbookmarks
@@ -125,14 +158,12 @@
       kdePackages.purpose
       # kdePackages.umbrello # marked as broken      
       kdePackages.libkgapi
-
     # PKM Tools
       obsidian
       logseq
       affine
       tana
       karakeep
- 
     # Web Scraping
       eget
       curl
@@ -148,7 +179,6 @@
       python313Packages.firecrawl-py    
       archivebox
       nodePackages.tiddlywiki
-    
     # AI
       ollama
       local-ai
@@ -185,7 +215,7 @@
 
   programs.firefox.enable = true;
 
-  # programs.mtr.enable = true;
+  programs.mtr.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -199,6 +229,8 @@
 
 # Enable Garuda dr460nized desktop
   garuda.dr460nized.enable = true;
+
+  security.rtkit.enable = true;
 
 # Services
   services = {
@@ -220,7 +252,10 @@
 
   # Touchpad support (enabled default in most desktopManager).
     # services.libinput.enable = true;
-  
+
+  # D-Bus Daemon  
+    dbus.enable = true;
+
   # Printing via CUPS
     printing.enable = true;
 
