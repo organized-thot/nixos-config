@@ -17,6 +17,11 @@
           modules = [
 	    ./hardware-configuration.nix
 	    ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
 	  ];
 	  specialArgs = { inherit home-manager chaotic garuda; };
         };
