@@ -76,6 +76,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedUnfreePackages = [
+      "vivaldi"
       "windsurf"
     ];
     permittedInsecurePackages = [ 
