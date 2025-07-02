@@ -75,6 +75,9 @@
 # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
+    permittedUnfreePackages = [
+      "windsurf"
+    ];
     permittedInsecurePackages = [ 
       "python3.13-django-3.1.14"
       "electron-27.3.11"
