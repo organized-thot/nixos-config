@@ -87,6 +87,7 @@
 
 # System Packages
   environment.systemPackages = with pkgs; [
+    tailscale
   # Nix-related tools
     home-manager
     disko
@@ -256,14 +257,17 @@
   # D-Bus Daemon  
     dbus.enable = true;
 
-  # Printing via CUPS
-    printing.enable = true;
+  # Tailscale
+    tailscale.enable = true;
 
   # OpenSSH daemon
     openssh.enable = true;
 
   # Flatpak support
     flatpak.enable = true;
+
+  # Printing via CUPS
+    printing.enable = true;
 
   # Meilisearch
     meilisearch.enable = true;
