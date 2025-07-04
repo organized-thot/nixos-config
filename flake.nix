@@ -9,7 +9,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }:
     overlays = import ./overlays;
     nixosConfigurations = {
       nixos = garuda.lib.garudaSystem {
