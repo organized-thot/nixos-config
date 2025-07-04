@@ -10,7 +10,6 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }:
-    overlays = import ./overlays;
     nixosConfigurations = {
       nixos = garuda.lib.garudaSystem {
         system = "x86_64-linux";
