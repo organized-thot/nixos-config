@@ -9,15 +9,15 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }:
-    nixosConfigurations = {
+  outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }: {
+    nixosConfigurations.nixos = {
       nixos = garuda.lib.garudaSystem {
         system = "x86_64-linux";
         modules = [
           ./hardware-configuration.nix
-	  ./configuration.nix
-	];
-	specialArgs = {
+          ./configuration.nix
+        ];
+        specialArgs = {
           inherit home-manager chaotic garuda;
           overlays = self.overlays;
         };
