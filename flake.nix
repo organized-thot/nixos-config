@@ -16,17 +16,21 @@
       default = import ./overlays/default.nix;
       ffmpeg-overlay = import ./overlays/ffmpeg-overlay.nix;
     };
-    nixosConfigurations.nixos = {
-      nixos = garuda.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hardware-configuration.nix
-          ./configuration.nix
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hardware-configuration.nix
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+        garuda.nixosModules.default
+        chaotic.nixosModules.default
+      ];
+      specialArgs = {
+        inherit inputs;
+        overlays = [
+          inputs.self.overlays.default
+          inputs.self.overlays.ffmpeg-overlay
         ];
-        specialArgs = {
-          inherit home-manager chaotic garuda inputs;
-          overlays = self.overlays.default;
-        };
       };
     };
   };
