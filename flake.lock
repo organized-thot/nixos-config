@@ -537,15 +537,14 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-DhpyeogVSRlxNFUSUdLd6ApA+VZQAz3z5sK0OpS/Zmg=",
         "path": "./screenpipe-flake",
         "type": "path"
       },
       "original": {
         "path": "./screenpipe-flake",
         "type": "path"
-      }
+      },
+      "parent": []
     }
   },
   "root": "root",
