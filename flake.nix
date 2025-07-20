@@ -27,6 +27,8 @@
       ];
       specialArgs = {
         inherit inputs;
+        garuda = inputs.garuda;
+        chaotic = inputs.chaotic;
         overlays = [
           inputs.self.overlays.default
           inputs.self.overlays.ffmpeg-overlay
