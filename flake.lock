@@ -77,11 +77,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1752873674,
-        "narHash": "sha256-utY0HoUO68Z5H/yeg6SPA9AI35vi4+Y0zZB9Vj3UKzc=",
+        "lastModified": 1752964425,
+        "narHash": "sha256-OIW+jSpY/Fl0xi5p6MspnrvGQFGRldm6t1RHoxO3giA=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "6fe26ca464e361b390713abc31c46f4811c4f29b",
+        "rev": "345ba493afc17aa9625eea60a8ee259300c5f99f",
         "type": "github"
       },
       "original": {
@@ -174,18 +174,18 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1752897888,
-        "narHash": "sha256-peqpBbixgaPrthJd9eKQnwTjF/20uDos3+1aToZ1/j8=",
+        "lastModified": 1752984328,
+        "narHash": "sha256-s6ptnwnIeDJcDZvRi8HP0qo0gxQNE1wvZ5Ot/BY8KJE=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "4839bf691cf4e77551dc49a4fc4b6d50b0b3b6db",
-        "type": "gitlab"
+        "rev": "d2a4838f0e9ec41f8c50588a9b7fb6eaad881d05",
+        "type": "github"
       },
       "original": {
         "owner": "garuda-linux",
         "ref": "stable",
         "repo": "garuda-nix-subsystem",
-        "type": "gitlab"
+        "type": "github"
       }
     },
     "gitignore": {
@@ -375,11 +375,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752441837,
-        "narHash": "sha256-FMH1OSSJp8Cx8MZHXz6KckxJGbCnVMotZNAH3v2WneU=",
+        "lastModified": 1752983928,
+        "narHash": "sha256-6HwHb3ZcMz0rzVMFYK0wn4sN6bh1ruDB8YKlRLUrGuo=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "839e02dece5845be3a322e507a79712b73a96ba2",
+        "rev": "57d8547540d3abb18922e8d1edbaac70dc486b7f",
         "type": "github"
       },
       "original": {
@@ -537,14 +537,15 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-DhpyeogVSRlxNFUSUdLd6ApA+VZQAz3z5sK0OpS/Zmg=",
         "path": "./screenpipe-flake",
         "type": "path"
       },
       "original": {
         "path": "./screenpipe-flake",
         "type": "path"
-      },
-      "parent": []
+      }
     }
   },
   "root": "root",
