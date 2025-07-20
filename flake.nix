@@ -8,9 +8,14 @@
     garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     chaotic.inputs.nixpkgs.follows = "nixpkgs";
+    screenpipe-flake.url = "path:./screenpipe-flake.nix";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }: {
+    overlays = {
+      default = import ./overlays/default.nix;
+      ffmpeg-overlay = import ./overlays/ffmpeg-overlay.nix;
+    };
     nixosConfigurations.nixos = {
       nixos = garuda.lib.garudaSystem {
         system = "x86_64-linux";
@@ -19,8 +24,8 @@
           ./configuration.nix
         ];
         specialArgs = {
-          inherit home-manager chaotic garuda;
-          overlays = self.overlays;
+          inherit home-manager chaotic garuda inputs;
+          overlays = self.overlays.default;
         };
       };
     };

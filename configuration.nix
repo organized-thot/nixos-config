@@ -100,8 +100,8 @@
     gdb
   # Package sources
     # Python
-    python313
-    python313Packages.yarg
+    python3
+    python3Packages.yarg
     # Node.js
     nodejs_24
     pnpm
@@ -176,7 +176,7 @@
       schemacrawler
       xcrawl3r
       crawley
-      python313Packages.firecrawl-py    
+      python3Packages.firecrawl-py    
       archivebox
       nodePackages.tiddlywiki
     # AI
@@ -193,12 +193,12 @@
     # PyPi Packages
       python313Packages.markitdown
     # AI Tools
-      python313Packages.huggingface-hub
-      python313Packages.langchain
-      python313Packages.langchain-huggingface
-      python313Packages.llama-index
-      python313Packages.llama-index-embeddings-huggingface
-      python313Packages.firecrawl-py
+      python3Packages.huggingface-hub
+      python3Packages.langchain
+      python3Packages.langchain-huggingface
+      python3Packages.llama-index
+      python3Packages.llama-index-embeddings-huggingface
+      python3Packages.firecrawl-py
 #      python3Packages.gensim
 #      python3Packages.graphrag
 
