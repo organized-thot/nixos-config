@@ -22,7 +22,7 @@
         ./hardware-configuration.nix
         ./configuration.nix
         home-manager.nixosModules.home-manager
-        garuda.nixosModules.garuda
+        garuda.nixosModules.default
         chaotic.nixosModules.default
       ];
       specialArgs = {
