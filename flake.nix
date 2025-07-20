@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
+    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable?dir=nixos-modules";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     chaotic.inputs.nixpkgs.follows = "nixpkgs";
     screenpipe-flake.url = "path:./screenpipe-flake";
@@ -22,7 +22,7 @@
         ./hardware-configuration.nix
         ./configuration.nix
         home-manager.nixosModules.home-manager
-        garuda.nixosModules.default
+        garuda.nixosModules.garuda
         chaotic.nixosModules.default
       ];
       specialArgs = {

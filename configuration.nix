@@ -71,6 +71,8 @@
     ];
   };
 
+  chaotic.nyx.chaoticEnabled = true;
+
 # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
