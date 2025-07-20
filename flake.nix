@@ -8,7 +8,7 @@
     garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     chaotic.inputs.nixpkgs.follows = "nixpkgs";
-    screenpipe-flake.url = "path:./screenpipe-flake.nix";
+    screenpipe-flake.url = "path:./screenpipe-flake";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, garuda, chaotic, ... }: {
