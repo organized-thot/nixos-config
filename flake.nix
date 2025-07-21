@@ -42,7 +42,11 @@
       inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
-
+    # screenpipe flake
+    screenpipe = {
+      url = "./screenpipe-flake.nix"
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs"
+    };
     #
     # Development tooling
     #
@@ -54,11 +58,11 @@
     };
 
     # Easy linting of the flake and all kind of other stuff
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.flake-compat.follows = "chaotic-nyx/nixpkgs";
-      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
-    };
+    # pre-commit-hooks = {
+    #  url = "github:cachix/git-hooks.nix";
+    #  inputs.flake-compat.follows = "chaotic-nyx/nixpkgs";
+    #  inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+    # };
 
     #
     # Theming
@@ -74,7 +78,7 @@
   outputs =
     { flake-parts
     , nixpkgs
-    , pre-commit-hooks
+#    , pre-commit-hooks
     , ...
     } @ inputs:
     let
@@ -97,19 +101,19 @@
           packages = import ./packages { inherit system pkgs inputs lib; };
         in
         {
-          checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            hooks = {
-              actionlint.enable = true;
-              commitizen.enable = true;
-              deadnix.enable = true;
-              nil.enable = true;
-              nixpkgs-fmt.enable = true;
-              prettier.enable = true;
-              statix.enable = true;
-              yamllint.enable = true;
-            };
-            src = ./.;
-          };
+#          checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+#            hooks = {
+#              actionlint.enable = true;
+#              commitizen.enable = true;
+#              deadnix.enable = true;
+#              nil.enable = true;
+#              nixpkgs-fmt.enable = true;
+#              prettier.enable = true;
+#              statix.enable = true;
+#              yamllint.enable = true;
+#            };
+#            src = ./.;
+#          };
 
           devShells = import ./devshell {
             inherit inputs nixpkgs system pkgs packages;
@@ -122,7 +126,8 @@
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       # Flake modules
-      imports = [ inputs.pre-commit-hooks.flakeModule ];
+#      imports = [ inputs.pre-commit-hooks.flakeModule ];
+       imports = [ inputs.screenpipe-flake.flakeModule ];
 
       # The available systems
       systems = [ "x86_64-linux" "aarch64-linux" ];
