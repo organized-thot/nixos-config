@@ -77,8 +77,10 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedUnfreePackages = [
+      "anydesk"
       "vivaldi"
       "windsurf"
+      "vscode-with-extensions"
     ];
     permittedInsecurePackages = [ 
       "python3.13-django-3.1.14"
@@ -89,6 +91,8 @@
 # System Packages
   environment.systemPackages = with pkgs; [
     tailscale
+    anydesk
+    vscode-with-extensions
   # Nix-related tools
     home-manager
     disko
