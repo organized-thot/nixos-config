@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     garuda.url = "github:garuda-linux/garuda-nix-subsystem/stable";
-    chaotic-nyx.url = "github:chaotic-nyx/nyx/nyxpkgs-unstable";
+    chaotic-nyx.url = "github:chaotic-nyx/nyxpkgs/main";
     screenpipe-flake.url = "path:./screenpipe-flake";
   };
 
