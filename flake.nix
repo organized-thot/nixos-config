@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration with Home Manager, Chaotic Nyx, and Garuda Linux NixOS submodule enabled.";
+  description = "NixOS configuration with Home Manager, Chaotic Nyx, and Garuda Linux NixOS submodule enabled";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,17 +8,14 @@
     screenpipe-flake.url = "git+file://${toString ./.}/screenpipe-flake";
   };
 
-  outputs = { nixpkgs, garuda, chaotic-nyx, ... }: {  # Add chaotic-nyx to parameters
-    overlays = {
-      default = import ./overlays/default.nix;
-      # ffmpeg-overlay = import ./overlays/ffmpeg-overlay.nix;
-    };
+  outputs = { nixpkgs, garuda, chaotic-nyx, screenpipe-flake }: {
     nixosConfigurations.nixos = garuda.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules = [
-          chaotic-nyx.nixosModules.default
-          ./configuration.nix
-        ];
-      };
+      system = "x86_64-linux";
+      modules = [
+        chaotic-nyx.nixosModules.default
+        ./hardware-configuration.nix  # Explicit import
+        ./configuration.nix
+      ];
     };
-  }
+  };
+}
