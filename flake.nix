@@ -4,15 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     garuda.url = "github:garuda-linux/garuda-nix-subsystem/stable";
-    chaotic-nyx.url = "github:chaotic-nyx/nyxpkgs/main";
-    screenpipe-flake.url = "git+file:///etc/nixos/screenpipe-flake";
+#    chaotic-nyx.url = "github:chaotic-nyx/nyx/nyxpkgs-unstable";
+#    screenpipe-flake.url = "git+file:///etc/nixos/screenpipe-flake";
   };
 
   outputs = { nixpkgs, garuda, chaotic-nyx, ... }: {
     nixosConfigurations.nixos = garuda.lib.garudaSystem {
       system = "x86_64-linux";
       modules = [
-        chaotic-nyx.nixosModules.default
+#        chaotic-nyx.nixosModules.default
         ./hardware-configuration.nix  # Explicit import
         ./configuration.nix
       ];
