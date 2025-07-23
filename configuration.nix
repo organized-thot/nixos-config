@@ -170,7 +170,6 @@
       eget
       curl
       curlie
-      wcurl
       curl-impersonate
       httpie
       katana
