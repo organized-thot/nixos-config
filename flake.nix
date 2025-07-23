@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     garuda.url = "github:garuda-linux/garuda-nix-subsystem/stable";
     chaotic-nyx.url = "github:chaotic-nyx/nyxpkgs/main";
-    screenpipe-flake.url = "git+file://${toString ./.}/screenpipe-flake";
+    screenpipe-flake.url = "git+file://" + (toString ./.) + "/screenpipe-flake";
   };
 
   outputs = { nixpkgs, garuda, chaotic-nyx, ... }: {  # Add chaotic-nyx to parameters
