@@ -193,7 +193,7 @@
       neo4j-desktop   
       open-webui
       mongodb
-      screen-pipe
+      # screen-pipe
       
     # PyPi Packages
       python313Packages.markitdown
