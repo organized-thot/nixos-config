@@ -8,7 +8,7 @@
     screenpipe-flake.url = "path:./screenpipe-flake";
   };
 
-  outputs = { nixpkgs, garuda, ... }: {
+  outputs = { nixpkgs, garuda, chaotic-nyx, ... }: {  # Add chaotic-nyx to parameters
     overlays = {
       default = import ./overlays/default.nix;
       # ffmpeg-overlay = import ./overlays/ffmpeg-overlay.nix;
