@@ -1,0 +1,515 @@
+Running phase: unpackPhase
+@nix { "action": "setPhase", "phase": "unpackPhase" }
+unpacking source archive /nix/store/6ynmy6qj9cwjdqg5gqy773wfj6f6vy1j-source
+source root is source
+Executing cargoSetupPostUnpackHook
+Finished cargoSetupPostUnpackHook
+Running phase: patchPhase
+@nix { "action": "setPhase", "phase": "patchPhase" }
+Executing cargoSetupPostPatchHook
+Validating consistency between /build/source/Cargo.lock and /build/cargo-vendor-dir/Cargo.lock
+Finished cargoSetupPostPatchHook
+Running phase: updateAutotoolsGnuConfigScriptsPhase
+@nix { "action": "setPhase", "phase": "updateAutotoolsGnuConfigScriptsPhase" }
+Running phase: configurePhase
+@nix { "action": "setPhase", "phase": "configurePhase" }
+Running phase: buildPhase
+@nix { "action": "setPhase", "phase": "buildPhase" }
+Executing cargoBuildHook
+cargoBuildHook flags: -j 12 --target x86_64-unknown-linux-gnu --offline --profile release
+[1m[32m   Compiling[0m proc-macro2 v1.0.86
+[1m[32m   Compiling[0m unicode-ident v1.0.12
+[1m[32m   Compiling[0m autocfg v1.3.0
+[1m[32m   Compiling[0m libc v0.2.155
+[1m[32m   Compiling[0m cfg-if v1.0.0
+[1m[32m   Compiling[0m version_check v0.9.5
+[1m[32m   Compiling[0m serde v1.0.204
+[1m[32m   Compiling[0m cc v1.1.7
+[1m[32m   Compiling[0m once_cell v1.19.0
+[1m[32m   Compiling[0m libm v0.2.8
+[1m[32m   Compiling[0m log v0.4.22
+[1m[32m   Compiling[0m pkg-config v0.3.30
+[1m[32m   Compiling[0m memchr v2.7.4
+[1m[32m   Compiling[0m byteorder v1.5.0
+[1m[32m   Compiling[0m scopeguard v1.2.0
+[1m[32m   Compiling[0m futures-core v0.3.30
+[1m[32m   Compiling[0m pin-project-lite v0.2.14
+[1m[32m   Compiling[0m parking_lot_core v0.9.10
+[1m[32m   Compiling[0m ahash v0.8.11
+[1m[32m   Compiling[0m num-traits v0.2.19
+[1m[32m   Compiling[0m lock_api v0.4.12
+[1m[32m   Compiling[0m slab v0.4.9
+[1m[32m   Compiling[0m itoa v1.0.11
+[1m[32m   Compiling[0m smallvec v1.13.2
+[1m[32m   Compiling[0m bitflags v1.3.2
+[1m[32m   Compiling[0m futures-sink v0.3.30
+[1m[32m   Compiling[0m bytes v1.7.1
+[1m[32m   Compiling[0m crossbeam-utils v0.8.20
+[1m[32m   Compiling[0m vcpkg v0.2.15
+[1m[32m   Compiling[0m quote v1.0.36
+[1m[32m   Compiling[0m syn v2.0.72
+[1m[32m   Compiling[0m paste v1.0.15
+[1m[32m   Compiling[0m futures-channel v0.3.30
+[1m[32m   Compiling[0m getrandom v0.2.15
+[1m[32m   Compiling[0m tracing-core v0.1.32
+[1m[32m   Compiling[0m pin-utils v0.1.0
+[1m[32m   Compiling[0m rand_core v0.6.4
+[1m[32m   Compiling[0m allocator-api2 v0.2.18
+[1m[32m   Compiling[0m parking_lot v0.12.3
+[1m[32m   Compiling[0m openssl-sys v0.9.103
+[1m[32m   Compiling[0m futures-task v0.3.30
+[1m[32m   Compiling[0m futures-io v0.3.30
+[1m[32m   Compiling[0m num-integer v0.1.46
+[1m[32m   Compiling[0m socket2 v0.5.7
+[1m[32m   Compiling[0m signal-hook-registry v1.4.2
+[1m[32m   Compiling[0m mio v1.0.1
+[1m[32m   Compiling[0m equivalent v1.0.1
+[1m[32m   Compiling[0m fnv v1.0.7
+[1m[32m   Compiling[0m crossbeam-epoch v0.9.18
+[1m[32m   Compiling[0m thiserror v1.0.63
+[1m[32m   Compiling[0m rayon-core v1.12.1
+[1m[32m   Compiling[0m serde_json v1.0.122
+[1m[32m   Compiling[0m lazy_static v1.5.0
+[1m[32m   Compiling[0m crossbeam-deque v0.8.5
+[1m[32m   Compiling[0m bitflags v2.6.0
+[1m[32m   Compiling[0m arrayvec v0.7.4
+[1m[32m   Compiling[0m openssl v0.10.66
+[1m[32m   Compiling[0m native-tls v0.2.12
+[1m[32m   Compiling[0m anyhow v1.0.86
+[1m[32m   Compiling[0m zerocopy v0.7.35
+[1m[32m   Compiling[0m tower-service v0.3.2
+[1m[32m   Compiling[0m httparse v1.9.4
+[1m[32m   Compiling[0m ryu v1.0.18
+[1m[32m   Compiling[0m typenum v1.17.0
+[1m[32m   Compiling[0m minimal-lexical v0.2.1
+[1m[32m   Compiling[0m percent-encoding v2.3.1
+[1m[32m   Compiling[0m crc32fast v1.4.2
+[1m[32m   Compiling[0m nom v7.1.3
+[1m[32m   Compiling[0m try-lock v0.2.5
+[1m[32m   Compiling[0m simd-adler32 v0.3.7
+[1m[32m   Compiling[0m generic-array v0.14.7
+[1m[32m   Compiling[0m want v0.3.1
+[1m[32m   Compiling[0m rustfft v6.2.0
+[1m[32m   Compiling[0m strength_reduce v0.2.4
+[1m[32m   Compiling[0m httpdate v1.0.3
+[1m[32m   Compiling[0m primal-check v0.3.4
+[1m[32m   Compiling[0m hashbrown v0.14.5
+[1m[32m   Compiling[0m spin v0.9.8
+[1m[32m   Compiling[0m adler v1.0.2
+[1m[32m   Compiling[0m foreign-types-shared v0.1.1
+[1m[32m   Compiling[0m transpose v0.2.3
+[1m[32m   Compiling[0m foreign-types v0.3.2
+[1m[32m   Compiling[0m miniz_oxide v0.7.4
+[1m[32m   Compiling[0m http v0.2.12
+[1m[32m   Compiling[0m encoding_rs v0.8.34
+[1m[32m   Compiling[0m rustversion v1.0.17
+[1m[32m   Compiling[0m reborrow v0.5.5
+[1m[32m   Compiling[0m rustix v0.38.34
+[1m[32m   Compiling[0m mime v0.3.17
+[1m[32m   Compiling[0m tinyvec_macros v0.1.1
+[1m[32m   Compiling[0m openssl-probe v0.1.5
+[1m[32m   Compiling[0m indexmap v2.3.0
+[1m[32m   Compiling[0m tinyvec v1.8.0
+[1m[32m   Compiling[0m form_urlencoded v1.2.1
+[1m[32m   Compiling[0m flate2 v1.0.31
+[1m[32m   Compiling[0m raw-cpuid v10.7.0
+[1m[32m   Compiling[0m http-body v0.4.6
+[1m[32m   Compiling[0m seq-macro v0.3.5
+[1m[32m   Compiling[0m unicase v2.7.0
+[1m[32m   Compiling[0m unicode-bidi v0.3.15
+[1m[32m   Compiling[0m unicode-normalization v0.1.23
+[1m[32m   Compiling[0m tower-layer v0.3.2
+[1m[32m   Compiling[0m aho-corasick v1.1.3
+[1m[32m   Compiling[0m indexmap v1.9.3
+[1m[32m   Compiling[0m regex-syntax v0.8.4
+[1m[32m   Compiling[0m toml_datetime v0.6.8
+[1m[32m   Compiling[0m sync_wrapper v0.1.2
+[1m[32m   Compiling[0m winnow v0.5.40
+[1m[32m   Compiling[0m idna v0.5.0
+[1m[32m   Compiling[0m synstructure v0.13.1
+[1m[32m   Compiling[0m url v2.5.2
+[1m[32m   Compiling[0m http v1.1.0
+[1m[32m   Compiling[0m ring v0.17.8
+[1m[32m   Compiling[0m ident_case v1.0.1
+[1m[32m   Compiling[0m base64 v0.21.7
+[1m[32m   Compiling[0m strsim v0.11.1
+[1m[32m   Compiling[0m rustls-pki-types v1.7.0
+[1m[32m   Compiling[0m hashbrown v0.12.3
+[1m[32m   Compiling[0m darling_core v0.20.10
+[1m[32m   Compiling[0m regex-automata v0.4.7
+[1m[32m   Compiling[0m toml_edit v0.21.1
+[1m[32m   Compiling[0m serde_derive v1.0.204
+[1m[32m   Compiling[0m zerocopy-derive v0.7.35
+[1m[32m   Compiling[0m bytemuck_derive v1.7.0
+[1m[32m   Compiling[0m tracing-attributes v0.1.27
+[1m[32m   Compiling[0m bytemuck v1.16.3
+[1m[32m   Compiling[0m futures-macro v0.3.30
+[1m[32m   Compiling[0m num-complex v0.4.6
+[1m[32m   Compiling[0m ppv-lite86 v0.2.20
+[1m[32m   Compiling[0m rand_chacha v0.3.1
+[1m[32m   Compiling[0m tokio-macros v2.4.0
+[1m[32m   Compiling[0m rand v0.8.5
+[1m[32m   Compiling[0m futures-util v0.3.30
+[1m[32m   Compiling[0m thiserror-impl v1.0.63
+[1m[32m   Compiling[0m tracing v0.1.40
+[1m[32m   Compiling[0m openssl-macros v0.1.1
+[1m[32m   Compiling[0m tokio v1.39.2
+[1m[32m   Compiling[0m rand_distr v0.4.3
+[1m[32m   Compiling[0m half v2.4.1
+[1m[32m   Compiling[0m pulp v0.18.21
+[1m[32m   Compiling[0m dyn-stack v0.10.0
+[1m[32m   Compiling[0m pin-project-internal v1.1.5
+[1m[32m   Compiling[0m proc-macro-crate v3.1.0
+[1m[32m   Compiling[0m num_enum_derive v0.7.3
+[1m[32m   Compiling[0m darling_macro v0.20.10
+[1m[32m   Compiling[0m pin-project v1.1.5
+[1m[32m   Compiling[0m zerofrom-derive v0.1.4
+[1m[32m   Compiling[0m http-body v1.0.1
+[1m[32m   Compiling[0m num-bigint v0.4.6
+[1m[32m   Compiling[0m num_cpus v1.16.0
+[1m[32m   Compiling[0m either v1.13.0
+[1m[32m   Compiling[0m rayon v1.10.0
+[1m[32m   Compiling[0m itertools v0.12.1
+[1m[32m   Compiling[0m tokio-util v0.7.11
+[1m[32m   Compiling[0m h2 v0.3.26
+[1m[32m   Compiling[0m symphonia-core v0.5.4
+[1m[32m   Compiling[0m tower v0.4.13
+[1m[32m   Compiling[0m tokio-native-tls v0.3.1
+[1m[32m   Compiling[0m aligned-vec v0.5.0
+[1m[32m   Compiling[0m unicode_categories v0.1.1
+[1m[32m   Compiling[0m zip v1.1.4
+[1m[32m   Compiling[0m stable_deref_trait v1.2.0
+[1m[32m   Compiling[0m untrusted v0.9.0
+[1m[32m   Compiling[0m portable-atomic v1.7.0
+[1m[32m   Compiling[0m built v0.7.4
+[1m[32m   Compiling[0m glob v0.3.1
+[1m[32m   Compiling[0m symphonia-metadata v0.5.4
+[1m[32m   Compiling[0m rav1e v0.7.1
+[1m[32m   Compiling[0m clang-sys v1.8.1
+[1m[32m   Compiling[0m gemm-common v0.17.1
+[1m[32m   Compiling[0m v_frame v0.3.8
+[1m[32m   Compiling[0m num-rational v0.4.2
+[1m[32m   Compiling[0m gemm-f32 v0.17.1
+[1m[32m   Compiling[0m gemm-c64 v0.17.1
+[1m[32m   Compiling[0m gemm-f64 v0.17.1
+[1m[32m   Compiling[0m gemm-f16 v0.17.1
+[1m[32m   Compiling[0m gemm-c32 v0.17.1
+[1m[32m   Compiling[0m zerofrom v0.1.4
+[1m[32m   Compiling[0m num_enum v0.7.3
+[1m[32m   Compiling[0m serde_urlencoded v0.7.1
+[1m[32m   Compiling[0m darling v0.20.10
+[1m[32m   Compiling[0m mime_guess v2.0.5
+[1m[32m   Compiling[0m futures-executor v0.3.30
+[1m[32m   Compiling[0m regex v1.10.6
+[1m[32m   Compiling[0m hyper v0.14.30
+[1m[32m   Compiling[0m yoke-derive v0.7.4
+[1m[32m   Compiling[0m profiling-procmacros v1.0.15
+[1m[32m   Compiling[0m displaydoc v0.2.5
+[1m[32m   Compiling[0m flume v0.11.0
+[1m[32m   Compiling[0m libsqlite3-sys v0.27.0
+[1m[32m   Compiling[0m onig_sys v69.8.1
+[1m[32m   Compiling[0m base64 v0.22.1
+[1m[32m   Compiling[0m option-ext v0.2.0
+[1m[32m   Compiling[0m rustls v0.23.12
+[1m[32m   Compiling[0m unicode-width v0.1.13
+[1m[32m   Compiling[0m linux-raw-sys v0.4.14
+[1m[32m   Compiling[0m console v0.15.8
+[1m[32m   Compiling[0m yoke v0.7.4
+[1m[32m   Compiling[0m dirs-sys v0.4.1
+[1m[32m   Compiling[0m profiling v1.0.15
+[1m[32m   Compiling[0m gemm v0.17.1
+[1m[32m   Compiling[0m derive_builder_core v0.20.0
+[1m[32m   Compiling[0m rustls-webpki v0.102.6
+[1m[32m   Compiling[0m av1-grain v0.2.3
+[1m[32m   Compiling[0m symphonia-utils-xiph v0.5.4
+[1m[32m   Compiling[0m memmap2 v0.9.4
+[1m[32m   Compiling[0m safetensors v0.4.3
+[1m[32m   Compiling[0m arg_enum_proc_macro v0.3.4
+[1m[32m   Compiling[0m num-derive v0.4.2
+[1m[32m   Compiling[0m esaxx-rs v0.1.10
+[1m[32m   Compiling[0m simd_helpers v0.1.0
+[1m[32m   Compiling[0m maybe-rayon v0.1.1
+[1m[32m   Compiling[0m quick-error v2.0.1
+[1m[32m   Compiling[0m atomic-waker v1.1.2
+[1m[32m   Compiling[0m imgref v1.10.1
+[1m[32m   Compiling[0m iana-time-zone v0.1.60
+[1m[32m   Compiling[0m noop_proc_macro v0.3.0
+[1m[32m   Compiling[0m zeroize v1.8.1
+[1m[32m   Compiling[0m ipnet v2.9.0
+[1m[32m   Compiling[0m new_debug_unreachable v1.0.6
+[1m[32m   Compiling[0m utf8parse v0.2.2
+[1m[32m   Compiling[0m number_prefix v0.4.0
+[1m[32m   Compiling[0m subtle v2.6.1
+[1m[32m   Compiling[0m bit-vec v0.6.3
+[1m[32m   Compiling[0m weezl v0.1.8
+[1m[32m   Compiling[0m bitstream-io v2.5.0
+[1m[32m   Compiling[0m bit-set v0.5.3
+[1m[32m   Compiling[0m indicatif v0.17.8
+[1m[32m   Compiling[0m anstyle-parse v0.2.5
+[1m[32m   Compiling[0m loop9 v0.1.5
+[1m[32m   Compiling[0m chrono v0.4.38
+[1m[32m   Compiling[0m h2 v0.4.5
+[1m[32m   Compiling[0m hyper-tls v0.5.0
+[1m[32m   Compiling[0m candle-core v0.6.0
+[1m[32m   Compiling[0m derive_builder_macro v0.20.0
+[1m[32m   Compiling[0m dirs v5.0.1
+[1m[32m   Compiling[0m block-buffer v0.10.4
+[1m[32m   Compiling[0m crypto-common v0.1.6
+[1m[32m   Compiling[0m itertools v0.11.0
+[1m[32m   Compiling[0m http-body-util v0.1.2
+[1m[32m   Compiling[0m rgb v0.8.45
+[1m[32m   Compiling[0m monostate-impl v0.1.13
+[1m[32m   Compiling[0m async-trait v0.1.81
+[1m[32m   Compiling[0m webpki-roots v0.26.3
+[1m[32m   Compiling[0m rustls-pemfile v1.0.4
+[1m[32m   Compiling[0m zune-inflate v0.2.54
+[1m[32m   Compiling[0m fdeflate v0.3.4
+[1m[32m   Compiling[0m avif-serialize v0.8.1
+[1m[32m   Compiling[0m libloading v0.8.5
+[1m[32m   Compiling[0m home v0.5.9
+[1m[32m   Compiling[0m colorchoice v1.0.2
+[1m[32m   Compiling[0m lebe v0.5.2
+[1m[32m   Compiling[0m byteorder-lite v0.1.0
+[1m[32m   Compiling[0m color_quant v1.1.0
+[1m[32m   Compiling[0m zune-core v0.4.12
+[1m[32m   Compiling[0m bit_field v0.10.2
+[1m[32m   Compiling[0m base64 v0.13.1
+[1m[32m   Compiling[0m unicode-segmentation v1.11.0
+[1m[32m   Compiling[0m jpeg-decoder v0.3.1
+[1m[32m   Compiling[0m is_terminal_polyfill v1.70.1
+[1m[32m   Compiling[0m bindgen v0.69.4
+[1m[32m   Compiling[0m anstyle-query v1.1.1
+[1m[32m   Compiling[0m macro_rules_attribute-proc_macro v0.2.0
+[1m[32m   Compiling[0m anstyle v1.0.8
+[1m[32m   Compiling[0m spm_precompiled v0.1.4
+[1m[32m   Compiling[0m hyper v1.4.1
+[1m[32m   Compiling[0m macro_rules_attribute v0.2.0
+[1m[32m   Compiling[0m tiff v0.9.1
+[1m[32m   Compiling[0m anstream v0.6.15
+[1m[32m   Compiling[0m zune-jpeg v0.4.13
+[1m[32m   Compiling[0m image-webp v0.1.3
+[1m[32m   Compiling[0m ravif v0.11.9
+[1m[32m   Compiling[0m candle-nn v0.6.0
+[1m[32m   Compiling[0m exr v1.72.0
+[1m[32m   Compiling[0m gif v0.13.1
+[1m[32m   Compiling[0m which v6.0.2
+[1m[32m   Compiling[0m png v0.17.13
+[1m[32m   Compiling[0m rayon-cond v0.3.0
+[1m[32m   Compiling[0m ureq v2.10.0
+[1m[32m   Compiling[0m reqwest v0.11.27
+[1m[32m   Compiling[0m monostate v0.1.13
+[1m[32m   Compiling[0m digest v0.10.7
+[1m[32m   Compiling[0m onig v6.4.0
+[1m[32m   Compiling[0m derive_builder v0.20.0
+[1m[32m   Compiling[0m fancy-regex v0.13.0
+[1m[32m   Compiling[0m futures v0.3.30
+[1m[32m   Compiling[0m tokio-stream v0.1.15
+[1m[32m   Compiling[0m serde_plain v1.0.2
+[1m[32m   Compiling[0m qoi v0.4.1
+[1m[32m   Compiling[0m cexpr v0.6.0
+[1m[32m   Compiling[0m axum-core v0.3.4
+[1m[32m   Compiling[0m quick-xml v0.30.0
+[1m[32m   Compiling[0m libdbus-sys v0.2.5
+[1m[32m   Compiling[0m unicode-normalization-alignments v0.1.12
+[1m[32m   Compiling[0m alsa-sys v0.3.1
+[1m[32m   Compiling[0m rustc-hash v1.1.0
+[1m[32m   Compiling[0m lazycell v1.3.0
+[1m[32m   Compiling[0m shlex v1.3.0
+[1m[32m   Compiling[0m clap_lex v0.7.2
+[1m[32m   Compiling[0m crc-catalog v2.4.0
+[1m[32m   Compiling[0m fastrand v2.1.0
+[1m[32m   Compiling[0m cpufeatures v0.2.12
+[1m[32m   Compiling[0m heck v0.5.0
+[1m[32m   Compiling[0m sha2 v0.10.8
+[1m[32m   Compiling[0m tempfile v3.11.0
+[1m[32m   Compiling[0m clap_derive v4.5.13
+[1m[32m   Compiling[0m clap_builder v4.5.13
+[1m[32m   Compiling[0m crc v3.2.1
+[1m[32m   Compiling[0m sqlformat v0.2.4
+[1m[32m   Compiling[0m tokenizers v0.19.1
+[1m[32m   Compiling[0m xcb v1.4.0
+[1m[32m   Compiling[0m image v0.25.2
+[1m[32m   Compiling[0m candle-transformers v0.6.0
+[1m[32m   Compiling[0m crossbeam-queue v0.3.11
+[1m[32m   Compiling[0m hf-hub v0.3.2
+[1m[32m   Compiling[0m futures-intrusive v0.5.0
+[1m[32m   Compiling[0m prost-derive v0.12.6
+[1m[32m   Compiling[0m hyper-util v0.1.6
+[1m[32m   Compiling[0m atoi v2.0.0
+[1m[32m   Compiling[0m axum v0.6.20
+[1m[32m   Compiling[0m hashlink v0.8.4
+[1m[32m   Compiling[0m substring v1.4.5
+[1m[32m   Compiling[0m hex v0.4.3
+[1m[32m   Compiling[0m matchit v0.7.3
+[1m[32m   Compiling[0m event-listener v2.5.3
+[1m[32m   Compiling[0m syn v1.0.109
+[1m[32m   Compiling[0m sqlx-core v0.7.4
+[1m[32m   Compiling[0m ffmpeg-sys-next v7.0.2
+[1m[32m   Compiling[0m prost v0.12.6
+[1m[32m   Compiling[0m clap v4.5.13
+[1m[32m   Compiling[0m tokio-io-timeout v1.2.0
+[1m[32m   Compiling[0m async-stream-impl v0.3.5
+[1m[32m   Compiling[0m webrtc-vad v0.4.0
+[1m[32m   Compiling[0m extended v0.1.0
+[1m[32m   Compiling[0m humantime v2.1.0
+[1m[32m   Compiling[0m urlencoding v2.1.3
+[1m[32m   Compiling[0m sync_wrapper v1.0.1
+[1m[32m   Compiling[0m cpal v0.15.3 (https://github.com/louis030195/cpal-d.git?rev=6751589#67515895)
+[1m[32m   Compiling[0m regex-syntax v0.6.29
+[1m[32m   Compiling[0m heck v0.4.1
+[1m[32m   Compiling[0m sqlx-sqlite v0.7.4
+[1m[32m   Compiling[0m async-stream v0.3.5
+[1m[32m   Compiling[0m symphonia-format-riff v0.5.4
+[1m[32m   Compiling[0m regex-automata v0.1.10
+[1m[32m   Compiling[0m hyper-timeout v0.4.1
+[1m[32m   Compiling[0m alsa v0.9.0
+[1m[32m   Compiling[0m dbus v0.9.7
+[1m[32m   Compiling[0m hyper-tls v0.6.0
+[1m[32m   Compiling[0m symphonia-format-ogg v0.5.4
+[1m[32m   Compiling[0m symphonia-format-mkv v0.5.4
+[1m[32m   Compiling[0m symphonia-bundle-flac v0.5.4
+[1m[32m   Compiling[0m symphonia-codec-vorbis v0.5.4
+[1m[32m   Compiling[0m symphonia-format-isomp4 v0.5.4
+[1m[32m   Compiling[0m rustls-pemfile v2.1.3
+[1m[32m   Compiling[0m sysinfo v0.30.13
+[1m[32m   Compiling[0m symphonia-codec-aac v0.5.4
+[1m[32m   Compiling[0m symphonia-codec-adpcm v0.5.4
+[1m[32m   Compiling[0m symphonia-codec-pcm v0.5.4
+[1m[32m   Compiling[0m realfft v3.3.0
+[1m[32m   Compiling[0m axum-core v0.4.3
+[1m[32m   Compiling[0m subprocess v0.2.9
+[1m[32m   Compiling[0m is-terminal v0.4.12
+[1m[32m   Compiling[0m overload v0.1.1
+[1m[32m   Compiling[0m dasp_sample v0.11.0
+[1m[32m   Compiling[0m termcolor v1.4.1
+[1m[32m   Compiling[0m dotenvy v0.15.7
+[1m[32m   Compiling[0m env_logger v0.10.2
+[1m[32m   Compiling[0m sqlx-macros-core v0.7.4
+[1m[32m   Compiling[0m rusty-tesseract v1.1.10 (https://github.com/louis030195/rusty-tesseract.git?branch=main#08346c1d)
+[1m[32m   Compiling[0m nu-ansi-term v0.46.0
+[1m[32m   Compiling[0m rubato v0.15.0
+[1m[32m   Compiling[0m symphonia v0.5.4
+[1m[32m   Compiling[0m xcap v0.0.10
+[1m[32m   Compiling[0m reqwest v0.12.5
+[1m[32m   Compiling[0m tonic v0.11.0
+[1m[32m   Compiling[0m matchers v0.1.0
+[1m[32m   Compiling[0m screenpipe-core v0.1.0 (/build/source/screenpipe-core)
+[1m[32m   Compiling[0m prost-types v0.12.6
+[1m[32m   Compiling[0m image-compare v0.4.1
+[1m[32m   Compiling[0m threadpool v1.8.1
+[1m[32m   Compiling[0m axum v0.7.5
+[1m[32m   Compiling[0m sharded-slab v0.1.7
+[1m[32m   Compiling[0m tracing-log v0.2.0
+[1m[32m   Compiling[0m crossbeam-channel v0.5.13
+[1m[32m   Compiling[0m thread_local v1.1.8
+[1m[32m   Compiling[0m strsim v0.10.0
+[1m[32m   Compiling[0m hound v3.5.1
+[1m[32m   Compiling[0m ffmpeg-next v7.0.4
+[1m[32m   Compiling[0m screenpipe-audio v0.1.0 (/build/source/screenpipe-audio)
+[1m[32m   Compiling[0m screenpipe-vision v0.1.0 (/build/source/screenpipe-vision)
+[1m[32m   Compiling[0m tracing-subscriber v0.3.18
+[1m[32m   Compiling[0m console-api v0.7.0
+[1m[32m   Compiling[0m sqlx-macros v0.7.4
+[1m[32m   Compiling[0m serde_path_to_error v0.1.16
+[1m[32m   Compiling[0m hdrhistogram v7.5.4
+[1m[32m   Compiling[0m console-subscriber v0.3.0
+[0m[1m[38;5;9merror[E0004][0m[0m[1m: non-exhaustive patterns: `sys::AVColorSpace::AVCOL_SPC_IPT_C2`, `sys::AVColorSpace::AVCOL_SPC_YCGCO_RE` and `sys::AVColorSpace::AVCOL_SPC_YCGCO_RO` not covered[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/cargo-vendor-dir/ffmpeg-next-7.0.4/src/util/color/space.rs:44:15[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m44[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        match value {[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mpatterns `sys::AVColorSpace::AVCOL_SPC_IPT_C2`, `sys::AVColorSpace::AVCOL_SPC_YCGCO_RE` and `sys::AVColorSpace::AVCOL_SPC_YCGCO_RO` not covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: `sys::AVColorSpace` defined here[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/source/target/x86_64-unknown-linux-gnu/release/build/ffmpeg-sys-next-fffee0615546ae5f/out/bindings.rs:3:186484[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m)] pub enum AVColorSpace { AVCOL_SPC_RGB = 0 , AVCOL_SPC_BT709 = 1 , AVCOL_SPC_UNSPECIFIED = 2 , AVCOL_SPC_RESERVED = 3 , AVCOL_SPC_FCC = 4 , AVCOL_SPC_BT470BG = 5 , AVCOL_SPC_SMPTE170M = 6 , AVCOL_SPC_SMPTE240M = 7 , AVCOL_SPC_YCGCO = 8 , AVCOL_SPC_BT2020_NCL = 9 , AVCOL_SPC_BT2020_CL = 10 , AVCOL_SPC_SMPTE2085 = 11 , AVCOL_SPC_CHROMA_DERIVED_NCL = 12 , AVCOL_SPC_CHROMA_DERIVED_CL = 13 , AVCOL_SPC_ICTCP = 14 , AVCOL_SPC_IPT_C2 = 15 , AVCOL_SPC_YCGCO_RE = 16 , AVCOL_SPC_YCGCO_RO = [0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^^^^[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                       [0m[0m[1m[38;5;12m----------------[0m[0m        [0m[0m[1m[38;5;12m------------------[0m[0m        [0m[0m[1m[38;5;12m------------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                   [0m[0m[1m[38;5;12m|[0m[0m                       [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                   [0m[0m[1m[38;5;12m|[0m[0m                       [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                   [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the matched value is of type `sys::AVColorSpace`[0m
+[0m[1m[38;5;14mhelp[0m[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m61[0m[0m [0m[0m[38;5;10m~ [0m[0m            AVCOL_SPC_ICTCP => Space::ICTCP[0m[0m[38;5;10m,[0m
+[0m[1m[38;5;12m62[0m[0m [0m[0m[38;5;10m~             sys::AVColorSpace::AVCOL_SPC_IPT_C2 | sys::AVColorSpace::AVCOL_SPC_YCGCO_RE | sys::AVColorSpace::AVCOL_SPC_YCGCO_RO => todo!()[0m[0m,[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+[0m[1m[38;5;9merror[E0004][0m[0m[1m: non-exhaustive patterns: `sys::AVFrameSideDataType::AV_FRAME_DATA_LCEVC` and `sys::AVFrameSideDataType::AV_FRAME_DATA_VIEW_ID` not covered[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/cargo-vendor-dir/ffmpeg-next-7.0.4/src/util/frame/side_data.rs:81:15[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m81[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        match value {[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mpatterns `sys::AVFrameSideDataType::AV_FRAME_DATA_LCEVC` and `sys::AVFrameSideDataType::AV_FRAME_DATA_VIEW_ID` not covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: `sys::AVFrameSideDataType` defined here[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/source/target/x86_64-unknown-linux-gnu/release/build/ffmpeg-sys-next-fffee0615546ae5f/out/bindings.rs:3:202434[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m)] pub enum AVFrameSideDataType { AV_FRAME_DATA_PANSCAN = 0 , AV_FRAME_DATA_A53_CC = 1 , AV_FRAME_DATA_STEREO3D = 2 , AV_FRAME_DATA_MATRIXENCODING = 3 , AV_FRAME_DATA_DOWNMIX_INFO = 4 , AV_FRAME_DATA_REPLAYGAIN = 5 , AV_FRAME_DATA_DISPLAYMATRIX = 6 , AV_FRAME_DATA_AFD = 7 , AV_FRAME_DATA_MOTION_VECTORS = 8 , AV_FRAME_DATA_SKIP_SAMPLES = 9 , AV_FRAME_DATA_AUDIO_SERVICE_TYPE = 10 , AV_FRAME_DATA_MASTERING_DISPLAY_METADATA = 11 , AV_FRAME_DATA_GOP_TIMECODE = 12 , AV_FRAME_DATA_SPHERICAL = 13 , AV_FRAME_DATA_CONTENT_LIGHT_LEVEL = 14 , AV_FRAME_DATA_ICC_PROFILE = 15 , AV_FRAME_DATA_S12M_TIMECODE = 16 , AV_FRAME_DATA_DYNAMIC_HDR_PLUS = 17 , AV_FRAME_DATA_REGIONS_OF_INTEREST = 18 , AV_FRAME_DATA_VIDEO_ENC_PARAMS = 19 , AV_FRAME_DATA_SEI_UNREGISTERED = 20 , AV_FRAME_DATA_FILM_GRAIN_PARAMS = 21 , AV_FRAME_DATA_DETECTION_BBOXES = 22 , AV_FRAME_DATA_DOVI_RPU_BUFFER = 23 , AV_FRAME_DATA_DOVI_METADATA = 24 , AV_FRAME_DATA_DYNAMIC_HDR_VIVID = 25 , AV_FRAME_DATA_AMBIENT_VIEWING_ENVIRONMENT = 26 , AV_FRAME_DATA_VIDEO_HINT = 27 , AV_FRAME_DATA_LCEVC = 28 , AV_FRAME_DATA_VIEW_ID = [0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      [0m[0m[1m[38;5;12m-------------------[0m[0m        [0m[0m[1m[38;5;12m---------------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the matched value is of type `sys::AVFrameSideDataType`[0m
+[0m[1m[38;5;14mhelp[0m[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m134[0m[0m[38;5;10m~ [0m[0m            AV_FRAME_DATA_VIDEO_HINT => Type::VIDEO_HINT[0m[0m[38;5;10m,[0m
+[0m[1m[38;5;12m135[0m[0m[38;5;10m~             sys::AVFrameSideDataType::AV_FRAME_DATA_LCEVC | sys::AVFrameSideDataType::AV_FRAME_DATA_VIEW_ID => todo!()[0m[0m,[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+[0m[1m[38;5;9merror[E0004][0m[0m[1m: non-exhaustive patterns: `sys::AVOptionType::AV_OPT_TYPE_UINT` not covered[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/cargo-vendor-dir/ffmpeg-next-7.0.4/src/util/option/mod.rs:35:15[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m35[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        match value {[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mpattern `sys::AVOptionType::AV_OPT_TYPE_UINT` not covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: `sys::AVOptionType` defined here[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/source/target/x86_64-unknown-linux-gnu/release/build/ffmpeg-sys-next-fffee0615546ae5f/out/bindings.rs:3:469251[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m)] pub enum AVOptionType { AV_OPT_TYPE_FLAGS = 1 , AV_OPT_TYPE_INT = 2 , AV_OPT_TYPE_INT64 = 3 , AV_OPT_TYPE_DOUBLE = 4 , AV_OPT_TYPE_FLOAT = 5 , AV_OPT_TYPE_STRING = 6 , AV_OPT_TYPE_RATIONAL = 7 , AV_OPT_TYPE_BINARY = 8 , AV_OPT_TYPE_DICT = 9 , AV_OPT_TYPE_UINT64 = 10 , AV_OPT_TYPE_CONST = 11 , AV_OPT_TYPE_IMAGE_SIZE = 12 , AV_OPT_TYPE_PIXEL_FMT = 13 , AV_OPT_TYPE_SAMPLE_FMT = 14 , AV_OPT_TYPE_VIDEO_RATE = 15 , AV_OPT_TYPE_DURATION = 16 , AV_OPT_TYPE_COLOR = 17 , AV_OPT_TYPE_BOOL = 18 , AV_OPT_TYPE_CHLAYOUT = 19 , AV_OPT_TYPE_UINT = [0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^^^^[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 [0m[0m[1m[38;5;12m----------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the matched value is of type `sys::AVOptionType`[0m
+[0m[1m[38;5;14mhelp[0m[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m60[0m[0m [0m[0m[38;5;10m~ [0m[0m            AV_OPT_TYPE_FLAG_ARRAY => Type::FlagArray[0m[0m[38;5;10m,[0m
+[0m[1m[38;5;12m61[0m[0m [0m[0m[38;5;10m~             sys::AVOptionType::AV_OPT_TYPE_UINT => todo!()[0m[0m,[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+[0m[1m[38;5;9merror[E0004][0m[0m[1m: non-exhaustive patterns: `sys::AVCodecID::AV_CODEC_ID_LC3` and `sys::AVCodecID::AV_CODEC_ID_LCEVC` not covered[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0m/build/cargo-vendor-dir/ffmpeg-next-7.0.4/src/codec/id.rs:685:15[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m685[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        match value {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mpatterns `sys::AVCodecID::AV_CODEC_ID_LC3` and `sys::AVCodecID::AV_CODEC_ID_LCEVC` not covered[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: `sys::AVCodecID` defined here[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0m/build/source/target/x86_64-unknown-linux-gnu/release/build/ffmpeg-sys-next-fffee0615546ae5f/out/bindings.rs:3:234832[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m)] pub enum AVCodecID { AV_CODEC_ID_NONE = 0 , AV_CODEC_ID_MPEG1VIDEO = 1 , AV_CODEC_ID_MPEG2VIDEO = 2 , AV_CODEC_ID_H261 = 3 , AV_CODEC_ID_H263 = 4 , AV_CODEC_ID_RV10 = 5 , AV_CODEC_ID_RV20 = 6 , AV_CODEC_ID_MJPEG = 7 , AV_CODEC_ID_MJPEGB = 8 , AV_CODEC_ID_LJPEG = 9 , AV_CODEC_ID_SP5X = 10 , AV_CODEC_ID_JPEGLS = 11 , AV_CODEC_ID_MPEG4 = 12 , AV_CODEC_ID_RAWVIDEO = 13 , AV_CODEC_ID_MSMPEG4V1 = 14 , AV_CODEC_ID_MSMPEG4V2 = 15 , AV_CODEC_ID_MSMPEG4V3 = 16 , AV_CODEC_ID_WMV1 = 17 , AV_CODEC_ID_WMV2 = 18 , AV_CODEC_ID_H263P = 19 , AV_CODEC_ID_H263I = 20 , AV_CODEC_ID_FLV1 = 21 , AV_CODEC_ID_SVQ1 = 22 , AV_CODEC_ID_SVQ3 = 23 , AV_CODEC_ID_DVVIDEO = 24 , AV_CODEC_ID_HUFFYUV = 25 , AV_CODEC_ID_CYUV = 26 , AV_CODEC_ID_H264 = 27 , AV_CODEC_ID_INDEO3 = 28 , AV_CODEC_ID_VP3 = 29 , AV_CODEC_ID_THEORA = 30 , AV_CODEC_ID_ASV1 = 31 , AV_CODEC_ID_ASV2 = 32 , AV_CODEC_ID_FFV1 = 33 , AV_CODEC_ID_4XM = 34 , AV_CODEC_ID_VCR1 = 35 , AV_CODEC_ID_CLJR = 36 , AV_CODEC_ID_MDEC = 37 , AV_CODEC_ID_ROQ = 38 , AV_CODEC_ID_INTERPLAY_VIDEO = 39 , AV_CODEC_ID_XAN_WC3 = 40 , AV_CODEC_ID_XAN_WC4 = 41 , AV_CODEC_ID_RPZA = 42 , AV_CODEC_ID_CINEPAK = 43 , AV_CODEC_ID_WS_VQA = 44 , AV_CODEC_ID_MSRLE = 45 , AV_CODEC_ID_MSVIDEO1 = 46 , AV_CODEC_ID_IDCIN = 47 , AV_CODEC_ID_8BPS = 48 , AV_CODEC_ID_SMC = 49 , AV_CODEC_ID_FLIC = 50 , AV_CODEC_ID_TRUEMOTION1 = 51 , AV_CODEC_ID_VMDVIDEO = 52 , AV_CODEC_ID_MSZH = 53 , AV_CODEC_ID_ZLIB = 54 , AV_CODEC_ID_QTRLE = 55 , AV_CODEC_ID_TSCC = 56 , AV_CODEC_ID_ULTI = 57 , AV_CODEC_ID_QDRAW = 58 , AV_CODEC_ID_VIXL = 59 , AV_CODEC_ID_QPEG = 60 , AV_CODEC_ID_PNG = 61 , AV_CODEC_ID_PPM = 62 , AV_CODEC_ID_PBM = 63 , AV_CODEC_ID_PGM = 64 , AV_CODEC_ID_PGMYUV = 65 , AV_CODEC_ID_PAM = 66 , AV_CODEC_ID_FFVHUFF = 67 , AV_CODEC_ID_RV30 = 68 , AV_CODEC_ID_RV40 = 69 , AV_CODEC_ID_VC1 = 70 , AV_CODEC_ID_WMV3 = 71 , AV_CODEC_ID_LOCO = 72 , AV_CODEC_ID_WNV1 = 73 , AV_CODEC_ID_AASC = 74 , AV_CODEC_ID_INDEO2 = 75 , AV_CODEC_ID_FRAPS = 76 , AV_CODEC_ID_TRUEMOTION2 = 77 , AV_CODEC_ID_BMP = 78 , AV_CODEC_ID_CSCD = 79 , AV_CODEC_ID_MMVIDEO = 80 , AV_CODEC_ID_ZMBV = 81 , AV_CODEC_ID_AVS = 82 , AV_CODEC_ID_SMACKVIDEO = 83 , AV_CODEC_ID_NUV = 84 , AV_CODEC_ID_KMVC = 85 , AV_CODEC_ID_FLASHSV = 86 , AV_CODEC_ID_CAVS = 87 , AV_CODEC_ID_JPEG2000 = 88 , AV_CODEC_ID_VMNC = 89 , AV_CODEC_ID_VP5 = 90 , AV_CODEC_ID_VP6 = 91 , AV_CODEC_ID_VP6F = 92 , AV_CODEC_ID_TARGA = 93 , AV_CODEC_ID_DSICINVIDEO = 94 , AV_CODEC_ID_TIERTEXSEQVIDEO = 95 , AV_CODEC_ID_TIFF = 96 , AV_CODEC_ID_GIF = 97 , AV_CODEC_ID_DXA = 98 , AV_CODEC_ID_DNXHD = 99 , AV_CODEC_ID_THP = 100 , AV_CODEC_ID_SGI = 101 , AV_CODEC_ID_C93 = 102 , AV_CODEC_ID_BETHSOFTVID = 103 , AV_CODEC_ID_PTX = 104 , AV_CODEC_ID_TXD = 105 , AV_CODEC_ID_VP6A = 106 , AV_CODEC_ID_AMV = 107 , AV_CODEC_ID_VB = 108 , AV_CODEC_ID_PCX = 109 , AV_CODEC_ID_SUNRAST = 110 , AV_CODEC_ID_INDEO4 = 111 , AV_CODEC_ID_INDEO5 = 112 , AV_CODEC_ID_MIMIC = 113 , AV_CODEC_ID_RL2 = 114 , AV_CODEC_ID_ESCAPE124 = 115 , AV_CODEC_ID_DIRAC = 116 , AV_CODEC_ID_BFI = 117 , AV_CODEC_ID_CMV = 118 , AV_CODEC_ID_MOTIONPIXELS = 119 , AV_CODEC_ID_TGV = 120 , AV_CODEC_ID_TGQ = 121 , AV_CODEC_ID_TQI = 122 , AV_CODEC_ID_AURA = 123 , AV_CODEC_ID_AURA2 = 124 , AV_CODEC_ID_V210X = 125 , AV_CODEC_ID_TMV = 126 , AV_CODEC_ID_V210 = 127 , AV_CODEC_ID_DPX = 128 , AV_CODEC_ID_MAD = 129 , AV_CODEC_ID_FRWU = 130 , AV_CODEC_ID_FLASHSV2 = 131 , AV_CODEC_ID_CDGRAPHICS = 132 , AV_CODEC_ID_R210 = 133 , AV_CODEC_ID_ANM = 134 , AV_CODEC_ID_BINKVIDEO = 135 , AV_CODEC_ID_IFF_ILBM = 136 , AV_CODEC_ID_KGV1 = 137 , AV_CODEC_ID_YOP = 138 , AV_CODEC_ID_VP8 = 139 , AV_CODEC_ID_PICTOR = 140 , AV_CODEC_ID_ANSI = 141 , AV_CODEC_ID_A64_MULTI = 142 , AV_CODEC_ID_A64_MULTI5 = 143 , AV_CODEC_ID_R10K = 144 , AV_CODEC_ID_MXPEG = 145 , AV_CODEC_ID_LAGARITH = 146 , AV_CODEC_ID_PRORES = 147 , AV_CODEC_ID_JV = 148 , AV_CODEC_ID_DFA = 149 , AV_CODEC_ID_WMV3IMAGE = 150 , AV_CODEC_ID_VC1IMAGE = 151 , AV_CODEC_ID_UTVIDEO = 152 , AV_CODEC_ID_BMV_VIDEO = 153 , AV_CODEC_ID_VBLE = 154 , AV_CODEC_ID_DXTORY = 155 , AV_CODEC_ID_V410 = 156 , AV_CODEC_ID_XWD = 157 , AV_CODEC_ID_CDXL = 158 , AV_CODEC_ID_XBM = 159 , AV_CODEC_ID_ZEROCODEC = 160 , AV_CODEC_ID_MSS1 = 161 , AV_CODEC_ID_MSA1 = 162 , AV_CODEC_ID_TSCC2 = 163 , AV_CODEC_ID_MTS2 = 164 , AV_CODEC_ID_CLLC = 165 , AV_CODEC_ID_MSS2 = 166 , AV_CODEC_ID_VP9 = 167 , AV_CODEC_ID_AIC = 168 , AV_CODEC_ID_ESCAPE130 = 169 , AV_CODEC_ID_G2M = 170 , AV_CODEC_ID_WEBP = 171 , AV_CODEC_ID_HNM4_VIDEO = 172 , AV_CODEC_ID_HEVC = 173 , AV_CODEC_ID_FIC = 174 , AV_CODEC_ID_ALIAS_PIX = 175 , AV_CODEC_ID_BRENDER_PIX = 176 , AV_CODEC_ID_PAF_VIDEO = 177 , AV_CODEC_ID_EXR = 178 , AV_CODEC_ID_VP7 = 179 , AV_CODEC_ID_SANM = 180 , AV_CODEC_ID_SGIRLE = 181 , AV_CODEC_ID_MVC1 = 182 , AV_CODEC_ID_MVC2 = 183 , AV_CODEC_ID_HQX = 184 , AV_CODEC_ID_TDSC = 185 , AV_CODEC_ID_HQ_HQA = 186 , AV_CODEC_ID_HAP = 187 , AV_CODEC_ID_DDS = 188 , AV_CODEC_ID_DXV = 189 , AV_CODEC_ID_SCREENPRESSO = 190 , AV_CODEC_ID_RSCC = 191 , AV_CODEC_ID_AVS2 = 192 , AV_CODEC_ID_PGX = 193 , AV_CODEC_ID_AVS3 = 194 , AV_CODEC_ID_MSP2 = 195 , AV_CODEC_ID_VVC = 196 , AV_CODEC_ID_Y41P = 197 , AV_CODEC_ID_AVRP = 198 , AV_CODEC_ID_012V = 199 , AV_CODEC_ID_AVUI = 200 , AV_CODEC_ID_TARGA_Y216 = 201 , AV_CODEC_ID_V308 = 202 , AV_CODEC_ID_V408 = 203 , AV_CODEC_ID_YUV4 = 204 , AV_CODEC_ID_AVRN = 205 , AV_CODEC_ID_CPIA = 206 , AV_CODEC_ID_XFACE = 207 , AV_CODEC_ID_SNOW = 208 , AV_CODEC_ID_SMVJPEG = 209 , AV_CODEC_ID_APNG = 210 , AV_CODEC_ID_DAALA = 211 , AV_CODEC_ID_CFHD = 212 , AV_CODEC_ID_TRUEMOTION2RT = 213 , AV_CODEC_ID_M101 = 214 , AV_CODEC_ID_MAGICYUV = 215 , AV_CODEC_ID_SHEERVIDEO = 216 , AV_CODEC_ID_YLC = 217 , AV_CODEC_ID_PSD = 218 , AV_CODEC_ID_PIXLET = 219 , AV_CODEC_ID_SPEEDHQ = 220 , AV_CODEC_ID_FMVC = 221 , AV_CODEC_ID_SCPR = 222 , AV_CODEC_ID_CLEARVIDEO = 223 , AV_CODEC_ID_XPM = 224 , AV_CODEC_ID_AV1 = 225 , AV_CODEC_ID_BITPACKED = 226 , AV_CODEC_ID_MSCC = 227 , AV_CODEC_ID_SRGC = 228 , AV_CODEC_ID_SVG = 229 , AV_CODEC_ID_GDV = 230 , AV_CODEC_ID_FITS = 231 , AV_CODEC_ID_IMM4 = 232 , AV_CODEC_ID_PROSUMER = 233 , AV_CODEC_ID_MWSC = 234 , AV_CODEC_ID_WCMV = 235 , AV_CODEC_ID_RASC = 236 , AV_CODEC_ID_HYMT = 237 , AV_CODEC_ID_ARBC = 238 , AV_CODEC_ID_AGM = 239 , AV_CODEC_ID_LSCR = 240 , AV_CODEC_ID_VP4 = 241 , AV_CODEC_ID_IMM5 = 242 , AV_CODEC_ID_MVDV = 243 , AV_CODEC_ID_MVHA = 244 , AV_CODEC_ID_CDTOONS = 245 , AV_CODEC_ID_MV30 = 246 , AV_CODEC_ID_NOTCHLC = 247 , AV_CODEC_ID_PFM = 248 , AV_CODEC_ID_MOBICLIP = 249 , AV_CODEC_ID_PHOTOCD = 250 , AV_CODEC_ID_IPU = 251 , AV_CODEC_ID_ARGO = 252 , AV_CODEC_ID_CRI = 253 , AV_CODEC_ID_SIMBIOSIS_IMX = 254 , AV_CODEC_ID_SGA_VIDEO = 255 , AV_CODEC_ID_GEM = 256 , AV_CODEC_ID_VBN = 257 , AV_CODEC_ID_JPEGXL = 258 , AV_CODEC_ID_QOI = 259 , AV_CODEC_ID_PHM = 260 , AV_CODEC_ID_RADIANCE_HDR = 261 , AV_CODEC_ID_WBMP = 262 , AV_CODEC_ID_MEDIA100 = 263 , AV_CODEC_ID_VQC = 264 , AV_CODEC_ID_PDV = 265 , AV_CODEC_ID_EVC = 266 , AV_CODEC_ID_RTV1 = 267 , AV_CODEC_ID_VMIX = 268 , AV_CODEC_ID_LEAD = 269 , AV_CODEC_ID_PCM_S16LE = 65536 , AV_CODEC_ID_PCM_S16BE = 65537 , AV_CODEC_ID_PCM_U16LE = 65538 , AV_CODEC_ID_PCM_U16BE = 65539 , AV_CODEC_ID_PCM_S8 = 65540 , AV_CODEC_ID_PCM_U8 = 65541 , AV_CODEC_ID_PCM_MULAW = 65542 , AV_CODEC_ID_PCM_ALAW = 65543 , AV_CODEC_ID_PCM_S32LE = 65544 , AV_CODEC_ID_PCM_S32BE = 65545 , AV_CODEC_ID_PCM_U32LE = 65546 , AV_CODEC_ID_PCM_U32BE = 65547 , AV_CODEC_ID_PCM_S24LE = 65548 , AV_CODEC_ID_PCM_S24BE = 65549 , AV_CODEC_ID_PCM_U24LE = 65550 , AV_CODEC_ID_PCM_U24BE = 65551 , AV_CODEC_ID_PCM_S24DAUD = 65552 , AV_CODEC_ID_PCM_ZORK = 65553 , AV_CODEC_ID_PCM_S16LE_PLANAR = 65554 , AV_CODEC_ID_PCM_DVD = 65555 , AV_CODEC_ID_PCM_F32BE = 65556 , AV_CODEC_ID_PCM_F32LE = 65557 , AV_CODEC_ID_PCM_F64BE = 65558 , AV_CODEC_ID_PCM_F64LE = 65559 , AV_CODEC_ID_PCM_BLURAY = 65560 , AV_CODEC_ID_PCM_LXF = 65561 , AV_CODEC_ID_S302M = 65562 , AV_CODEC_ID_PCM_S8_PLANAR = 65563 , AV_CODEC_ID_PCM_S24LE_PLANAR = 65564 , AV_CODEC_ID_PCM_S32LE_PLANAR = 65565 , AV_CODEC_ID_PCM_S16BE_PLANAR = 65566 , AV_CODEC_ID_PCM_S64LE = 65567 , AV_CODEC_ID_PCM_S64BE = 65568 , AV_CODEC_ID_PCM_F16LE = 65569 , AV_CODEC_ID_PCM_F24LE = 65570 , AV_CODEC_ID_PCM_VIDC = 65571 , AV_CODEC_ID_PCM_SGA = 65572 , AV_CODEC_ID_ADPCM_IMA_QT = 69632 , AV_CODEC_ID_ADPCM_IMA_WAV = 69633 , AV_CODEC_ID_ADPCM_IMA_DK3 = 69634 , AV_CODEC_ID_ADPCM_IMA_DK4 = 69635 , AV_CODEC_ID_ADPCM_IMA_WS = 69636 , AV_CODEC_ID_ADPCM_IMA_SMJPEG = 69637 , AV_CODEC_ID_ADPCM_MS = 69638 , AV_CODEC_ID_ADPCM_4XM = 69639 , AV_CODEC_ID_ADPCM_XA = 69640 , AV_CODEC_ID_ADPCM_ADX = 69641 , AV_CODEC_ID_ADPCM_EA = 69642 , AV_CODEC_ID_ADPCM_G726 = 69643 , AV_CODEC_ID_ADPCM_CT = 69644 , AV_CODEC_ID_ADPCM_SWF = 69645 , AV_CODEC_ID_ADPCM_YAMAHA = 69646 , AV_CODEC_ID_ADPCM_SBPRO_4 = 69647 , AV_CODEC_ID_ADPCM_SBPRO_3 = 69648 , AV_CODEC_ID_ADPCM_SBPRO_2 = 69649 , AV_CODEC_ID_ADPCM_THP = 69650 , AV_CODEC_ID_ADPCM_IMA_AMV = 69651 , AV_CODEC_ID_ADPCM_EA_R1 = 69652 , AV_CODEC_ID_ADPCM_EA_R3 = 69653 , AV_CODEC_ID_ADPCM_EA_R2 = 69654 , AV_CODEC_ID_ADPCM_IMA_EA_SEAD = 69655 , AV_CODEC_ID_ADPCM_IMA_EA_EACS = 69656 , AV_CODEC_ID_ADPCM_EA_XAS = 69657 , AV_CODEC_ID_ADPCM_EA_MAXIS_XA = 69658 , AV_CODEC_ID_ADPCM_IMA_ISS = 69659 , AV_CODEC_ID_ADPCM_G722 = 69660 , AV_CODEC_ID_ADPCM_IMA_APC = 69661 , AV_CODEC_ID_ADPCM_VIMA = 69662 , AV_CODEC_ID_ADPCM_AFC = 69663 , AV_CODEC_ID_ADPCM_IMA_OKI = 69664 , AV_CODEC_ID_ADPCM_DTK = 69665 , AV_CODEC_ID_ADPCM_IMA_RAD = 69666 , AV_CODEC_ID_ADPCM_G726LE = 69667 , AV_CODEC_ID_ADPCM_THP_LE = 69668 , AV_CODEC_ID_ADPCM_PSX = 69669 , AV_CODEC_ID_ADPCM_AICA = 69670 , AV_CODEC_ID_ADPCM_IMA_DAT4 = 69671 , AV_CODEC_ID_ADPCM_MTAF = 69672 , AV_CODEC_ID_ADPCM_AGM = 69673 , AV_CODEC_ID_ADPCM_ARGO = 69674 , AV_CODEC_ID_ADPCM_IMA_SSI = 69675 , AV_CODEC_ID_ADPCM_ZORK = 69676 , AV_CODEC_ID_ADPCM_IMA_APM = 69677 , AV_CODEC_ID_ADPCM_IMA_ALP = 69678 , AV_CODEC_ID_ADPCM_IMA_MTF = 69679 , AV_CODEC_ID_ADPCM_IMA_CUNNING = 69680 , AV_CODEC_ID_ADPCM_IMA_MOFLEX = 69681 , AV_CODEC_ID_ADPCM_IMA_ACORN = 69682 , AV_CODEC_ID_ADPCM_XMD = 69683 , AV_CODEC_ID_AMR_NB = 73728 , AV_CODEC_ID_AMR_WB = 73729 , AV_CODEC_ID_RA_144 = 77824 , AV_CODEC_ID_RA_288 = 77825 , AV_CODEC_ID_ROQ_DPCM = 81920 , AV_CODEC_ID_INTERPLAY_DPCM = 81921 , AV_CODEC_ID_XAN_DPCM = 81922 , AV_CODEC_ID_SOL_DPCM = 81923 , AV_CODEC_ID_SDX2_DPCM = 81924 , AV_CODEC_ID_GREMLIN_DPCM = 81925 , AV_CODEC_ID_DERF_DPCM = 81926 , AV_CODEC_ID_WADY_DPCM = 81927 , AV_CODEC_ID_CBD2_DPCM = 81928 , AV_CODEC_ID_MP2 = 86016 , AV_CODEC_ID_MP3 = 86017 , AV_CODEC_ID_AAC = 86018 , AV_CODEC_ID_AC3 = 86019 , AV_CODEC_ID_DTS = 86020 , AV_CODEC_ID_VORBIS = 86021 , AV_CODEC_ID_DVAUDIO = 86022 , AV_CODEC_ID_WMAV1 = 86023 , AV_CODEC_ID_WMAV2 = 86024 , AV_CODEC_ID_MACE3 = 86025 , AV_CODEC_ID_MACE6 = 86026 , AV_CODEC_ID_VMDAUDIO = 86027 , AV_CODEC_ID_FLAC = 86028 , AV_CODEC_ID_MP3ADU = 86029 , AV_CODEC_ID_MP3ON4 = 86030 , AV_CODEC_ID_SHORTEN = 86031 , AV_CODEC_ID_ALAC = 86032 , AV_CODEC_ID_WESTWOOD_SND1 = 86033 , AV_CODEC_ID_GSM = 86034 , AV_CODEC_ID_QDM2 = 86035 , AV_CODEC_ID_COOK = 86036 , AV_CODEC_ID_TRUESPEECH = 86037 , AV_CODEC_ID_TTA = 86038 , AV_CODEC_ID_SMACKAUDIO = 86039 , AV_CODEC_ID_QCELP = 86040 , AV_CODEC_ID_WAVPACK = 86041 , AV_CODEC_ID_DSICINAUDIO = 86042 , AV_CODEC_ID_IMC = 86043 , AV_CODEC_ID_MUSEPACK7 = 86044 , AV_CODEC_ID_MLP = 86045 , AV_CODEC_ID_GSM_MS = 86046 , AV_CODEC_ID_ATRAC3 = 86047 , AV_CODEC_ID_APE = 86048 , AV_CODEC_ID_NELLYMOSER = 86049 , AV_CODEC_ID_MUSEPACK8 = 86050 , AV_CODEC_ID_SPEEX = 86051 , AV_CODEC_ID_WMAVOICE = 86052 , AV_CODEC_ID_WMAPRO = 86053 , AV_CODEC_ID_WMALOSSLESS = 86054 , AV_CODEC_ID_ATRAC3P = 86055 , AV_CODEC_ID_EAC3 = 86056 , AV_CODEC_ID_SIPR = 86057 , AV_CODEC_ID_MP1 = 86058 , AV_CODEC_ID_TWINVQ = 86059 , AV_CODEC_ID_TRUEHD = 86060 , AV_CODEC_ID_MP4ALS = 86061 , AV_CODEC_ID_ATRAC1 = 86062 , AV_CODEC_ID_BINKAUDIO_RDFT = 86063 , AV_CODEC_ID_BINKAUDIO_DCT = 86064 , AV_CODEC_ID_AAC_LATM = 86065 , AV_CODEC_ID_QDMC = 86066 , AV_CODEC_ID_CELT = 86067 , AV_CODEC_ID_G723_1 = 86068 , AV_CODEC_ID_G729 = 86069 , AV_CODEC_ID_8SVX_EXP = 86070 , AV_CODEC_ID_8SVX_FIB = 86071 , AV_CODEC_ID_BMV_AUDIO = 86072 , AV_CODEC_ID_RALF = 86073 , AV_CODEC_ID_IAC = 86074 , AV_CODEC_ID_ILBC = 86075 , AV_CODEC_ID_OPUS = 86076 , AV_CODEC_ID_COMFORT_NOISE = 86077 , AV_CODEC_ID_TAK = 86078 , AV_CODEC_ID_METASOUND = 86079 , AV_CODEC_ID_PAF_AUDIO = 86080 , AV_CODEC_ID_ON2AVC = 86081 , AV_CODEC_ID_DSS_SP = 86082 , AV_CODEC_ID_CODEC2 = 86083 , AV_CODEC_ID_FFWAVESYNTH = 86084 , AV_CODEC_ID_SONIC = 86085 , AV_CODEC_ID_SONIC_LS = 86086 , AV_CODEC_ID_EVRC = 86087 , AV_CODEC_ID_SMV = 86088 , AV_CODEC_ID_DSD_LSBF = 86089 , AV_CODEC_ID_DSD_MSBF = 86090 , AV_CODEC_ID_DSD_LSBF_PLANAR = 86091 , AV_CODEC_ID_DSD_MSBF_PLANAR = 86092 , AV_CODEC_ID_4GV = 86093 , AV_CODEC_ID_INTERPLAY_ACM = 86094 , AV_CODEC_ID_XMA1 = 86095 , AV_CODEC_ID_XMA2 = 86096 , AV_CODEC_ID_DST = 86097 , AV_CODEC_ID_ATRAC3AL = 86098 , AV_CODEC_ID_ATRAC3PAL = 86099 , AV_CODEC_ID_DOLBY_E = 86100 , AV_CODEC_ID_APTX = 86101 , AV_CODEC_ID_APTX_HD = 86102 , AV_CODEC_ID_SBC = 86103 , AV_CODEC_ID_ATRAC9 = 86104 , AV_CODEC_ID_HCOM = 86105 , AV_CODEC_ID_ACELP_KELVIN = 86106 , AV_CODEC_ID_MPEGH_3D_AUDIO = 86107 , AV_CODEC_ID_SIREN = 86108 , AV_CODEC_ID_HCA = 86109 , AV_CODEC_ID_FASTAUDIO = 86110 , AV_CODEC_ID_MSNSIREN = 86111 , AV_CODEC_ID_DFPWM = 86112 , AV_CODEC_ID_BONK = 86113 , AV_CODEC_ID_MISC4 = 86114 , AV_CODEC_ID_APAC = 86115 , AV_CODEC_ID_FTR = 86116 , AV_CODEC_ID_WAVARC = 86117 , AV_CODEC_ID_RKA = 86118 , AV_CODEC_ID_AC4 = 86119 , AV_CODEC_ID_OSQ = 86120 , AV_CODEC_ID_QOA = 86121 , AV_CODEC_ID_LC3 = 86122 , AV_CODEC_ID_DVD_SUBTITLE = 94208 , AV_CODEC_ID_DVB_SUBTITLE = 94209 , AV_CODEC_ID_TEXT = 94210 , AV_CODEC_ID_XSUB = 94211 , AV_CODEC_ID_SSA = 94212 , AV_CODEC_ID_MOV_TEXT = 94213 , AV_CODEC_ID_HDMV_PGS_SUBTITLE = 94214 , AV_CODEC_ID_DVB_TELETEXT = 94215 , AV_CODEC_ID_SRT = 94216 , AV_CODEC_ID_MICRODVD = 94217 , AV_CODEC_ID_EIA_608 = 94218 , AV_CODEC_ID_JACOSUB = 94219 , AV_CODEC_ID_SAMI = 94220 , AV_CODEC_ID_REALTEXT = 94221 , AV_CODEC_ID_STL = 94222 , AV_CODEC_ID_SUBVIEWER1 = 94223 , AV_CODEC_ID_SUBVIEWER = 94224 , AV_CODEC_ID_SUBRIP = 94225 , AV_CODEC_ID_WEBVTT = 94226 , AV_CODEC_ID_MPL2 = 94227 , AV_CODEC_ID_VPLAYER = 94228 , AV_CODEC_ID_PJS = 94229 , AV_CODEC_ID_ASS = 94230 , AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 94231 , AV_CODEC_ID_TTML = 94232 , AV_CODEC_ID_ARIB_CAPTION = 94233 , AV_CODEC_ID_TTF = 98304 , AV_CODEC_ID_SCTE_35 = 98305 , AV_CODEC_ID_EPG = 98306 , AV_CODEC_ID_BINTEXT = 98307 , AV_CODEC_ID_XBIN = 98308 , AV_CODEC_ID_IDF = 98309 , AV_CODEC_ID_OTF = 98310 , AV_CODEC_ID_SMPTE_KLV = 98311 , AV_CODEC_ID_DVD_NAV = 98312 , AV_CODEC_ID_TIMED_ID3 = 98313 , AV_CODEC_ID_BIN_DATA = 98314 , AV_CODEC_ID_SMPTE_2038 = 98315 , AV_CODEC_ID_LCEVC = [0m[0m[1m[38;5;12m...[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              [0m[0m[1m[38;5;12m---------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    [0m[0m[1m[38;5;12m-----------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the matched value is of type `sys::AVCodecID`[0m
+[0m[1m[38;5;14mhelp[0m[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1339[0m[0m[38;5;10m~ [0m[0m            AV_CODEC_ID_LEAD => Id::LEAD[0m[0m[38;5;10m,[0m
+[0m[1m[38;5;12m1340[0m[0m[38;5;10m~             sys::AVCodecID::AV_CODEC_ID_LC3 | sys::AVCodecID::AV_CODEC_ID_LCEVC => todo!()[0m[0m,[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+
+[0m[1m[38;5;9merror[E0004][0m[0m[1m: non-exhaustive patterns: `sys::AVPacketSideDataType::AV_PKT_DATA_FRAME_CROPPING` and `sys::AVPacketSideDataType::AV_PKT_DATA_LCEVC` not covered[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/cargo-vendor-dir/ffmpeg-next-7.0.4/src/codec/packet/side_data.rs:70:15[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m70[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        match value {[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mpatterns `sys::AVPacketSideDataType::AV_PKT_DATA_FRAME_CROPPING` and `sys::AVPacketSideDataType::AV_PKT_DATA_LCEVC` not covered[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: `sys::AVPacketSideDataType` defined here[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/build/source/target/x86_64-unknown-linux-gnu/release/build/ffmpeg-sys-next-fffee0615546ae5f/out/bindings.rs:3:271403[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m)] pub enum AVPacketSideDataType { # [doc = " An AV_PKT_DATA_PALETTE side data packet contains exactly AVPALETTE_SIZE\n bytes worth of palette. This side data signals that a new palette is\n present."] AV_PKT_DATA_PALETTE = 0 , # [doc = " The AV_PKT_DATA_NEW_EXTRADATA is used to notify the codec or the format\n that the extradata buffer was changed and the receiving side should\n act upon it appropriately. The new extradata is embedded in the side\n data buffer and should be immediately used for processing the current\n frame or packet."] AV_PKT_DATA_NEW_EXTRADATA = 1 , # [doc = " An AV_PKT_DATA_PARAM_CHANGE side data packet is laid out as follows:\n @code\n u32le param_flags\n if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_SAMPLE_RATE)\n     s32le sample_rate\n if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS)\n     s32le width\n     s32le height\n @endcode"] AV_PKT_DATA_PARAM_CHANGE = 2 , # [doc = " An AV_PKT_DATA_H263_MB_INFO side data packet contains a number of\n structures with info about macroblocks relevant to splitting the\n packet into smaller packets on macroblock edges (e.g. as for RFC 2190).\n That is, it does not necessarily contain info about all macroblocks,\n as long as the distance between macroblocks in the info is smaller\n than the target payload size.\n Each MB info structure is 12 bytes, and is laid out as follows:\n @code\n u32le bit offset from the start of the packet\n u8    current quantizer at the start of the macroblock\n u8    GOB number\n u16le macroblock address within the GOB\n u8    horizontal MV predictor\n u8    vertical MV predictor\n u8    horizontal MV predictor for block number 3\n u8    vertical MV predictor for block number 3\n @endcode"] AV_PKT_DATA_H263_MB_INFO = 3 , # [doc = " This side data should be associated with an audio stream and contains\n ReplayGain information in form of the AVReplayGain struct."] AV_PKT_DATA_REPLAYGAIN = 4 , # [doc = " This side data contains a 3x3 transformation matrix describing an affine\n transformation that needs to be applied to the decoded video frames for\n correct presentation.\n\n See libavutil/display.h for a detailed description of the data."] AV_PKT_DATA_DISPLAYMATRIX = 5 , # [doc = " This side data should be associated with a video stream and contains\n Stereoscopic 3D information in form of the AVStereo3D struct."] AV_PKT_DATA_STEREO3D = 6 , # [doc = " This side data should be associated with an audio stream and corresponds\n to enum AVAudioServiceType."] AV_PKT_DATA_AUDIO_SERVICE_TYPE = 7 , # [doc = " This side data contains quality related information from the encoder.\n @code\n u32le quality factor of the compressed frame. Allowed range is between 1 (good) and FF_LAMBDA_MAX (bad).\n u8    picture type\n u8    error count\n u16   reserved\n u64le[error count] sum of squared differences between encoder in and output\n @endcode"] AV_PKT_DATA_QUALITY_STATS = 8 , # [doc = " This side data contains an integer value representing the stream index\n of a \"fallback\" track.  A fallback track indicates an alternate\n track to use when the current track can not be decoded for some reason.\n e.g. no decoder available for codec."] AV_PKT_DATA_FALLBACK_TRACK = 9 , # [doc = " This side data corresponds to the AVCPBProperties struct."] AV_PKT_DATA_CPB_PROPERTIES = 10 , # [doc = " Recommmends skipping the specified number of samples\n @code\n u32le number of samples to skip from start of this packet\n u32le number of samples to skip from end of this packet\n u8    reason for start skip\n u8    reason for end   skip (0=padding silence, 1=convergence)\n @endcode"] AV_PKT_DATA_SKIP_SAMPLES = 11 , # [doc = " An AV_PKT_DATA_JP_DUALMONO side data packet indicates that\n the packet may contain \"dual mono\" audio specific to Japanese DTV\n and if it is true, recommends only the selected channel to be used.\n @code\n u8    selected channels (0=main/left, 1=sub/right, 2=both)\n @endcode"] AV_PKT_DATA_JP_DUALMONO = 12 , # [doc = " A list of zero terminated key/value strings. There is no end marker for\n the list, so it is required to rely on the side data size to stop."] AV_PKT_DATA_STRINGS_METADATA = 13 , # [doc = " Subtitle event position\n @code\n u32le x1\n u32le y1\n u32le x2\n u32le y2\n @endcode"] AV_PKT_DATA_SUBTITLE_POSITION = 14 , # [doc = " Data found in BlockAdditional element of matroska container. There is\n no end marker for the data, so it is required to rely on the side data\n size to recognize the end. 8 byte id (as found in BlockAddId) followed\n by data."] AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL = 15 , # [doc = " The optional first identifier line of a WebVTT cue."] AV_PKT_DATA_WEBVTT_IDENTIFIER = 16 , # [doc = " The optional settings (rendering instructions) that immediately\n follow the timestamp specifier of a WebVTT cue."] AV_PKT_DATA_WEBVTT_SETTINGS = 17 , # [doc = " A list of zero terminated key/value strings. There is no end marker for\n the list, so it is required to rely on the side data size to stop. This\n side data includes updated metadata which appeared in the stream."] AV_PKT_DATA_METADATA_UPDATE = 18 , # [doc = " MPEGTS stream ID as uint8_t, this is required to pass the stream ID\n information from the demuxer to the corresponding muxer."] AV_PKT_DATA_MPEGTS_STREAM_ID = 19 , # [doc = " Mastering display metadata (based on SMPTE-2086:2014). This metadata\n should be associated with a video stream and contains data in the form\n of the AVMasteringDisplayMetadata struct."] AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 20 , # [doc = " This side data should be associated with a video stream and corresponds\n to the AVSphericalMapping structure."] AV_PKT_DATA_SPHERICAL = 21 , # [doc = " Content light level (based on CTA-861.3). This metadata should be\n associated with a video stream and contains data in the form of the\n AVContentLightMetadata struct."] AV_PKT_DATA_CONTENT_LIGHT_LEVEL = 22 , # [doc = " ATSC A53 Part 4 Closed Captions. This metadata should be associated with\n a video stream. A53 CC bitstream is stored as uint8_t in AVPacketSideData.data.\n The number of bytes of CC data is AVPacketSideData.size."] AV_PKT_DATA_A53_CC = 23 , # [doc = " This side data is encryption initialization data.\n The format is not part of ABI, use av_encryption_init_info_* methods to\n access."] AV_PKT_DATA_ENCRYPTION_INIT_INFO = 24 , # [doc = " This side data contains encryption info for how to decrypt the packet.\n The format is not part of ABI, use av_encryption_info_* methods to access."] AV_PKT_DATA_ENCRYPTION_INFO = 25 , # [doc = " Active Format Description data consisting of a single byte as specified\n in ETSI TS 101 154 using AVActiveFormatDescription enum."] AV_PKT_DATA_AFD = 26 , # [doc = " Producer Reference Time data corresponding to the AVProducerReferenceTime struct,\n usually exported by some encoders (on demand through the prft flag set in the\n AVCodecContext export_side_data field)."] AV_PKT_DATA_PRFT = 27 , # [doc = " ICC profile data consisting of an opaque octet buffer following the\n format described by ISO 15076-1."] AV_PKT_DATA_ICC_PROFILE = 28 , # [doc = " DOVI configuration\n ref:\n dolby-vision-bitstreams-within-the-iso-base-media-file-format-v2.1.2, section 2.2\n dolby-vision-bitstreams-in-mpeg-2-transport-stream-multiplex-v1.2, section 3.3\n Tags are stored in struct AVDOVIDecoderConfigurationRecord."] AV_PKT_DATA_DOVI_CONF = 29 , # [doc = " Timecode which conforms to SMPTE ST 12-1:2014. The data is an array of 4 uint32_t\n where the first uint32_t describes how many (1-3) of the other timecodes are used.\n The timecode format is described in the documentation of av_timecode_get_smpte_from_framenum()\n function in libavutil/timecode.h."] AV_PKT_DATA_S12M_TIMECODE = 30 , # [doc = " HDR10+ dynamic metadata associated with a video frame. The metadata is in\n the form of the AVDynamicHDRPlus struct and contains\n information for color volume transform - application 4 of\n SMPTE 2094-40:2016 standard."] AV_PKT_DATA_DYNAMIC_HDR10_PLUS = 31 , # [doc = " IAMF Mix Gain Parameter Data associated with the audio frame. This metadata\n is in the form of the AVIAMFParamDefinition struct and contains information\n defined in sections 3.6.1 and 3.8.1 of the Immersive Audio Model and\n Formats standard."] AV_PKT_DATA_IAMF_MIX_GAIN_PARAM = 32 , # [doc = " IAMF Demixing Info Parameter Data associated with the audio frame. This\n metadata is in the form of the AVIAMFParamDefinition struct and contains\n information defined in sections 3.6.1 and 3.8.2 of the Immersive Audio Model\n and Formats standard."] AV_PKT_DATA_IAMF_DEMIXING_INFO_PARAM = 33 , # [doc = " IAMF Recon Gain Info Parameter Data associated with the audio frame. This\n metadata is in the form of the AVIAMFParamDefinition struct and contains\n information defined in sections 3.6.1 and 3.8.3 of the Immersive Audio Model\n and Formats standard."] AV_PKT_DATA_IAMF_RECON_GAIN_INFO_PARAM = 34 , # [doc = " Ambient viewing environment metadata, as defined by H.274. This metadata\n should be associated with a video stream and contains data in the form\n of the AVAmbientViewingEnvironment struct."] AV_PKT_DATA_AMBIENT_VIEWING_ENVIRONMENT = 35 , # [doc = " The number of pixels to discard from the top/bottom/left/right border of the\n decoded frame to obtain the sub-rectangle intended for presentation.\n\n @code\n u32le crop_top\n u32le crop_bottom\n u32le crop_left\n u32le crop_right\n @endcode"] AV_PKT_DATA_FRAME_CROPPING = 36 , # [doc = " Raw LCEVC payload data, as a uint8_t array, with NAL emulation\n bytes intact."] AV_PKT_DATA_LCEVC = [0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        [0m[0m[1m[38;5;12m--------------------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m[0m                                                                                        [0m[0m[1m[38;5;12m-----------------[0m[0m [0m[0m[1m[38;5;12mnot covered[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the matched value is of type `sys::AVPacketSideDataType`[0m
+[0m[1m[38;5;14mhelp[0m[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m126[0m[0m[38;5;10m~ [0m[0m            AV_PKT_DATA_AMBIENT_VIEWING_ENVIRONMENT => Type::AMBIENT_VIEWING_ENVIRONMENT[0m[0m[38;5;10m,[0m
+[0m[1m[38;5;12m127[0m[0m[38;5;10m~             sys::AVPacketSideDataType::AV_PKT_DATA_FRAME_CROPPING | sys::AVPacketSideDataType::AV_PKT_DATA_LCEVC => todo!()[0m[0m,[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+[1m[32m   Compiling[0m crossbeam v0.8.4
+[1m[32m   Compiling[0m tower-http v0.5.2
+[0m[1mFor more information about this error, try `rustc --explain E0004`.[0m
+[1m[31merror[0m[1m:[0m could not compile `ffmpeg-next` (lib) due to 5 previous errors
+[1m[33mwarning[0m[1m:[0m build failed, waiting for other jobs to finish...
