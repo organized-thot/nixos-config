@@ -71,16 +71,14 @@
     ];
   };
 
-#  chaotic.nyx.chaoticEnabled = true;
+  chaotic.nyx.chaoticEnabled = true;
 
 # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
     permittedUnfreePackages = [
-      "anydesk"
       "vivaldi"
       "windsurf"
-      "vscode-with-extensions"
     ];
     permittedInsecurePackages = [ 
       "python3.13-django-3.1.14"
@@ -91,8 +89,6 @@
 # System Packages
   environment.systemPackages = with pkgs; [
     tailscale
-    anydesk
-    vscode-with-extensions
   # Nix-related tools
     home-manager
     disko
@@ -174,6 +170,7 @@
       eget
       curl
       curlie
+      wcurl
       curl-impersonate
       httpie
       katana
@@ -193,7 +190,7 @@
       neo4j-desktop   
       open-webui
       mongodb
-      # screen-pipe
+      inputs.screenpipe-flake.packages.${pkgs.system}.screen-pipe
       
     # PyPi Packages
       python313Packages.markitdown
