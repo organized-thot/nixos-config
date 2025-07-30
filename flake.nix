@@ -42,11 +42,6 @@
       inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
-    # screenpipe flake
-    screenpipe = {
-      url = "./screenpipe-flake.nix";
-      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs"
-    };
     #
     # Development tooling
     #
