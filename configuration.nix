@@ -89,6 +89,7 @@
 # System Packages
   environment.systemPackages = with pkgs; [
     tailscale
+    kasmweb
   # Nix-related tools
     home-manager
     disko
