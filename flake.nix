@@ -135,6 +135,7 @@
             ./configuration.nix
             ./hardware-configuration.nix
             inputs.home-manager.nixosModules.home-manager
+            inputs.chaotic-nyx.nixosModules.default  # Chaotic Nyx module
           ];
         };
       };
