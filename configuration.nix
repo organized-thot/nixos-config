@@ -192,7 +192,6 @@
       neo4j-desktop   
       open-webui
       mongodb
-      inputs.screenpipe-flake.packages.${pkgs.system}.screen-pipe
       
     # PyPi Packages
       python313Packages.markitdown

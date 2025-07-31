@@ -122,10 +122,9 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       # Flake modules
 #      imports = [ inputs.pre-commit-hooks.flakeModule ];
-       imports = [ inputs.screenpipe-flake.flakeModule ];
 
       # The available systems
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [ "x86_64-linux" ];
 
       # Regular flake stuff
       flake = {
