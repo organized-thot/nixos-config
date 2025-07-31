@@ -14,6 +14,12 @@
     # OS internals
     #
 
+    # Garuda Linux modules
+    garuda = {
+      url = "github:garuda-linux/nixos-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Chaotic's Nyx
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -136,6 +142,7 @@
             ./hardware-configuration.nix
             inputs.home-manager.nixosModules.home-manager
             inputs.chaotic-nyx.nixosModules.default  # Chaotic Nyx module
+            inputs.garuda.nixosModules.default  # Garuda Linux module
           ];
         };
       };
