@@ -6,16 +6,31 @@
 { config, pkgs, ... }:
 
 {
+# BOOTLOADER
 # Bootloader for Windows dual boot (GRUB + EFI)
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      efiSupport = true;
-      devices = [ "nodev" ];
-      useOSProber = true;
+  
+  boot = { 
+    loader = {
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        devices = [ "nodev" ];
+        useOSProber = true;
+      };
     };
+    initrd = [ ];
+    kernelModules = [ "nvidia" ];
+    blacklistedKernelModules = [ "nouveau" ];
   };
+
+# HARDWARE
+
+  hardware.nvidia = {
+    enable = true;
+    package = pkgs.linuxKernel.packages.nvidiaPackages.stable.${pkgs.linux.kernel.version};
+  };
+
 
 # Locale
   i18n = {
@@ -243,7 +258,8 @@
     xserver = {
       enable = true; # Enable the X11 windowing system
       xkb.layout = "us"; # Configure X11 keymap
-    };
+      videoDrivers = [ "nvidia" ];    
+};
 
   # Audio
     pipewire = {
