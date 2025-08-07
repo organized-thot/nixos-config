@@ -102,22 +102,32 @@
     fwupd
     ffmpeg-full
     gdb
+
   # Package sources
-    # Python
-    python3
-    python3Packages.yarg
-    # Node.js
-    nodejs_24
-    pnpm
-    # Flatpak
-    flatpak
-    kdePackages.discover
-    # PackageKit
-    packagekit
+
     # AppImage
     libappimage
     appimage-run 
     appimageupdate
+
+    # Flatpak
+    flatpak
+    kdePackages.discover
+
+    # Node.js
+    nodejs_24
+    pnpm
+
+    # PackageKit
+    packagekit
+
+    # Python
+    python3
+    python3Packages.yarg
+
+    # Rust
+    cargo
+
   # Disk management    
     os-prober
     disko
@@ -126,6 +136,7 @@
     kdePackages.wayland
     kdePackages.plasma-wayland-protocols
     wayland-utils
+    xcb-proto
   # Desktop Utilities
     kdePackages.plasma-nm
     kdePackages.yakuake
