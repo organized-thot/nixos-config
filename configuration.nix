@@ -71,7 +71,7 @@
     ];
   };
 
-  nyx.chaoticEnabled = true;
+  chaotic.nyx.chaoticEnabled = true;
 
 # Allow unfree packages
   nixpkgs.config = {
@@ -242,7 +242,7 @@
   };
 
 # Enable Garuda dr460nized desktop
-  nyx.garuda.dr460nized.enable = true;
+  chaotic.nyx.garuda.dr460nized.enable = true;
 
   security.rtkit.enable = true;
 
