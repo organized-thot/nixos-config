@@ -134,6 +134,7 @@
         nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            inputs.chaotic-nyx.nixosModules.default
             ./configuration.nix
           ];
         };
