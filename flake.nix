@@ -130,6 +130,13 @@
       flake = {
         inherit lib;
         inherit internal;
+        
+        nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+          ];
+        };
       };
 
       # This applies to all systems
