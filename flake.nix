@@ -135,7 +135,6 @@
           system = "x86_64-linux";
           modules = [
             inputs.chaotic-nyx.nixosModules.default
-            inputs.chaotic-nyx.nixosModules.garuda
             ./configuration.nix
           ];
         };

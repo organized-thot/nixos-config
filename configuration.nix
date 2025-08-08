@@ -242,7 +242,7 @@
   };
 
 # Enable Garuda dr460nized desktop
-  chaotic.garuda.dr460nized.enable = true;
+  nyx.garuda.dr460nized.enable = true;
 
   security.rtkit.enable = true;
 
