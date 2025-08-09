@@ -1,4 +1,3 @@
-
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
@@ -6,43 +5,80 @@
 { config, pkgs, ... }:
 
 {
-# Bootloader for Windows dual boot (GRUB + EFI)
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      efiSupport = true;
-      devices = [ "nodev" ];
-      useOSProber = true;
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  boot = {
+    # Bootloader for Windows dual boot (GRUB + EFI)
+    loader = {
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        devices = [ "nodev" ];
+        useOSProber = true;
+      };
+    };
+
+    initrd.luks.devices."dm-0" = {
+      # Use the UUID of the PHYSICAL partition (nvme1n1p2)
+      device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
+      preLVM = true;
+    };
+
+    initrd.luks.devices."dm-1" = {
+      device = "/dev/disk/by-uuid/af0953e8-4082-4b8e-be3b-d147df43a908";
+      preLVM = false;
     };
   };
 
-# Locale
+  # 2. Define the root filesystem on the DECRYPTED container
+  fileSystems."/" = {
+    device = "/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e";
+    fsType = "ext4";
+  };
+
+  fileSystems." /mnt/windows " = {
+    device = " /dev/disk/by-uuid/C8408C44408C3AE8 ";
+    fsType = "ntfs ";
+  };
+
+  # Locale
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = "
+      en_US.UTF-8 ";
     extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
+      LC_ADDRESS = "
+      en_US.UTF-8 ";
+      LC_IDENTIFICATION = "
+      en_US.UTF-8 ";
+      LC_MEASUREMENT = "
+      en_US.UTF-8 ";
+      LC_MONETARY = "
+      en_US.UTF-8 ";
+      LC_NAME = "
+      en_US.UTF-8 ";
+      LC_NUMERIC = "
+      en_US.UTF-8 ";
+      LC_PAPER = "
+      en_US.UTF-8 ";
+      LC_TELEPHONE = "
+      en_US.UTF-8 ";
+      LC_TIME = "
+      en_US.UTF-8 ";
     };
   };
 
-# Time zone
+  # Time zone
   time.timeZone = "America/Chicago";
 
-# Networking
+  # Networking
   networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
   networking.hostName = "nixos";
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # networking.proxy.default = " http://user:password@proxy:port/ ";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -50,13 +86,13 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-# Virtualisation
+  # Virtualisation
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
   };
 
-# Nix Settings
+  # Nix Settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
@@ -71,43 +107,45 @@
     ];
   };
 
-  chaotic.nyx.chaoticEnabled = true;
+  #  chaotic.nyx.chaoticEnabled = true;
 
-# Allow unfree packages
+  # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
     permittedUnfreePackages = [
       "vivaldi"
       "windsurf"
+      "vscode-with-extensions"
+      "n8n"
     ];
-    permittedInsecurePackages = [ 
+    permittedInsecurePackages = [
       "python3.13-django-3.1.14"
       "electron-27.3.11"
     ];
   };
 
-# System Packages
+  # System Packages
   environment.systemPackages = with pkgs; [
     tailscale
     kasmweb
     screen-pipe
-  # Nix-related tools
+    # Nix-related tools
     home-manager
     disko
     nixfmt-tree
     rippkgs
     nixpkgs-manual
-  # Libraries and other dependencies
+    # Libraries and other dependencies
     dmidecode
     fwupd
     ffmpeg-full
     gdb
 
-  # Package sources
+    # Package sources
 
     # AppImage
     libappimage
-    appimage-run 
+    appimage-run
     appimageupdate
 
     # Flatpak
@@ -128,20 +166,20 @@
     # Rust
     cargo
 
-  # Disk management    
+    # Disk management    
     os-prober
     disko
     timeshift
-  # Display and desktop environment
+    # Display and desktop environment
     kdePackages.wayland
     kdePackages.plasma-wayland-protocols
     wayland-utils
     xcb-proto
-  # Desktop Utilities
+    # Desktop Utilities
     kdePackages.plasma-nm
     kdePackages.yakuake
     kdePackages.konqueror
-  # Command-line tools
+    # Command-line tools
     git
     gh
     bat
@@ -149,23 +187,23 @@
     phantomsocks
     docker
     tldr
-  # Search
+    # Search
     kdePackages.baloo
     kdePackages.milou
     meilisearch
   ];
 
-# Users
+  # Users
   users.users.nix = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [
-    # User Packages
+      # User Packages
       vivaldi
       telegram-desktop
       protege-distribution
       home-assistant
-    # KDE Software
+      # KDE Software
       kdePackages.kbookmarks
       kdePackages.keditbookmarks
       kdePackages.akonadi
@@ -173,17 +211,16 @@
       kdePackages.purpose
       # kdePackages.umbrello # marked as broken      
       kdePackages.libkgapi
-    # PKM Tools
+      # PKM Tools
       obsidian
       logseq
       affine
       tana
       karakeep
-    # Web Scraping
+      # Web Scraping
       eget
       curl
       curlie
-      wcurl
       curl-impersonate
       httpie
       katana
@@ -191,32 +228,31 @@
       schemacrawler
       xcrawl3r
       crawley
-      python3Packages.firecrawl-py    
-      archivebox
+      python3Packages.firecrawl-py
       nodePackages.tiddlywiki
-    # AI
+      # AI
       ollama
       local-ai
       n8n
       fabric-ai
       neo4j
-      neo4j-desktop   
+      neo4j-desktop
       open-webui
       mongodb
-      
-    # PyPi Packages
+
+      # PyPi Packages
       python313Packages.markitdown
-    # AI Tools
+      # AI Tools
       python3Packages.huggingface-hub
       python3Packages.langchain
       python3Packages.langchain-huggingface
       python3Packages.llama-index
       python3Packages.llama-index-embeddings-huggingface
       python3Packages.firecrawl-py
-#      python3Packages.gensim
-#      python3Packages.graphrag
+      #      python3Packages.gensim
+      #      python3Packages.graphrag
 
-    # Containerization
+      # Containerization
       distrobox
       distrobox-tui
       podman
@@ -225,7 +261,7 @@
     ];
   };
 
-# Some programs need SUID wrappers, can be configured further or are started in user sessions.
+  # Some programs need SUID wrappers, can be configured further or are started in user sessions.
 
   programs.firefox.enable = true;
 
@@ -241,14 +277,14 @@
     binfmt = true;
   };
 
-# Enable Garuda dr460nized desktop
-  chaotic.nyx.garuda.dr460nized.enable = true;
+  # Enable Garuda dr460nized desktop
+  #  garuda.dr460nized.enable = true;
 
   security.rtkit.enable = true;
 
-# Services
+  # Services
   services = {
-  # Desktop environment
+    # Desktop environment
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
     xserver = {
@@ -256,7 +292,7 @@
       xkb.layout = "us"; # Configure X11 keymap
     };
 
-  # Audio
+    # Audio
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -264,28 +300,28 @@
       pulse.enable = true;
     };
 
-  # Touchpad support (enabled default in most desktopManager).
+    # Touchpad support (enabled default in most desktopManager).
     # services.libinput.enable = true;
 
-  # D-Bus Daemon  
+    # D-Bus Daemon  
     dbus.enable = true;
 
-  # Tailscale
+    # Tailscale
     tailscale.enable = true;
 
-  # OpenSSH daemon
+    # OpenSSH daemon
     openssh.enable = true;
 
-  # Flatpak support
+    # Flatpak support
     flatpak.enable = true;
 
-  # Printing via CUPS
+    # Printing via CUPS
     printing.enable = true;
 
-  # Meilisearch
+    # Meilisearch
     meilisearch.enable = true;
 
-  # AI Tools
+    # AI Tools
     mongodb = {
       enable = true;
       user = "nix";
@@ -298,14 +334,14 @@
 
     neo4j.enable = true;
 
-    ollama.enable = true;  
+    ollama.enable = true;
 
     open-webui.enable = true;
 
-  # TiddlyWiki
+    # TiddlyWiki
     tiddlywiki.enable = true;
 
-  # Karakeep
+    # Karakeep
     karakeep.enable = true;
   };
 
@@ -334,6 +370,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-
