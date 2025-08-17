@@ -2,6 +2,7 @@
   description = "NixOS config with FlakeHub, Garuda Nix Subsystem, Home Manager, Nix User Repository, and snapd enabled";
 
   inputs = {
+    flake.url = "https://flakehub.com/f/nixified-ai/flake/0.1.76.tar.gz";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
@@ -34,18 +35,17 @@
     nixpkgs,
     garuda,
     home-manager,
-    nix-snapd,
+    nix-snapd, flake,
     ...
   }: {
     nixosConfigurations = {
-      nixos-fh = nixpkgs.lib.nixosSystem
-        nixos-fh = garuda.lib.garudaSystem {
+      nixos-fh = garuda.lib.garudaSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;}; # Pass inputs if needed in modules
         modules = [
           ./configuration.nix # Local NixOS configuration
 
-          determinate.nixosModules.default;
+          determinate.nixosModules.default
           {
             environment.systemPackages = [ fh.packages.x86_64-linux.default ];
           }
