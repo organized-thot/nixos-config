@@ -2,10 +2,10 @@
   description = "NixOS config with FlakeHub, Garuda Nix Subsystem, Home Manager, Nix User Repository, and snapd enabled";
 
   inputs = {
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2305.*.tar.gz";
-
     garuda = {
       url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +29,7 @@
 
   outputs = inputs @ {
     self,
+    determinate,
     fh,
     nixpkgs,
     garuda,
@@ -42,11 +43,12 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;}; # Pass inputs if needed in modules
         modules = [
+          ./configuration.nix # Local NixOS configuration
+
+          determinate.nixosModules.default;
           {
             environment.systemPackages = [ fh.packages.x86_64-linux.default ];
           }
-
-          ./configuration.nix # Local NixOS configuration
 
           nix-snapd.nixosModules.default
           {
