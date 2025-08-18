@@ -9,7 +9,11 @@
 # BOOTLOADER
 
 # Bootloader for Windows dual boot (GRUB + EFI)
-  
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+
   boot = { 
     loader = {
       efi.canTouchEfiVariables = true;
