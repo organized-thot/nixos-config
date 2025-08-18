@@ -12,7 +12,7 @@
     };
 
     home-manager = {
-      url = "https://flakehub.com/f/nix-community/home-manager/0.2505.4804.tar.gz";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
