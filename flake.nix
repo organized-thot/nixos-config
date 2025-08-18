@@ -48,7 +48,7 @@
 
           determinate.nixosModules.default
           {
-            nix.package = nixpkgs.lib.mkForce (determinate.packages.x86_64-linux.default.override {
+            nix.package = nixpkgs.lib.mkForce (nixpkgs.nix.override {
               version = "2.91.3";
               vendorVersion = "3.8.5";
             });
