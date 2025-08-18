@@ -29,7 +29,6 @@
 # HARDWARE
 
   hardware.nvidia = {
-    enabled = true;
     nvidiaSettings = true;
     open = true;
   };
