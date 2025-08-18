@@ -2,7 +2,6 @@
   description = "NixOS config with FlakeHub, Garuda Nix Subsystem, Home Manager, Nix User Repository, and snapd enabled";
 
   inputs = {
-    flake.url = "https://flakehub.com/f/nixified-ai/flake/0.1.76.tar.gz";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
@@ -26,6 +25,8 @@
       url = "https://flakehub.com/f/nix-community/nix-snapd/0.1.62.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixified-ai.url = "https://flakehub.com/f/nixified-ai/flake/0.1.76.tar.gz";
   };
 
   outputs = inputs @ {
@@ -35,7 +36,7 @@
     nixpkgs,
     garuda,
     home-manager,
-    nix-snapd, flake,
+    nix-snapd, nixified-ai,
     ...
   }: {
     nixosConfigurations = {
