@@ -48,7 +48,7 @@
 
           determinate.nixosModules.default
           {
-            nix.package = nixpkgs.lib.mkDefault determinate.packages.x86_64-linux.default;
+            nix.package = nixpkgs.lib.mkForce determinate.packages.x86_64-linux.default;
             environment.systemPackages = [ fh.packages.x86_64-linux.default ];
           }
 
