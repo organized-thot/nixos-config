@@ -82,17 +82,18 @@
     package = pkgs.nix;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-    substituters = [
+    };
+  };
+  substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://chaotic-cx.cachix.org"
-    ];
-    trusted-public-keys = [
+  ];
+  trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
-    ];
-  };
+  ];
 
 #  nyx.chaoticEnabled = true;
 
@@ -267,7 +268,7 @@
       enable = true; # Enable the X11 windowing system
       xkb.layout = "us"; # Configure X11 keymap
       videoDrivers = [ "nvidia" ];    
-};
+    };
 
   # Audio
     pipewire = {
@@ -349,4 +350,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
