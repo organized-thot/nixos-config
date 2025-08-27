@@ -1,22 +1,26 @@
-# Edit this configuration file to define what should be installed on
+0# Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
-# BOOTLOADER
-
-# Bootloader for Windows dual boot (GRUB + EFI)
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
+# BOOTLOADER
+
+# Bootloader for Windows dual boot (GRUB + EFI)
+
   boot = { 
+
     loader = {
+      
       efi.canTouchEfiVariables = true;
+      
       grub = {
         enable = true;
         efiSupport = true;
@@ -25,18 +29,38 @@
       };
     };
 
-#    initrd = [ ];
-    kernelModules = [ "nvidia" ];
+    initrd = {
+      kernelModules = [ "nvidia_x11" ]; # hwinfo output a module alias of pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00, which corresponds to PCI ID 10DE:1BBB for GP104GLM [Quadro P3200 Mobile] according to https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb
+    };
+
     blacklistedKernelModules = [ "nouveau" ];
   };
-
+  
 # HARDWARE
 
-  hardware.nvidia = {
-    nvidiaSettings = true;
-    open = true;
-  };
+  hardware = {
 
+  # NVIDIA QUADRO P3200 GPU CONFIGURATION
+    nvidia = {
+#      enabled = true;
+#      driverVersion = "580.78.05"; # https://www.nvidia.com/en-us/drivers/details/252613/
+      open = true;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      powerManagement.enable = false;
+
+    # OPTIMUS HYBRID GRAPHICS
+      prime = {
+        offload.enable = true;
+        offload.enableOffloadCmd = true;
+        intelBusId = "PCI:0:0:2";
+        nvidiaBusId = "PCI:0:1:0";
+      };
+    };
+
+  # GRAPHICS
+    graphics.enable = true;
+  };
 
 # Locale
   i18n = {
@@ -77,41 +101,89 @@
     docker.enable = true;
   };
 
-# Nix Settings
+# NIX SETTINGS
+
   nix = {
-    package = pkgs.nix;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
+#      substituters = [
+#        "https://chaotic-cx.cachix.org"
+#       "https://cache.nixos.org"
+#       "https://nix-community.cachix.org"
+#      ];
+#      trusted-public-keys = [
+#        "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
+#       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+#       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+#      ];
+#    package = pkgs.nix;
     };
   };
-  substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://chaotic-cx.cachix.org"
-  ];
-  trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
-  ];
+
+# NIXPKGS CONFIG
+
+  nixpkgs = {
+    
+    config = {
+
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
+
+      permittedUnfreePackages = [
+        "vivaldi"
+        "windsurf"
+        "n8n"
+        "vscode-with-extensions"
+        "mongodb"
+        "nvidia_x11"
+      ];
+
+      permittedInsecurePackages = [ 
+        "python3.12-django-3.1.14"
+        "python3.13-django-3.1.14"
+        "electron-27.3.11"
+      ];
+     
+      packageOverrides = pkgs: {
+        screen-pipe = pkgs.screen-pipe.override {
+          ffmpeg = pkgs.ffmpeg_6;
+        };
+      };
+
+#    overlays = [
+#      (final: prev: {
+#        screen-pipe = prev.screen-pipe.overrideAttrs (old: {
+#          cargoDeps = old.cargoDeps // {
+#            ffmpeg-next = prev.ffmpeg-6;
+#          };
+#        });
+#      })
+#    ];
+    };
+  };
+
+
 
 #  nyx.chaoticEnabled = true;
 
-# Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedUnfreePackages = [
-      "vivaldi"
-      "windsurf"
-    ];
-    permittedInsecurePackages = [ 
-      "python3.13-django-3.1.14"
-      "electron-27.3.11"
-    ];
-  };
-
 # System Packages
   environment.systemPackages = with pkgs; [
+    stdenv
+    linuxKernel.packages.linux_6_16.nvidia_x11_latest_open
+    dmalloc
+    klibcShrunk
+   
+  # PYTHON PACKAGE DEPENDENCIES
+    python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
+    python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
+
+
+
+  # WAYLAND
+    weston
+    wl-clipboard # wayland clopboard
+
+    # MISC
     tailscale
     kasmweb
     screen-pipe
@@ -162,6 +234,7 @@
     phantomsocks
     docker
     tldr
+    chafa # terminal graphics for the 21st century
   # Search
     kdePackages.baloo
     kdePackages.milou
@@ -177,7 +250,14 @@
       vivaldi
       telegram-desktop
       protege-distribution
+      grayjay # Cross-platform application to stream and download content from various sources
+     
       home-assistant
+      i2p # Applications and router for I2P, anonymity over the Internet
+      i2pd # Minimal I2P router written in C++
+      i2pd-tools # Toolsuite to work with keys and eepsites
+      mosh # Mobile shell (SSH replacement)
+
     # KDE Software
       kdePackages.kbookmarks
       kdePackages.keditbookmarks
@@ -186,17 +266,18 @@
       kdePackages.purpose
       # kdePackages.umbrello # marked as broken      
       kdePackages.libkgapi
+
     # PKM Tools
       obsidian
       logseq
       affine
       tana
       karakeep
+
     # Web Scraping
       eget
       curl
       curlie
-      wcurl
       curl-impersonate
       httpie
       katana
@@ -205,21 +286,35 @@
       xcrawl3r
       crawley
       python3Packages.firecrawl-py    
-      archivebox
       nodePackages.tiddlywiki
+
     # AI
-      ollama
-      local-ai
-      n8n
-      fabric-ai
-      neo4j
-      neo4j-desktop   
-      open-webui
+
+      ollama # Get up and running with large language models locally
+      python3Packages.ollama # Ollama Python library
+      python3Packages.llm-ollama # LLM plugin providing access to Ollama models using HTTP API
+
+      litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+      python3Packages.litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+      local-ai # OpenAI alternative to run local LLMs, image and audio generation
+
+      python3Packages.mistral-common # mistral-common is a set of tools to help you work with Mistral models.
+      mistralclient # OpenStack Mistral Command-line Client
+
+      aider-chat-full      
+      fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.
+      mods
+      oterm # Text-based terminal client for Ollama
+
+      kdePackages.alpaka # Kirigami client for Ollama
+      lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
+      open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
+
       mongodb
-      
-    # PyPi Packages
+      n8n
+      neo4j
+      neo4j-desktop  
       python313Packages.markitdown
-    # AI Tools
       python3Packages.huggingface-hub
       python3Packages.langchain
       python3Packages.langchain-huggingface
@@ -259,15 +354,22 @@
 
   security.rtkit.enable = true;
 
-# Services
+# SERVICES
+
   services = {
   # Desktop environment
-    displayManager.sddm.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+
     desktopManager.plasma6.enable = true;
+
+  # XORG
     xserver = {
       enable = true; # Enable the X11 windowing system
       xkb.layout = "us"; # Configure X11 keymap
-      videoDrivers = [ "nvidia" ];    
+      videoDrivers = [ "modesetting" "nvidia" ];    
     };
 
   # Audio
@@ -297,7 +399,10 @@
     printing.enable = true;
 
   # Meilisearch
-    meilisearch.enable = true;
+    meilisearch = {
+      enable = true;
+      settings.experimental_dumpless_upgrade = true;
+    };
 
   # AI Tools
     mongodb = {
@@ -320,7 +425,13 @@
     tiddlywiki.enable = true;
 
   # Karakeep
-    karakeep.enable = true;
+    karakeep = {
+      enable = true;
+      meilisearch.enable = true;
+      browser = {
+        enable = true;
+      };
+    };
   };
 
 
