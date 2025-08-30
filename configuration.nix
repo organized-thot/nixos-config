@@ -1,27 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-# BOOT AND KERNEL
+  # BOOT AND KERNEL
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-# NETWORK
+  # NETWORK
 
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -33,7 +35,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-# LOCALE 
+  # LOCALE
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -41,18 +43,17 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   # console = {
-    # font = "Lat2-Terminus16";
-    # keyMap = "us";
-    # useXkbConfig = true; # use xkb.options in tty.
+  # font = "Lat2-Terminus16";
+  # keyMap = "us";
+  # useXkbConfig = true; # use xkb.options in tty.
   # };
 
-# DISPLAY AND GRAPHICS
+  # DISPLAY AND GRAPHICS
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
-# HARDWARE AND DEVICES
+  # HARDWARE AND DEVICES
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -72,26 +73,25 @@
     pulse.enable = true;
   };
 
-# NIXPKGS
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # NIXPKGS
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-# USERS
+  # USERS
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    root.hashedPassword = "$5$p7db8EhfvHHwEvIf$L/t78C4vJ9ttSkcX049HKdvkKjKsEHNalkroe.zSPh1";
     nix = {
       hashedPassword = "$5$p7db8EhfvHHwEvIf$L/t78C4vJ9ttSkcX049HKdvkKjKsEHNalkroe.zSPh1";
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
-        packages = with pkgs; [
-          tree
-          git
-          gh
-        ];
+      extraGroups = ["wheel"];
+      packages = with pkgs; [
+        tree
+        git
+        gh
+      ];
     };
   };
-# PACKAGES
+  # PACKAGES
 
   programs.firefox.enable = true;
 
@@ -101,7 +101,7 @@
     wget
   ];
 
-# SERVICES
+  # SERVICES
 
   # List services that you want to enable:
 
@@ -139,6 +139,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-
