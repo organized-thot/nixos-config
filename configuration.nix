@@ -79,8 +79,9 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
+    root.hashedPassword = "$5$p7db8EhfvHHwEvIf$L/t78C4vJ9ttSkcX049HKdvkKjKsEHNalkroe.zSPh1";
     nix = {
-      hashedPassword = "$5$1qXPlcme0SMOxWop$eGjM05OZ3wP.wIj03y0Bk.4vgptpLDwg.u7UeClyD86";
+      hashedPassword = "$5$p7db8EhfvHHwEvIf$L/t78C4vJ9ttSkcX049HKdvkKjKsEHNalkroe.zSPh1";
       isNormalUser = true;
       extraGroups = [ "wheel" ];
         packages = with pkgs; [
