@@ -18,7 +18,7 @@
 
 # NETWORK
 
-  networking.hostName = "nix-registry"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -72,19 +72,24 @@
     pulse.enable = true;
   };
 
+# NIXPKGS
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 # USERS
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nixreg = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-      git
-      gh
-    ];
+  users.users = {
+    nix = {
+      hashedPassword = "$5$1qXPlcme0SMOxWop$eGjM05OZ3wP.wIj03y0Bk.4vgptpLDwg.u7UeClyD86";
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+        packages = with pkgs; [
+          tree
+          git
+          gh
+        ];
+    };
   };
-
 # PACKAGES
 
   programs.firefox.enable = true;
