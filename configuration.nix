@@ -1,173 +1,88 @@
-0# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+# Edit this configuration file to define what should be installed on your system. 
+# Help is available in: 
+# - the configuration.nix(5) man page, 
+# - on https://search.nixos.org/options, and 
+# - in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
 
 {
 
-<<<<<<< HEAD
-=======
-# FILESYSTEMS
+  imports = [ 
+    ./hardware-configuration.nix # Produced by nixos-generate-config
+  ];
 
->>>>>>> fh-regenerate
-  fileSystems."/" = {
-    device = "/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e";
-    fsType = "ext4";
-  };
-
-<<<<<<< HEAD
-# BOOTLOADER
-
-# Bootloader for Windows dual boot (GRUB + EFI)
+# LINUX KERNEL AND BOOTLOADER 
 
   boot = { 
-
-    loader = {
-      
-      efi.canTouchEfiVariables = true;
-      
-      grub = {
+    loader = { # Set bootloader options
+      grub = { # Grub with EFI support, and OSProber enabled for Windows dual boot
         enable = true;
         efiSupport = true;
         devices = [ "nodev" ];
         useOSProber = true;
       };
+      # systemd-boot.enable = true; # Configuration options for systemd bootloader
+      # efi.canTouchEfiVariables = true;
     };
-
-    initrd = {
-      kernelModules = [ "nvidia_x11" ]; # hwinfo output a module alias of pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00, which corresponds to PCI ID 10DE:1BBB for GP104GLM [Quadro P3200 Mobile] according to https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb
-    };
-
-    blacklistedKernelModules = [ "nouveau" ];
+    kernelModules = [ "nvidia_x11" ]; # hwinfo output a module alias of pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00, which corresponds to PCI ID 10DE:1BBB for GP104GLM [Quadro P3200 Mobile] according to https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb
+    blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
   
 # HARDWARE
 
   hardware = {
-
-  # NVIDIA QUADRO P3200 GPU CONFIGURATION
-    nvidia = {
-#      enabled = true;
-#      driverVersion = "580.78.05"; # https://www.nvidia.com/en-us/drivers/details/252613/
-      open = true;
+    nvidia = { # Configure support for NVIDIA Quadro P3200 GPU 
+      enabled = true;
+      driverVersion = "580.78.05"; # (Based on [results of NVIDIA's hardware compatibility list](https://www.nvidia.com/en-us/drivers/details/252613/)
       modesetting.enable = true;
       nvidiaSettings = true;
       powerManagement.enable = false;
-
-    # OPTIMUS HYBRID GRAPHICS
-      prime = {
+      prime = { # NVIDIA Optimus hybrid graphics
         offload.enable = true;
         offload.enableOffloadCmd = true;
         intelBusId = "PCI:0:0:2";
         nvidiaBusId = "PCI:0:1:0";
       };
     };
-
-  # GRAPHICS
-    graphics.enable = true;
+    graphics.enable = true; # Enable opengl
   };
-=======
+
+# FILESYSTEMS
+
+  fileSystems."/" = {
+    device = "/dev/dm-0";
+    fsType = "ext4";
+  };
+
   swapDevices = [
-    { label = "SWAP"; }
+    { label = "swap"; }
   ];
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+# NETWORKING
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  networking = {
+    hostName = "nixos"; # Define your hostname.
+    networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ ... ];
+      allowedUDPPorts = [ ... ];
+    };
+#   proxy = { # Configure network proxy if necessary
+#     default = "http://user:password@proxy:port/";
+#     noProxy = "127.0.0.1,localhost,internal.domain";
+#   };
+  };
 
-  # networking.hostName = "nixos"; # Define your hostname.
+# LOCALE AND TIMEZONE
 
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
->>>>>>> fh-regenerate
-
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-
-  
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
-
-  # programs.firefox.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-<<<<<<< HEAD
-# Virtualisation
-  virtualisation = {
-    podman.enable = true;
-    docker.enable = true;
+  time.timeZone = "America/Chicago"; # Set your time zone.
+  i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
   };
 
 # NIX SETTINGS
@@ -177,11 +92,11 @@
       experimental-features = [ "nix-command" "flakes" ];
 #      substituters = [
 #        "https://chaotic-cx.cachix.org"
-#       "https://cache.nixos.org"
-#       "https://nix-community.cachix.org"
+#        "https://cache.nixos.org"
+#        "https://nix-community.cachix.org"
 #      ];
 #      trusted-public-keys = [
-#        "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
+#       "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
 #       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
 #       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
 #      ];
@@ -189,311 +104,40 @@
     };
   };
 
-# NIXPKGS CONFIG
-
-  nixpkgs = {
-    
-    config = {
-
-      allowUnfree = true;
-      allowUnsupportedSystem = true;
-
-      permittedUnfreePackages = [
-        "vivaldi"
-        "windsurf"
-        "n8n"
-        "vscode-with-extensions"
-        "mongodb"
-        "nvidia_x11"
-      ];
-
-      permittedInsecurePackages = [ 
-        "python3.12-django-3.1.14"
-        "python3.13-django-3.1.14"
-        "electron-27.3.11"
-      ];
-     
-      packageOverrides = pkgs: {
-        screen-pipe = pkgs.screen-pipe.override {
-          ffmpeg = pkgs.ffmpeg_6;
-        };
-      };
-
-#    overlays = [
-#      (final: prev: {
-#        screen-pipe = prev.screen-pipe.overrideAttrs (old: {
-#          cargoDeps = old.cargoDeps // {
-#            ffmpeg-next = prev.ffmpeg-6;
-#          };
-#        });
-#      })
-#    ];
-    };
-  };
-
-
-
-#  nyx.chaoticEnabled = true;
-
-# System Packages
-  environment.systemPackages = with pkgs; [
-    stdenv
-    linuxKernel.packages.linux_6_16.nvidia_x11_latest_open
-    dmalloc
-    klibcShrunk
-   
-  # PYTHON PACKAGE DEPENDENCIES
-    python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
-    python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
-
-
-
-  # WAYLAND
-    weston
-    wl-clipboard # wayland clopboard
-
-    # MISC
-    tailscale
-    kasmweb
-    screen-pipe
-  # Nix-related tools
-    home-manager
-    disko
-    nixfmt-tree
-    rippkgs
-    nixpkgs-manual
-  # Libraries and other dependencies
-    dmidecode
-    fwupd
-    ffmpeg-full
-    gdb
-  # Package sources
-    # Python
-    python3
-    python3Packages.yarg
-    # Node.js
-    nodejs_24
-    pnpm
-    # Flatpak
-    flatpak
-    kdePackages.discover
-    # PackageKit
-    packagekit
-    # AppImage
-    libappimage
-    appimage-run 
-    appimageupdate
-  # Disk management    
-    os-prober
-    disko
-    timeshift
-  # Display and desktop environment
-    kdePackages.wayland
-    kdePackages.plasma-wayland-protocols
-    wayland-utils
-  # Desktop Utilities
-    kdePackages.plasma-nm
-    kdePackages.yakuake
-    kdePackages.konqueror
-  # Command-line tools
-    git
-    gh
-    bat
-    wget
-    phantomsocks
-    docker
-    tldr
-    chafa # terminal graphics for the 21st century
-  # Search
-    kdePackages.baloo
-    kdePackages.milou
-    meilisearch
-  ];
-
-# Users
-  users.users.nix = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-    packages = with pkgs; [
-    # User Packages
-      vivaldi
-      telegram-desktop
-      protege-distribution
-      grayjay # Cross-platform application to stream and download content from various sources
-     
-      home-assistant
-      i2p # Applications and router for I2P, anonymity over the Internet
-      i2pd # Minimal I2P router written in C++
-      i2pd-tools # Toolsuite to work with keys and eepsites
-      mosh # Mobile shell (SSH replacement)
-
-    # KDE Software
-      kdePackages.kbookmarks
-      kdePackages.keditbookmarks
-      kdePackages.akonadi
-      kdePackages.zanshin
-      kdePackages.purpose
-      # kdePackages.umbrello # marked as broken      
-      kdePackages.libkgapi
-
-    # PKM Tools
-      obsidian
-      logseq
-      affine
-      tana
-      karakeep
-
-    # Web Scraping
-      eget
-      curl
-      curlie
-      curl-impersonate
-      httpie
-      katana
-      scraper
-      schemacrawler
-      xcrawl3r
-      crawley
-      python3Packages.firecrawl-py    
-      nodePackages.tiddlywiki
-
-    # AI
-
-      ollama # Get up and running with large language models locally
-      python3Packages.ollama # Ollama Python library
-      python3Packages.llm-ollama # LLM plugin providing access to Ollama models using HTTP API
-
-      litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
-      python3Packages.litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
-      local-ai # OpenAI alternative to run local LLMs, image and audio generation
-
-      python3Packages.mistral-common # mistral-common is a set of tools to help you work with Mistral models.
-      mistralclient # OpenStack Mistral Command-line Client
-
-      aider-chat-full      
-      fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.
-      mods
-      oterm # Text-based terminal client for Ollama
-
-      kdePackages.alpaka # Kirigami client for Ollama
-      lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
-      open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
-
-      mongodb
-      n8n
-      neo4j
-      neo4j-desktop  
-      python313Packages.markitdown
-      python3Packages.huggingface-hub
-      python3Packages.langchain
-      python3Packages.langchain-huggingface
-      python3Packages.llama-index
-      python3Packages.llama-index-embeddings-huggingface
-      python3Packages.firecrawl-py
-#      python3Packages.gensim
-#      python3Packages.graphrag
-
-    # Containerization
-      distrobox
-      distrobox-tui
-      podman
-      podman-tui
-      podman-desktop
-    ];
-  };
-
-# Some programs need SUID wrappers, can be configured further or are started in user sessions.
-
-  programs.firefox.enable = true;
-
-  programs.mtr.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-
-# Enable Garuda dr460nized desktop
-  garuda.dr460nized.enable = true;
-
-  security.rtkit.enable = true;
+  garuda.dr460nized.enable = true; # Enable Garuda dr460nized desktop
 
 # SERVICES
 
   services = {
-  # Desktop environment
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
 
-    desktopManager.plasma6.enable = true;
-
-  # XORG
-    xserver = {
-      enable = true; # Enable the X11 windowing system
-      xkb.layout = "us"; # Configure X11 keymap
-      videoDrivers = [ "modesetting" "nvidia" ];    
-    };
-
-  # Audio
-    pipewire = {
+  # System and external device-related services
+    libinput.enable = true; # Touchpad support (enabled default in most desktopManager).
+    openssh.enable = true; # Enable the OpenSSH daemon
+    pipewire = { # Enable sound using Pipewire
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    # pulseaudio.enable = true; # Alternatively, enable sound using PulseAudio
+    printing.enable = true; # Enable printing via CUPS
 
-  # Touchpad support (enabled default in most desktopManager).
-    # services.libinput.enable = true;
-
-  # D-Bus Daemon  
-    dbus.enable = true;
-
-  # Tailscale
-    tailscale.enable = true;
-
-  # OpenSSH daemon
-    openssh.enable = true;
-
-  # Flatpak support
-    flatpak.enable = true;
-
-  # Printing via CUPS
-    printing.enable = true;
-
-  # Meilisearch
-    meilisearch = {
-      enable = true;
-      settings.experimental_dumpless_upgrade = true;
+  # Display, graphics, and desktop environment
+    xserver = { # X11 options
+      enable = true; # Enable the X11 windowing system
+      xkb.layout = "us"; # Configure X11 keymap
+      videoDrivers = [ "modesetting" "nvidia" ];    
     };
-
-  # AI Tools
-    mongodb = {
+    displayManager.sddm = {
       enable = true;
-      user = "nix";
+      wayland.enable = true;
     };
+    desktopManager.plasma6.enable = true;
+    dbus.enable = true; # D-Bus Daemon  
+    
+    flatpak.enable = true; 
 
-    n8n = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    neo4j.enable = true;
-
-    ollama.enable = true;  
-
-    open-webui.enable = true;
-
-  # TiddlyWiki
-    tiddlywiki.enable = true;
-
-  # Karakeep
+  # Enable self-hosted programs that run web services
     karakeep = {
       enable = true;
       meilisearch.enable = true;
@@ -501,12 +145,229 @@
         enable = true;
       };
     };
+    meilisearch = {
+      enable = true;
+      settings.experimental_dumpless_upgrade = true;
+    };
+    mongodb = {
+      enable = true;
+      user = "nix";
+    };
+    n8n = {
+      enable = true;
+      openFirewall = true;
+    };
+    neo4j.enable = true;
+    ollama.enable = true;  
+    open-webui.enable = true;
+    tailscale.enable = true;
+    tiddlywiki.enable = true;
   };
 
+# PROGRAM CONFIGURATIONS (Some programs need SUID wrappers, can be configured further or are started in user sessions.)
 
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    firefox.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    mtr.enable = true; # Network diagnostics tool
 
-=======
->>>>>>> fh-regenerate
+    tailscale.enable = true;
+
+# VIRTUALIZATION
+
+  virtualisation = {
+    podman.enable = true;
+    docker.enable = true;
+  };
+
+# USER CONFIG
+
+  users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+
+    packages = {
+      with pkgs; [
+       #ai
+        aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
+        aider-chat-full      
+        fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.
+        gemini-cli # AI agent that brings the power of Gemini directly into your terminal
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
+        local-ai # OpenAI alternative to run local LLMs, image and audio generation
+        mistralclient # OpenStack Mistral Command-line Client
+        mods # AI on the command line
+        n8n
+        ollama # Get up and running with large language models locally
+        open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
+        oterm # Text-based terminal client for Ollama
+        screen-pipe
+
+       #containerization
+        distrobox
+        distrobox-tui
+        podman
+        podman-tui
+        podman-desktop
+
+       #git
+        committed
+        deepgit
+        eget  
+        gh
+        git-aggregator
+        git-annex
+        git-branchless
+        git-dive 
+        git-filter-repo
+        git-relevant-hsitory
+        git-annex
+
+       #network
+        mosh # Mobile shell (SSH replacement)
+        home-assistant
+        i2p # Applications and router for I2P, anonymity over the Internet
+        i2pd # Minimal I2P router written in C++
+        i2pd-tools # Toolsuite to work with keys and eepsites
+        phantomsocks
+
+       #pkm   
+        affine
+        chrome-export
+        karakeep
+        logseq
+        mindforger
+        obsidian
+        protege-distribution
+        tana
+        nodePackages.tiddlywiki
+        
+       #web
+        browsh
+        chrome-export       
+        grayjay # Cross-platform application to stream and download content from various sources
+        telegram-desktop
+        offpunk
+        vivaldi
+    
+        crawley
+        curl
+        curlie # Frontend to curl that adds the ease of use of httpie, without compromising on features and performance
+        httpie
+        katana # Next-generation crawling and spidering framework
+        muffet # Website link checker which scrapes and inspects all pages in a website recursively
+        scraper # Tool to query HTML files with CSS selectors
+        spider # Web crawler and scraper, building blocks for data curation workloads
+        schemacrawler
+        xcrawl3r
+
+       #other
+        chafa # Terminal graphics for the 21st century
+        ffmpeg-full
+        mongodb
+        neo4j
+        neo4j-desktop  
+        tldr
+
+      with python3Packages; [
+        firecrawl-py
+        gensim
+        git-filter-repo
+        graphrag
+        huggingface-hub
+        langchain
+        langchain-huggingface
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        llama-index
+        llama-index-embeddings-huggingface
+        llm-ollama # LLM plugin providing access to Ollama models using HTTP API
+        markitdown
+        mistral-common # mistral-common is a set of tools to help you work with Mistral models.
+        ollama # Ollama Python library
+     ];
+
+     with kdePackages; [
+       akonadi
+       alpaka # Kirigami client for ollama
+       baloo
+       kbookmarks
+       keditbookmarks
+       konqueror
+       libkgapi
+       milou
+       plasma-nm
+       purpose
+       umbrello # marked as broken
+       yakuake
+       zanshin
+      ];
+    ];
+  };
+
+# SYSTEM PACKAGES
+
+  environment.systemPackages = with pkgs; [
+   #required
+    dmalloc
+    dmidecode
+    fwupd
+    gdb
+    klibcShrunk
+    linuxKernel.packages.linux_6_16.nvidia_x11_latest_open
+    stdenv
+    python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
+    python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
+
+   #other
+    git
+    bat
+    wget
+    docker
+    tailscale
+    kasmweb
+
+   #disks    
+    os-prober
+    disko
+    timeshift
+
+   #nixos
+    home-manager
+    disko
+    rippkgs
+    nixpkgs-manual
+
+   #display
+    wayland-utils
+    weston
+    wl-clipboard # wayland clopboard
+
+   #package-management
+    #Python
+    python3
+    python3Packages.yarg
+    #Node.js
+    nodejs_24
+    pnpm
+    #Flatpak
+    flatpak
+    kdePackages.discover
+    #PackageKit
+    packagekit
+    #AppImage
+    libappimage
+    appimage-run 
+    appimageupdate
+  ];
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
@@ -530,6 +391,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
 

@@ -8,53 +8,18 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e";
+    { device = "/dev/disk/by-uuid/ea874f04-ff7f-4b22-b604-90a3d2609cee";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-33706ffc-082c-4470-8e43-8fa1d071179e".device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
+  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
 
-<<<<<<< HEAD
-  fileSystems."/var/lib/containers/storage/overlay" =
-    { device = "/var/lib/containers/storage/overlay";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/var/lib/containers/storage/overlay-containers/cc85bd58d2f8f7f55ff659af4e4fbdb20c28c763c7faffb67599f3419486edd4/userdata/shm" =
-    { device = "shm";
-      fsType = "tmpfs";
-    };
-
-  fileSystems."/var/lib/containers/storage/overlay/3a7fbdbd964dec7b63e32d1b63547e38fb9ecb58776b8ef3a426f056abdb79b1/merged" =
-    { device = "overlay";
-      fsType = "overlay";
-=======
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9EBE-244A";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
->>>>>>> fh-regenerate
-    };
-
-  fileSystems."/var/lib/docker/plugins/75c43123da67b0b3e40a00af51d0764776d988b755c850071beee133ed5bbca2/propagated-mount" =
-    { device = "/var/lib/docker/plugins/75c43123da67b0b3e40a00af51d0764776d988b755c850071beee133ed5bbca2/propagated-mount";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/root/.cache/doc" =
-    { device = "portal";
-      fsType = "fuse.portal";
-    };
-
-<<<<<<< HEAD
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/9EBE-244A";
       fsType = "vfat";
@@ -62,17 +27,16 @@
     };
 
   swapDevices =
-    [ { device = "/dev/mapper/luks-af0953e8-4082-4b8e-be3b-d147df43a908"; }
+    [ { device = "/dev/disk/by-uuid/7da8d28f-e372-493b-8391-2578db420743"; }
     ];
-=======
-  fileSystems."/mnt" =
-    { device = "";
-      fsType = "none";
-      options = [ "bind" ];
-    };
 
-  swapDevices = [ ];
->>>>>>> fh-regenerate
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp111s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
