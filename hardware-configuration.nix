@@ -20,6 +20,7 @@
 
   boot.initrd.luks.devices."luks-33706ffc-082c-4470-8e43-8fa1d071179e".device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
 
+<<<<<<< HEAD
   fileSystems."/var/lib/containers/storage/overlay" =
     { device = "/var/lib/containers/storage/overlay";
       fsType = "none";
@@ -34,6 +35,12 @@
   fileSystems."/var/lib/containers/storage/overlay/3a7fbdbd964dec7b63e32d1b63547e38fb9ecb58776b8ef3a426f056abdb79b1/merged" =
     { device = "overlay";
       fsType = "overlay";
+=======
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/9EBE-244A";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+>>>>>>> fh-regenerate
     };
 
   fileSystems."/var/lib/docker/plugins/75c43123da67b0b3e40a00af51d0764776d988b755c850071beee133ed5bbca2/propagated-mount" =
@@ -47,6 +54,7 @@
       fsType = "fuse.portal";
     };
 
+<<<<<<< HEAD
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/9EBE-244A";
       fsType = "vfat";
@@ -56,6 +64,15 @@
   swapDevices =
     [ { device = "/dev/mapper/luks-af0953e8-4082-4b8e-be3b-d147df43a908"; }
     ];
+=======
+  fileSystems."/mnt" =
+    { device = "";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  swapDevices = [ ];
+>>>>>>> fh-regenerate
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

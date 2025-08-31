@@ -1,5 +1,6 @@
 {
   "nodes": {
+<<<<<<< HEAD
     "TagStudio": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -537,6 +538,15 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "b024ced1aac25639f8ca8fdfc2f8c4fbd66c48ef",
+=======
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1755186698,
+        "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fbcf476f790d8a217c3eab4e12033dc4a0f6d23c",
+>>>>>>> fh-regenerate
         "type": "github"
       },
       "original": {
@@ -546,6 +556,7 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1733096140,
@@ -734,6 +745,11 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+=======
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+>>>>>>> fh-regenerate
       }
     },
     "systems": {
