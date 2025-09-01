@@ -28,6 +28,10 @@
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
   
+# HARDWARE
+
+  hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
+
 # NETWORKING
 
   networking = {
