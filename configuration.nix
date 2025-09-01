@@ -25,7 +25,17 @@
       # systemd-boot.enable = true; # Configuration options for systemd bootloader
       # efi.canTouchEfiVariables = true;
     };
-    kernelModules = [ "nvidia_x11" ]; # hwinfo output a module alias of pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00, which corresponds to PCI ID 10DE:1BBB for GP104GLM [Quadro P3200 Mobile] according to https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb
+    kernelModules = [ "nvidia_x11" ]; 
+      # From hwinfo output:
+      #   module alias: 
+      #     pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00
+      #   PCI ID:
+      #     10DE:1BBB
+      # From the [PCI ID Repository](https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb)
+      #   Vendor (10de): 
+      #     NVIDIA Corporation 
+      #   Device Name (for device ID 1bbb): 
+      #     GP104GLM [Quadro P3200 Mobile]
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
   
@@ -66,8 +76,8 @@
     networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
     firewall = {
       enable = true;
-      allowedTCPPorts = [ ... ];
-      allowedUDPPorts = [ ... ];
+#     allowedTCPPorts = [ ... ];
+#     allowedUDPPorts = [ ... ];
     };
 #   proxy = { # Configure network proxy if necessary
 #     default = "http://user:password@proxy:port/";
@@ -192,9 +202,7 @@
   users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-
-    packages = {
-      with pkgs; [
+    packages = with pkgs; [
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
         aider-chat-full      
@@ -276,8 +284,8 @@
         neo4j
         neo4j-desktop  
         tldr
-
-      with python3Packages; [
+    ];
+    packages = with pkgs.python3Packages; [
         firecrawl-py
         gensim
         git-filter-repo
@@ -292,9 +300,9 @@
         markitdown
         mistral-common # mistral-common is a set of tools to help you work with Mistral models.
         ollama # Ollama Python library
-     ];
+   ];
 
-     with kdePackages; [
+   packages = with pkgs.kdePackages; [
        akonadi
        alpaka # Kirigami client for ollama
        baloo
@@ -308,7 +316,6 @@
        umbrello # marked as broken
        yakuake
        zanshin
-      ];
     ];
   };
 
