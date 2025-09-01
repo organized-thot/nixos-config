@@ -56,17 +56,6 @@
     graphics.enable = true; # Enable opengl
   };
 
-# FILESYSTEMS
-
-  fileSystems."/" = {
-    device = "/dev/dm-0";
-    fsType = "ext4";
-  };
-
-  swapDevices = [
-    { label = "swap"; }
-  ];
-
 # NETWORKING
 
   networking = {
