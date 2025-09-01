@@ -202,7 +202,7 @@
   users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    packages = with pkgs; [
+    packages = (with pkgs; [
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
         aider-chat-full      
@@ -284,8 +284,7 @@
         neo4j
         neo4j-desktop  
         tldr
-    ];
-    packages = with pkgs.python3Packages; [
+    ]) ++ (with pkgs.python3Packages; [
         firecrawl-py
         gensim
         git-filter-repo
@@ -300,9 +299,7 @@
         markitdown
         mistral-common # mistral-common is a set of tools to help you work with Mistral models.
         ollama # Ollama Python library
-   ];
-
-   packages = with pkgs.kdePackages; [
+   ]) ++ (with pkgs.kdePackages; [
        akonadi
        alpaka # Kirigami client for ollama
        baloo
@@ -316,7 +313,7 @@
        umbrello # marked as broken
        yakuake
        zanshin
-    ];
+    ]);
   };
 
 # SYSTEM PACKAGES
@@ -399,4 +396,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
 }
-
