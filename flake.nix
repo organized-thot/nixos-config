@@ -50,7 +50,6 @@
       inherit system;
         modules = [
           ./configuration.nix
-           home-manager.nixosModules.home-manager
            nix-snapd.nixosModules.default { # snapd for NixOS            
               services.snap.enable = true;
            }
@@ -58,4 +57,3 @@
       };
     };
 }
-
