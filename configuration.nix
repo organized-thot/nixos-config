@@ -189,6 +189,7 @@
     mtr.enable = true; # Network diagnostics tool
 
     tailscale.enable = true;
+  };
 
 # VIRTUALIZATION
 
