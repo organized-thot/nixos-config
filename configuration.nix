@@ -72,6 +72,12 @@
     };
   };
 
+  nixpkgs.config = {
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+    ];
+  };
+
   garuda.dr460nized.enable = true; # Enable Garuda dr460nized desktop
 
 # SERVICES
