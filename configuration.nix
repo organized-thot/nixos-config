@@ -194,7 +194,7 @@
         git-branchless
         git-dive 
         git-filter-repo
-        git-relevant-hsitory
+        git-relevant-history
         git-annex
 
        #network
