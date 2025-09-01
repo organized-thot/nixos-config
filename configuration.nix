@@ -181,6 +181,7 @@
         open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
         oterm # Text-based terminal client for Ollama
         screen-pipe
+        python312Packages.gensim
 
        #containerization
         distrobox
@@ -249,7 +250,6 @@
         tldr
     ]) ++ (with pkgs.python3Packages; [
         firecrawl-py
-        gensim
         git-filter-repo
         graphrag
         huggingface-hub
@@ -273,7 +273,6 @@
        milou
        plasma-nm
        purpose
-       qtwebengine
        umbrello # marked as broken
        yakuake
        zanshin
