@@ -25,17 +25,16 @@
       # systemd-boot.enable = true; # Configuration options for systemd bootloader
       # efi.canTouchEfiVariables = true;
     };
-    kernelModules = [ "nvidia_x11" ]; 
-      # From hwinfo output:
-      #   module alias: 
-      #     pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00
-      #   PCI ID:
-      #     10DE:1BBB
-      # From the [PCI ID Repository](https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb)
-      #   Vendor (10de): 
-      #     NVIDIA Corporation 
-      #   Device Name (for device ID 1bbb): 
-      #     GP104GLM [Quadro P3200 Mobile]
+    # From hwinfo output:
+    #   module alias: 
+    #     pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00
+    #   PCI ID:
+    #     10DE:1BBB
+    # From the [PCI ID Repository](https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb)
+    #   Vendor (10de): 
+    #     NVIDIA Corporation 
+    #   Device Name (for device ID 1bbb): 
+    #     GP104GLM [Quadro P3200 Mobile]
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
   
@@ -44,7 +43,6 @@
   hardware = {
     nvidia = { # Configure support for NVIDIA Quadro P3200 GPU 
       enabled = true;
-      driverVersion = "580.78.05"; # (Based on [results of NVIDIA's hardware compatibility list](https://www.nvidia.com/en-us/drivers/details/252613/)
       modesetting.enable = true;
       nvidiaSettings = true;
       powerManagement.enable = false;
@@ -326,7 +324,6 @@
     fwupd
     gdb
     klibcShrunk
-    linuxKernel.packages.linux_6_16.nvidia_x11_latest_open
     stdenv
     python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
     python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
