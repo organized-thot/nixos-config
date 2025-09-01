@@ -25,37 +25,9 @@
       # systemd-boot.enable = true; # Configuration options for systemd bootloader
       # efi.canTouchEfiVariables = true;
     };
-    # From hwinfo output:
-    #   module alias: 
-    #     pci:v000010DEd00001BBBsv00001028sd00000832bc03sc00i00
-    #   PCI ID:
-    #     10DE:1BBB
-    # From the [PCI ID Repository](https://admin.pci-ids.ucw.cz/read/PC/10de/1bbb)
-    #   Vendor (10de): 
-    #     NVIDIA Corporation 
-    #   Device Name (for device ID 1bbb): 
-    #     GP104GLM [Quadro P3200 Mobile]
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
   
-# HARDWARE
-
-  hardware = {
-    nvidia = { # Configure support for NVIDIA Quadro P3200 GPU 
-      enabled = true;
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      powerManagement.enable = false;
-      prime = { # NVIDIA Optimus hybrid graphics
-        offload.enable = true;
-        offload.enableOffloadCmd = true;
-        intelBusId = "PCI:0:0:2";
-        nvidiaBusId = "PCI:0:1:0";
-      };
-    };
-    graphics.enable = true; # Enable opengl
-  };
-
 # NETWORKING
 
   networking = {
@@ -192,7 +164,7 @@
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
         aider-chat-full      
-        fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.
+        fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced of AI prompts that can be used anywhere.
         gemini-cli # AI agent that brings the power of Gemini directly into your terminal
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
         lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
