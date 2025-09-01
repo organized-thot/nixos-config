@@ -267,6 +267,7 @@
        milou
        plasma-nm
        purpose
+       qtwebengine
        umbrello # marked as broken
        yakuake
        zanshin
