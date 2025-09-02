@@ -1,120 +1,341 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+# Edit this configuration file to define what should be installed on your system.
+# Help is available in:
+# - the configuration.nix(5) man page,
+# - on https://search.nixos.org/options, and
+# - in the NixOS manual (`nixos-help`).
+
+{ config, lib, pkgs, ... }:
+
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./hardware-configuration.nix # Produced by nixos-generate-config
   ];
 
-  # BOOT AND KERNEL
+# LINUX KERNEL AND BOOTLOADER
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # NETWORK
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # LOCALE
-
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  # font = "Lat2-Terminus16";
-  # keyMap = "us";
-  # useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # DISPLAY AND GRAPHICS
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # HARDWARE AND DEVICES
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+  boot = {
+    loader = { # Set bootloader options
+      grub = { # Grub with EFI support, and OSProber enabled for Windows dual boot
+        enable = true;
+        efiSupport = true;
+        devices = [ "nodev" ];
+        useOSProber = true;
+      };
+      # systemd-boot.enable = true; # Configuration options for systemd bootloader
+      # efi.canTouchEfiVariables = true;
+    };
+    blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
 
-  # NIXPKGS
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+# HARDWARE
 
-  # USERS
+  hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    nix = {
-      hashedPassword = "$5$p7db8EhfvHHwEvIf$L/t78C4vJ9ttSkcX049HKdvkKjKsEHNalkroe.zSPh1";
-      isNormalUser = true;
-      extraGroups = ["wheel"];
-      packages = with pkgs; [
-        tree
-        git
-        gh
-      ];
+# NETWORKING
+
+  networking = {
+    hostName = "nixos"; # Define your hostname.
+    networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
+    firewall = {
+      enable = true;
+#     allowedTCPPorts = [ ... ];
+#     allowedUDPPorts = [ ... ];
+    };
+#   proxy = { # Configure network proxy if necessary
+#     default = "http://user:password@proxy:port/";
+#     noProxy = "127.0.0.1,localhost,internal.domain";
+#   };
+  };
+
+# LOCALE AND TIMEZONE
+
+  time.timeZone = "America/Chicago"; # Set your time zone.
+  i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
+
+# NIX SETTINGS
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+#      substituters = [
+#        "https://chaotic-cx.cachix.org"
+#        "https://cache.nixos.org"
+#        "https://nix-community.cachix.org"
+#      ];
+#      trusted-public-keys = [
+#       "chaotic-cx.cachix.org-1:gFRsEiK5fIKiP5/MEHEO4aY2QT5xOoQ6RqhlZ8U219Q="
+#       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+#       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+#      ];
+#    package = pkgs.nix;
+    optimise.automatic = true;
     };
   };
-  # PACKAGES
 
-  programs.firefox.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    wget
-  ];
-
-  # SERVICES
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  nixpkgs.config = {
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+    ];
   };
+
+  garuda.dr460nized.enable = true; # Enable Garuda dr460nized desktop
+
+# SERVICES
+
+  services = {
+
+  # System and external device-related services
+    libinput.enable = true; # Touchpad support (enabled default in most desktopManager).
+    openssh.enable = true; # Enable the OpenSSH daemon
+    pipewire = { # Enable sound using Pipewire
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    # pulseaudio.enable = true; # Alternatively, enable sound using PulseAudio
+    printing.enable = true; # Enable printing via CUPS
+
+  # Display, graphics, and desktop environment
+    xserver = { # X11 options
+      enable = true; # Enable the X11 windowing system
+      xkb.layout = "us"; # Configure X11 keymap
+      videoDrivers = [ "modesetting" "nvidia" ];
+    };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    desktopManager.plasma6.enable = true;
+    dbus.enable = true; # D-Bus Daemon
+
+    flatpak.enable = true;
+
+  # Enable self-hosted programs that run web services
+    karakeep = {
+      enable = true;
+      meilisearch.enable = true;
+      browser = {
+        enable = true;
+      };
+    };
+    meilisearch = {
+      enable = true;
+      settings.experimental_dumpless_upgrade = true;
+    };
+    mongodb = {
+      enable = true;
+      user = "nix";
+    };
+    n8n = {
+      enable = true;
+      openFirewall = true;
+    };
+    neo4j.enable = true;
+    ollama.enable = true;
+    open-webui.enable = true;
+    tailscale.enable = true;
+    tiddlywiki.enable = true;
+  };
+
+# PROGRAM CONFIGURATIONS (Some programs need SUID wrappers, can be configured further or are started in user sessions.)
+
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    firefox.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    mtr.enable = true; # Network diagnostics tool
+  };
+
+# VIRTUALIZATION
+
+  virtualisation = {
+    podman.enable = true;
+    docker.enable = true;
+  };
+
+# USER CONFIG
+
+  users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    packages = (with pkgs; [
+       #ai
+        aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
+        aider-chat-full
+        fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced of AI prompts that can be used anywhere.
+        gemini-cli # AI agent that brings the power of Gemini directly into your terminal
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
+        local-ai # OpenAI alternative to run local LLMs, image and audio generation
+        mistralclient # OpenStack Mistral Command-line Client
+        mods # AI on the command line
+        n8n
+        ollama # Get up and running with large language models locally
+        open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
+        oterm # Text-based terminal client for Ollama
+        screen-pipe
+
+       #containerization
+        distrobox
+        distrobox-tui
+        podman
+        podman-tui
+        podman-desktop
+
+       #git
+        committed
+        deepgit
+        eget
+        gh
+        git-aggregator
+        git-annex
+        git-branchless
+        git-dive
+        git-filter-repo
+        git-relevant-history
+        git-annex
+
+       #network
+        mosh # Mobile shell (SSH replacement)
+        home-assistant
+        i2p # Applications and router for I2P, anonymity over the Internet
+        i2pd # Minimal I2P router written in C++
+        i2pd-tools # Toolsuite to work with keys and eepsites
+        phantomsocks
+
+       #pkm
+        affine
+        chrome-export
+        karakeep
+        logseq
+        mindforger
+        obsidian
+        protege-distribution
+        tana
+        nodePackages.tiddlywiki
+
+       #web
+        browsh
+        chrome-export
+        grayjay # Cross-platform application to stream and download content from various sources
+        telegram-desktop
+        offpunk
+        vivaldi
+
+        crawley
+        curl
+        curlie # Frontend to curl that adds the ease of use of httpie, without compromising on features and performance
+        httpie
+        katana # Next-generation crawling and spidering framework
+        muffet # Website link checker which scrapes and inspects all pages in a website recursively
+        scraper # Tool to query HTML files with CSS selectors
+        spider # Web crawler and scraper, building blocks for data curation workloads
+        schemacrawler
+        xcrawl3r
+
+       #other
+        chafa # Terminal graphics for the 21st century
+        ffmpeg-full
+        mongodb
+        neo4j
+        neo4j-desktop
+        tldr
+    ]) ++ (let
+      pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+        firecrawl-py
+        gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
+        git-filter-repo
+        graphrag
+        huggingface-hub
+        langchain
+        langchain-huggingface
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        llama-index
+        llama-index-embeddings-huggingface
+        llm-ollama # LLM plugin providing access to Ollama models using HTTP API
+        markitdown
+        mistral-common # mistral-common is a set of tools to help you work with Mistral models.
+        ollama # Ollama Python library
+      ]);
+    in [ pythonEnv ]) ++ (with pkgs.kdePackages; [
+       akonadi
+       alpaka # Kirigami client for ollama
+       baloo
+       kbookmarks
+       keditbookmarks
+       konqueror
+       libkgapi
+       milou
+       plasma-nm
+       purpose
+#      umbrello # marked as broken
+       yakuake
+       zanshin
+    ]);
+  };
+
+# SYSTEM PACKAGES
+
+  environment.systemPackages = with pkgs; [
+   #required
+    dmalloc
+    dmidecode
+    fwupd
+    gdb
+    klibcShrunk
+    stdenv
+    python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
+    python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
+
+   #other
+    git
+    bat
+    wget
+    docker
+    tailscale
+    kasmweb
+
+   #disks
+    os-prober
+    disko
+    timeshift
+
+   #nixos
+    home-manager
+    disko
+    rippkgs
+    nixpkgs-manual
+
+   #display
+    wayland-utils
+    weston
+    wl-clipboard # wayland clopboard
+
+   #package-management
+    #Python
+    python3
+    python3Packages.yarg
+    #Node.js
+    nodejs_24
+    pnpm
+    #Flatpak
+    flatpak
+    kdePackages.discover
+    #PackageKit
+    packagekit
+    #AppImage
+    libappimage
+    appimage-run
+    appimageupdate
+  ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -138,5 +359,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
