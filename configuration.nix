@@ -275,7 +275,7 @@
        milou
        plasma-nm
        purpose
-       umbrello # marked as broken
+#      umbrello # marked as broken
        yakuake
        zanshin
     ]);
