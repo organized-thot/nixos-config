@@ -171,7 +171,7 @@
         aider-chat-full      
         fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced of AI prompts that can be used anywhere.
         gemini-cli # AI agent that brings the power of Gemini directly into your terminal
-        python312Packages.gensim # Topic-modelling library
+        python313Packages.gensim # Topic-modelling library
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
         lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
         local-ai # OpenAI alternative to run local LLMs, image and audio generation
