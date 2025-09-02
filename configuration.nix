@@ -247,9 +247,10 @@
         neo4j
         neo4j-desktop
         tldr
-    ]) ++ (with pkgs.python3Packages; [
+    ]) ++ (let
+      pythonEnv = pkgs.python311.withPackages (ps: with ps; [
         firecrawl-py
-        # gensim [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
+        gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
         git-filter-repo
         graphrag
         huggingface-hub
@@ -262,7 +263,8 @@
         markitdown
         mistral-common # mistral-common is a set of tools to help you work with Mistral models.
         ollama # Ollama Python library
-   ]) ++ (with pkgs.kdePackages; [
+      ]);
+    in [ pythonEnv ]) ++ (with pkgs.kdePackages; [
        akonadi
        alpaka # Kirigami client for ollama
        baloo
