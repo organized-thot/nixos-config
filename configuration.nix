@@ -1,20 +1,20 @@
-# Edit this configuration file to define what should be installed on your system. 
-# Help is available in: 
-# - the configuration.nix(5) man page, 
-# - on https://search.nixos.org/options, and 
+# Edit this configuration file to define what should be installed on your system.
+# Help is available in:
+# - the configuration.nix(5) man page,
+# - on https://search.nixos.org/options, and
 # - in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
 
 {
 
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix # Produced by nixos-generate-config
   ];
 
-# LINUX KERNEL AND BOOTLOADER 
+# LINUX KERNEL AND BOOTLOADER
 
-  boot = { 
+  boot = {
     loader = { # Set bootloader options
       grub = { # Grub with EFI support, and OSProber enabled for Windows dual boot
         enable = true;
@@ -27,7 +27,7 @@
     };
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
   };
-  
+
 # HARDWARE
 
   hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
@@ -100,16 +100,16 @@
     xserver = { # X11 options
       enable = true; # Enable the X11 windowing system
       xkb.layout = "us"; # Configure X11 keymap
-      videoDrivers = [ "modesetting" "nvidia" ];    
+      videoDrivers = [ "modesetting" "nvidia" ];
     };
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
     };
     desktopManager.plasma6.enable = true;
-    dbus.enable = true; # D-Bus Daemon  
-    
-    flatpak.enable = true; 
+    dbus.enable = true; # D-Bus Daemon
+
+    flatpak.enable = true;
 
   # Enable self-hosted programs that run web services
     karakeep = {
@@ -132,7 +132,7 @@
       openFirewall = true;
     };
     neo4j.enable = true;
-    ollama.enable = true;  
+    ollama.enable = true;
     open-webui.enable = true;
     tailscale.enable = true;
     tiddlywiki.enable = true;
@@ -168,7 +168,7 @@
     packages = (with pkgs; [
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
-        aider-chat-full      
+        aider-chat-full
         fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced of AI prompts that can be used anywhere.
         gemini-cli # AI agent that brings the power of Gemini directly into your terminal
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
@@ -192,12 +192,12 @@
        #git
         committed
         deepgit
-        eget  
+        eget
         gh
         git-aggregator
         git-annex
         git-branchless
-        git-dive 
+        git-dive
         git-filter-repo
         git-relevant-history
         git-annex
@@ -210,7 +210,7 @@
         i2pd-tools # Toolsuite to work with keys and eepsites
         phantomsocks
 
-       #pkm   
+       #pkm
         affine
         chrome-export
         karakeep
@@ -220,15 +220,15 @@
         protege-distribution
         tana
         nodePackages.tiddlywiki
-        
+
        #web
         browsh
-        chrome-export       
+        chrome-export
         grayjay # Cross-platform application to stream and download content from various sources
         telegram-desktop
         offpunk
         vivaldi
-    
+
         crawley
         curl
         curlie # Frontend to curl that adds the ease of use of httpie, without compromising on features and performance
@@ -245,7 +245,7 @@
         ffmpeg-full
         mongodb
         neo4j
-        neo4j-desktop  
+        neo4j-desktop
         tldr
     ]) ++ (with pkgs.python3Packages; [
         firecrawl-py
@@ -300,7 +300,7 @@
     tailscale
     kasmweb
 
-   #disks    
+   #disks
     os-prober
     disko
     timeshift
@@ -330,7 +330,7 @@
     packagekit
     #AppImage
     libappimage
-    appimage-run 
+    appimage-run
     appimageupdate
   ];
 
