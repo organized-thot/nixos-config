@@ -240,11 +240,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1756786050,
-        "narHash": "sha256-l17K3y3bfQ2RnpRCQkjOvcNs9VUEDPumQ5np5Ovtuig=",
+        "lastModified": 1756872360,
+        "narHash": "sha256-RA0ID4u7Q4VOsqY2BKRK7XVNwN4FC0vrMdPX0sh+XpI=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "34fc28cb98a8493917f68dae5515ca5cf9240e0d",
+        "rev": "305857f03274f85ad8b800d1de0c8f7cacfcefe2",
         "type": "gitlab"
       },
       "original": {
@@ -321,11 +321,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756777514,
-        "narHash": "sha256-BVCWCoYNCqTt8UuEUbsHJmwjEOGjKatbrBTlLg2rwzU=",
+        "lastModified": 1756842514,
+        "narHash": "sha256-XbtRMewPGJwTNhBC4pnBu3w/xT1XejvB0HfohC2Kga8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e31db6141e47f1007a54bc9e4d8b2a26a9fbd697",
+        "rev": "30fc1b532645a21e157b6e33e3f8b4c154f86382",
         "type": "github"
       },
       "original": {
@@ -424,7 +424,7 @@
       },
       "original": {
         "type": "tarball",
-        "url": "https://flakehub.com/f/nix-community/nix-snapd/0.1.62.tar.gz"
+        "url": "https://flakehub.com/f/nix-community/nix-snapd/0.1.62%2Brev-355a1ed0141b6fd3093e3cb7b3492e6e67913681.tar.gz"
       }
     },
     "nixified-ai": {
@@ -535,11 +535,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756864478,
-        "narHash": "sha256-Nw5MnRNZu0seV2/S1KMdIa4RVvIp2kg2YweqNQfncYE=",
+        "lastModified": 1756889379,
+        "narHash": "sha256-3NSHfLMBFSlMFpBdd4/jUfdPCIDA7mcw2m5eKEgVsbU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "56dde8b941b873709a2eee5e912ce8a161fe47a1",
+        "rev": "fc7b109fc7b7bbeacac51fa8f793c48c5442b343",
         "type": "github"
       },
       "original": {
