@@ -277,6 +277,7 @@
     fwupd
     gdb
     klibcShrunk
+    logrotate # Rotates and compresses system logs (dependency of garuda-nix-subsystem)
     stdenv
     python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
     python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
