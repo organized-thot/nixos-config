@@ -120,10 +120,7 @@
         enable = true;
       };
     };
-    meilisearch = {
-      enable = true;
-      settings.experimental_dumpless_upgrade = true;
-    };
+    meilisearch.enable = true;
     mongodb = {
       enable = true;
       user = "nix";
