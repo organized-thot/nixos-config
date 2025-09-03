@@ -295,7 +295,6 @@
     timeshift
 
    #nixos
-    home-manager
     disko
     rippkgs
     nixpkgs-manual

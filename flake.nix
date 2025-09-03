@@ -1,5 +1,5 @@
 {
-  description = "NixOS flake v0.3 for personal system with Garuda Nix Subsystem, Home Manager, and numerous other imputs.";
+  description = "NixOS flake v0.3 for personal system with Garuda Nix Subsystem, and numerous other imputs.";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2505.tar.gz";
