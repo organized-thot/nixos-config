@@ -109,6 +109,7 @@
         enable = true;
       };
     };
+    logrotate.checkConfig = false;
     meilisearch.enable = true;
     mongodb = {
       enable = true;
