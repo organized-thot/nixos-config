@@ -5,10 +5,6 @@
     flake-parts.url = "https://flakehub.com/f/hercules-ci/flake-parts/0.1.397.tar.gz";
     hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.2295.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.854036.tar.gz";
-    home-manager = {
-      url = "https://flakehub.com/f/nix-community/home-manager/0.2505.4808.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     garuda = {
       url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
       inputs.nixpkgs.follows = "nixpkgs";
