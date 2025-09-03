@@ -23,7 +23,7 @@
     };
 
     nix-snapd = {
-      url = "https://flakehub.com/f/nix-community/nix-snapd/0.1.62.tar.gz";
+      url = "https://flakehub.com/f/nix-community/nix-snapd/0.1.62+rev-355a1ed0141b6fd3093e3cb7b3492e6e67913681.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
