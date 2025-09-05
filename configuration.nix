@@ -236,6 +236,9 @@
         neo4j
         neo4j-desktop
         tldr
+        appimage-run
+        appimageupdate
+
     ]) ++ (let
       pythonEnv = pkgs.python311.withPackages (ps: with ps; [
         firecrawl-py
@@ -257,6 +260,7 @@
        akonadi
        alpaka # Kirigami client for ollama
        baloo
+       discover
        kbookmarks
        keditbookmarks
        konqueror
@@ -287,7 +291,9 @@
    #other
     git
     bat
-    wget
+    groff 
+
+   wget
     docker
     tailscale
     kasmweb
@@ -316,13 +322,10 @@
     pnpm
     #Flatpak
     flatpak
-    kdePackages.discover
     #PackageKit
     packagekit
     #AppImage
     libappimage
-    appimage-run
-    appimageupdate
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
