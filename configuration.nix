@@ -152,6 +152,8 @@
 
   users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
     isNormalUser = true;
+    home = "/home/nix";
+    description = "NixOS User";
     extraGroups = [ "wheel" "networkmanager" ];
     packages = (with pkgs; [
        #ai
