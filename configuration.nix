@@ -26,6 +26,8 @@
       # efi.canTouchEfiVariables = true;
     };
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
+    kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+
   };
 
 # HARDWARE
