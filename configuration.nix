@@ -35,8 +35,6 @@
 
   hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
 
-  fileSystems."/".device = "/dev/mapper/nixos";
-
 # NETWORKING
 
   networking = {
