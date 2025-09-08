@@ -18,6 +18,7 @@
     loader = { # Set bootloader options
       grub = { # Grub with EFI support, and OSProber enabled for Windows dual boot
         enable = true;
+        device = "/dev/nvme1n1";
         efiSupport = true;
         devices = [ "nodev" ];
         useOSProber = true;
@@ -27,12 +28,14 @@
     };
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
     kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
-
+    initrd.luks.devices.nixos.device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
   };
 
 # HARDWARE
 
   hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
+
+  fileSystems."/".device = "/dev/mapper/nixos";
 
 # NETWORKING
 
