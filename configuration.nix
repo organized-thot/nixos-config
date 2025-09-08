@@ -82,7 +82,15 @@
 
   # System and external device-related services
     libinput.enable = true; # Touchpad support (enabled default in most desktopManager).
-    openssh.enable = true; # Enable the OpenSSH daemon
+    openssh = {
+      enable = true; # Enable the OpenSSH daemon
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "yes";
+        Password Authentication = false;
+      };
+      openFirewall = true;
+    };
     pipewire = { # Enable sound using Pipewire
       enable = true;
       alsa.enable = true;
@@ -158,9 +166,11 @@
 
   users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
     isNormalUser = true;
-    home = "/home/nix";
     description = "NixOS User";
+    home = "/home/nix";
     extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjpA7B2L6g5ChvNeGFhzHyy/crfK7Auy5aZaEGxxpwn" ];
+
     packages = (with pkgs; [
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
