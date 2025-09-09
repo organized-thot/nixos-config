@@ -136,7 +136,10 @@
       openFirewall = true;
     };
     neo4j.enable = true;
-    ollama.enable = true;
+    ollama = {
+      enable = true;
+      openFirewall = true;
+    };
     open-webui.enable = true;
     tailscale.enable = true;
     tiddlywiki.enable = true;
