@@ -23,11 +23,15 @@
         devices = [ "nodev" ];
         useOSProber = true;
       };
-      # systemd-boot.enable = true; # Configuration options for systemd bootloader
+      systemd-boot.enable = false; # Configuration options for systemd bootloader
       # efi.canTouchEfiVariables = true;
     };
     blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
     kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+    kernelParams = [ 
+      "cryptdevice=UUID=33706ffc-082c-4470-8e43-8fa1d071179e:luks-33706ffc-082c-4470-8e43-8fa1d071179e"
+      "root=/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e"
+    ];
     initrd.luks.devices.nixos.device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
   };
 
