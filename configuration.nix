@@ -270,7 +270,7 @@
         gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
         git-filter-repo
         graphrag
-        huggingface-hub
+        huggingface-hub # Download and publish models and other files on the huggingface.co hub
         langchain
         langchain-huggingface
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
