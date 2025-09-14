@@ -128,6 +128,7 @@
     llama-cpp = {
       enable = true;
       openFirewall = true;
+      model = "/home/nix/.models/cognitivecomputations/Dolphin3.0-R1-Mistral-24B-GGUF/Dolphin3.0-R1-Mistral-24B-Q4_0.gguf";
     };
     logrotate.checkConfig = false;
     meilisearch.enable = true;
