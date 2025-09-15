@@ -189,6 +189,7 @@
         llama-cpp
         lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
         local-ai # OpenAI alternative to run local LLMs, image and audio generation
+        mcp-nixos
         mistralclient # OpenStack Mistral Command-line Client
         mods # AI on the command line
         n8n
@@ -264,12 +265,14 @@
         tldr
         appimage-run
         appimageupdate
+        uv
 
     ]) ++ (let
       pythonEnv = pkgs.python311.withPackages (ps: with ps; [
         firecrawl-py
         gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
         git-filter-repo
+        fastmcp # Fast, Pythonic way to build MCP servers and clients
         graphrag
         huggingface-hub # Download and publish models and other files on the huggingface.co hub
         langchain
