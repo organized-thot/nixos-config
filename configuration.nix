@@ -193,7 +193,6 @@
         mistralclient # OpenStack Mistral Command-line Client
         mods # AI on the command line
         n8n
-        nixai
         ollama # Get up and running with large language models locally
         open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
         oterm # Text-based terminal client for Ollama
