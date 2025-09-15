@@ -272,7 +272,7 @@
         firecrawl-py
         gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
         git-filter-repo
-        fastmcp # Fast, Pythonic way to build MCP servers and clients
+        # fastmcp # Fast, Pythonic way to build MCP servers and clients (cyclopts-3.24 not compatible with Python 3.11)
         graphrag
         huggingface-hub # Download and publish models and other files on the huggingface.co hub
         langchain
