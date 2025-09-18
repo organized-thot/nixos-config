@@ -26,12 +26,15 @@
       systemd-boot.enable = false; # Configuration options for systemd bootloader
       # efi.canTouchEfiVariables = true;
     };
-    blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
-    kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ 
       "cryptdevice=UUID=33706ffc-082c-4470-8e43-8fa1d071179e:luks-33706ffc-082c-4470-8e43-8fa1d071179e"
       "root=/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e"
     ];
+    kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+    blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
+
     initrd.luks.devices.nixos.device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
   };
 
