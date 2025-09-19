@@ -81,8 +81,6 @@
     ];
   };
 
-  garuda.dr460nized.enable = true; # Enable Garuda dr460nized desktop
-
 # SERVICES
 
   services = {
