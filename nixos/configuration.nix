@@ -10,6 +10,7 @@
 
   imports = [
     ./hardware-configuration.nix # Produced by nixos-generate-config
+    ./home-manager.nix # Home Manager module configuration
   ];
 
 # LINUX KERNEL AND BOOTLOADER
