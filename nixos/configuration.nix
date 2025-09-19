@@ -1,99 +1,389 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+# Edit this configuration file to define what should be installed on your system.
+# Help is available in:
+# - the configuration.nix(5) man page,
+# - on https://search.nixos.org/options, and
+# - in the NixOS manual (`nixos-help`).
+
+{ config, lib, pkgs, ... }:
+
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  # You can import other NixOS modules here
+
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    ./hardware-configuration.nix # Produced by nixos-generate-config
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+# LINUX KERNEL AND BOOTLOADER
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+  boot = {
+    loader = { # Set bootloader options
+      grub = { # Grub with EFI support, and OSProber enabled for Windows dual boot
+        enable = true;
+        device = "/dev/nvme1n1";
+        efiSupport = true;
+        devices = [ "nodev" ];
+        useOSProber = true;
+      };
+      systemd-boot.enable = false; # Configuration options for systemd bootloader
+      # efi.canTouchEfiVariables = true;
+    };
+
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ 
+      "cryptdevice=UUID=33706ffc-082c-4470-8e43-8fa1d071179e:luks-33706ffc-082c-4470-8e43-8fa1d071179e"
+      "root=/dev/mapper/luks-33706ffc-082c-4470-8e43-8fa1d071179e"
     ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
+    kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+    blacklistedKernelModules = [ "nouveau" ]; # Disable nouveau (open-source NVIDIA GPU driver).
+
+    initrd.luks.devices.nixos.device = "/dev/disk/by-uuid/33706ffc-082c-4470-8e43-8fa1d071179e";
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
+# HARDWARE
+
+  hardware.nvidia.open = false; # Use proprietary kernel modules for Pascal GPU
+
+# NETWORKING
+
+  networking = {
+    hostName = "nixos"; # Define your hostname.
+    networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
+    firewall = {
+      enable = true;
+#     allowedTCPPorts = [ ... ];
+#     allowedUDPPorts = [ ... ];
+    };
+#   proxy = { # Configure network proxy if necessary
+#     default = "http://user:password@proxy:port/";
+#     noProxy = "127.0.0.1,localhost,internal.domain";
+#   };
+  };
+
+# LOCALE AND TIMEZONE
+
+  time.timeZone = "America/Chicago"; # Set your time zone.
+  i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
+
+# NIX SETTINGS
+
+  nix = {
     settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+      experimental-features = [ "nix-command" "flakes" ];
+      sandbox = "relaxed";
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    optimise.automatic = true;
   };
 
-  # FIXME: Add the rest of your current configuration
-
-  # TODO: Set your hostname
-  networking.hostName = "your-hostname";
-
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  users.users = {
-    # FIXME: Replace with your username
-    your-username = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
-    };
+  nixpkgs.config = {
+    allowBroken = true;
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+    ];
   };
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Opinionated: forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Opinionated: use keys only.
-      # Remove if you want to SSH using passwords
-      PasswordAuthentication = false;
+  garuda.dr460nized.enable = true; # Enable Garuda dr460nized desktop
+
+# SERVICES
+
+  services = {
+
+  # System and external device-related services
+    libinput.enable = true; # Touchpad support (enabled default in most desktopManager).
+    openssh = {
+      enable = true; # Enable the OpenSSH daemon
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "yes";
+        PasswordAuthentication = false;
+      };
+      openFirewall = true;
     };
+    pipewire = { # Enable sound using Pipewire
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    # pulseaudio.enable = true; # Alternatively, enable sound using PulseAudio
+    printing.enable = true; # Enable printing via CUPS
+
+  # Display, graphics, and desktop environment
+    xserver = { # X11 options
+      enable = true; # Enable the X11 windowing system
+      xkb.layout = "us"; # Configure X11 keymap
+      videoDrivers = [ "modesetting" "nvidia" ];
+    };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    desktopManager.plasma6.enable = true;
+    dbus.enable = true; # D-Bus Daemon
+
+    flatpak.enable = true;
+
+  # Enable self-hosted programs that run web services
+    karakeep = {
+      enable = true;
+      meilisearch.enable = true;
+      browser = {
+        enable = true;
+      };
+    };
+    llama-cpp = {
+      enable = true;
+      openFirewall = true;
+      model = "/home/nix/.models/cognitivecomputations/Dolphin3.0-R1-Mistral-24B-GGUF/Dolphin3.0-R1-Mistral-24B-Q4_0.gguf";
+    };
+    logrotate.checkConfig = false;
+    meilisearch.enable = true;
+    mongodb = {
+      enable = true;
+      user = "nix";
+    };
+    n8n = {
+      enable = true;
+      openFirewall = true;
+    };
+    neo4j.enable = true;
+    ollama = {
+      enable = true;
+      openFirewall = true;
+    };
+    open-webui.enable = true;
+    tailscale.enable = true;
+    tiddlywiki.enable = true;
   };
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+# PROGRAM CONFIGURATIONS (Some programs need SUID wrappers, can be configured further or are started in user sessions.)
+
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    firefox.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    mtr.enable = true; # Network diagnostics tool
+  };
+
+# VIRTUALIZATION
+
+  virtualisation = {
+    podman.enable = true;
+    docker.enable = true;
+  };
+
+# USER CONFIG
+
+  users.users.nix = { # Define a user account. Don't forget to set a password with ‘passwd’.
+    isNormalUser = true;
+    description = "NixOS User";
+    home = "/home/nix";
+    extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjpA7B2L6g5ChvNeGFhzHyy/crfK7Auy5aZaEGxxpwn" ];
+
+    packages = (with pkgs; [
+       #ai
+        aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
+        aider-chat-full
+        fabric-ai # Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced of AI prompts that can be used anywhere.
+        gemini-cli # AI agent that brings the power of Gemini directly into your terminal
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        llama-cpp
+        lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
+        local-ai # OpenAI alternative to run local LLMs, image and audio generation
+        mcp-nixos
+        mistralclient # OpenStack Mistral Command-line Client
+        mods # AI on the command line
+        n8n
+        ollama # Get up and running with large language models locally
+        open-webui # Comprehensive suite for LLMs with a user-friendly WebUI
+        oterm # Text-based terminal client for Ollama
+        screen-pipe
+
+       #containerization
+        distrobox
+        distrobox-tui
+        podman
+        podman-tui
+        podman-desktop
+
+       #git
+        committed
+        deepgit
+        eget
+        gh
+        git-aggregator
+        git-annex
+        git-branchless
+        git-dive
+        git-filter-repo
+        git-relevant-history
+        git-annex
+
+       #network
+        mosh # Mobile shell (SSH replacement)
+        home-assistant
+        i2p # Applications and router for I2P, anonymity over the Internet
+        i2pd # Minimal I2P router written in C++
+        i2pd-tools # Toolsuite to work with keys and eepsites
+        phantomsocks
+
+       #pkm
+        affine
+        chrome-export
+        karakeep
+        logseq
+        mindforger
+        obsidian
+        protege-distribution
+        tana
+        nodePackages.tiddlywiki
+
+       #web
+        browsh
+        chrome-export
+        grayjay # Cross-platform application to stream and download content from various sources
+        telegram-desktop
+        offpunk
+        vivaldi
+
+        crawley
+        curl
+        curlie # Frontend to curl that adds the ease of use of httpie, without compromising on features and performance
+        httpie
+        katana # Next-generation crawling and spidering framework
+        muffet # Website link checker which scrapes and inspects all pages in a website recursively
+        scraper # Tool to query HTML files with CSS selectors
+        spider # Web crawler and scraper, building blocks for data curation workloads
+        schemacrawler
+        xcrawl3r
+
+       #other
+        chafa # Terminal graphics for the 21st century
+        ffmpeg-full
+        mongodb
+        neo4j
+        neo4j-desktop
+        tldr
+        appimage-run
+        appimageupdate
+        uv
+
+    ]) ++ (let
+      pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+        firecrawl-py
+        gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
+        git-filter-repo
+        # fastmcp # Fast, Pythonic way to build MCP servers and clients (cyclopts-3.24 not compatible with Python 3.11)
+        graphrag
+        huggingface-hub # Download and publish models and other files on the huggingface.co hub
+        langchain
+        langchain-huggingface
+        litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
+        llama-index
+        llama-index-embeddings-huggingface
+        llm-ollama # LLM plugin providing access to Ollama models using HTTP API
+        markitdown
+        mistral-common # mistral-common is a set of tools to help you work with Mistral models.
+        ollama # Ollama Python library
+      ]);
+    in [ pythonEnv ]) ++ (with pkgs.kdePackages; [
+       akonadi
+       alpaka # Kirigami client for ollama
+       baloo
+       discover
+       kbookmarks
+       keditbookmarks
+       konqueror
+       libkgapi
+       milou
+       plasma-nm
+       purpose
+#      umbrello # marked as broken
+       yakuake
+       zanshin
+    ]);
+  };
+
+# SYSTEM PACKAGES
+
+  environment.systemPackages = with pkgs; [
+   #required
+    dmalloc
+    dmidecode
+    fwupd
+    gdb
+    klibcShrunk
+    logrotate # Rotates and compresses system logs (dependency of garuda-nix-subsystem)
+    stdenv
+    python3Packages.aiohttp # Asynchronous HTTP Client/Server for Python and asyncio
+    python3Packages.cython # Optimising static compiler for both the Python and the extended Cython programming languages
+
+   #other
+    git
+    bat
+    groff 
+
+   wget
+    docker
+    tailscale
+    kasmweb
+
+   #disks
+    os-prober
+    disko
+    timeshift
+
+   #nixos
+    disko
+    rippkgs
+    nixpkgs-manual
+
+   #display
+    wayland-utils
+    weston
+    wl-clipboard # wayland clopboard
+
+   #package-management
+    #Python
+    python3
+    python3Packages.yarg
+    #Node.js
+    nodejs_24
+    pnpm
+    #Flatpak
+    flatpak
+    #PackageKit
+    packagekit
+    #AppImage
+    libappimage
+  ];
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
