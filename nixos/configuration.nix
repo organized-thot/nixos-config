@@ -72,6 +72,7 @@
       sandbox = "relaxed";
     };
     optimise.automatic = true;
+		channel.enable = false;
   };
 
   nixpkgs.config = {
