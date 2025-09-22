@@ -1,0 +1,6 @@
+[submodule "templates/dblsaiko/dotfiles"]
+	path = templates/dblsaiko/dotfiles
+	url = ./templates/dblsaiko/dotfiles
+[submodule "templates/dblsaiko/systems"]
+	path = templates/dblsaiko/systems
+	url = ./templates/dblsaiko/systems
