@@ -9,8 +9,6 @@ pkgs.mkShellNoCC {
   # ADB
     python313Packages.adb-enhanced #   Tool for Android testing and development
     python313Packages.adb-homeassistant #  Pure python implementation of the Android ADB and Fastboot protocols
-    haskellPackages.adb #  Android Debug Bridge (ADB) protocol
-    haskellPackages.android #  Android methods exposed to Haskell
     adbfs-rootless #  Mount Android phones on Linux with adb, no root required
     adbtuifm #    TUI-based file manager for the Android Debug Bridge
     dcnnt #  UI-less tool to connect Android phone with desktop
@@ -35,9 +33,9 @@ pkgs.mkShellNoCC {
     android-tools #  Android SDK platform tools
 
   # ANDROID NDK
-    androidndkPkgs.binaries #  Android NDK toolchain, tuned for other platforms
-    androidndkPkgs.binutils #  Android NDK toolchain, tuned for other platforms (wrapper script)
-    androidndkPkgs.libraries
+#    androidndkPkgs.binaries #  Android NDK toolchain, tuned for other platforms
+ #   androidndkPkgs.binutils #  Android NDK toolchain, tuned for other platforms (wrapper script)
+  #  androidndkPkgs.libraries
     
   # SAMSUNG FIRMWARE
     heimdall #  Cross-platform open-source tool suite used to flash firmware onto Samsung Galaxy devices
