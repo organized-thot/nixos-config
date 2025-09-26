@@ -194,7 +194,7 @@
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
         llama-cpp
         lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
-        local-ai # OpenAI alternative to run local LLMs, image and audio generation
+        # BROKEN AS OF 2025-09-25 local-ai # OpenAI alternative to run local LLMs, image and audio generation
         mcp-nixos
         mistralclient # OpenStack Mistral Command-line Client
         mods # AI on the command line
