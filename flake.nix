@@ -55,17 +55,27 @@
     ... }: 
   let
     system = "x86_64-linux";
+
+    # Overlay to fix tkinter build failure.
+    # The tcl package needs libtommath in propagatedBuildInputs for other packages
+    # (like python's tkinter) to find tommath.h.
+    tkinter-fix-overlay = final: prev: {
+      tcl = prev.tcl.overrideAttrs (old: {
+        buildInputs = builtins.filter (p: p.pname != "libtommath") (old.buildInputs or []);
+        propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ prev.libtommath ];
+      });
+    };
   in
   { 
     nixosConfigurations.nixos = garuda.lib.garudaSystem {
       inherit system;
-        modules = [
-          ./configuration.nix
-           nix-snapd.nixosModules.default { # snapd for NixOS            
-              services.snap.enable = true;
-           }
-        ];
-      };
+      overlays = [ tkinter-fix-overlay ];
+      modules = [
+        ./configuration.nix
+         nix-snapd.nixosModules.default { # snapd for NixOS            
+            services.snap.enable = true;
+         }
+      ];
     };
+  };
 }
-
