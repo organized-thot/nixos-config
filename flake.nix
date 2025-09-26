@@ -69,9 +69,11 @@
   { 
     nixosConfigurations.nixos = garuda.lib.garudaSystem {
       inherit system;
-      overlays = [ tkinter-fix-overlay ];
       modules = [
         ./configuration.nix
+        ({
+          nixpkgs.overlays = [ tkinter-fix-overlay ];
+        })
          nix-snapd.nixosModules.default { # snapd for NixOS            
             services.snap.enable = true;
          }
