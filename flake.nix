@@ -69,11 +69,13 @@
     # Overlay to fix psutil build failure.
     # The psutil package's test suite fails in the sandboxed build environment.
     psutil-fix-overlay = final: prev: {
-      python311Packages = prev.python311Packages.overrideScope' (pself: psuper: {
-        psutil = psuper.psutil.overrideAttrs (old: {
-          doCheck = false;
-        });
-      });
+      python311 = prev.python311.override {
+        packageOverrides = pfinal: pprev: {
+          psutil = pprev.psutil.overrideAttrs (old: {
+            doCheck = false;
+          });
+        };
+      };
     };
   in
   { 
