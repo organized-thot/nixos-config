@@ -65,18 +65,6 @@
         propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ prev.libtommath ];
       });
     };
-
-    # Overlay to fix psutil build failure.
-    # The psutil package's test suite fails in the sandboxed build environment.
-    psutil-fix-overlay = final: prev: {
-      python311 = prev.python311.override {
-        packageOverrides = pfinal: pprev: {
-          psutil = pprev.psutil.overrideAttrs (old: {
-            doCheck = false;
-          });
-        };
-      };
-    };
   in
   { 
     nixosConfigurations.nixos = garuda.lib.garudaSystem {
@@ -84,7 +72,7 @@
       modules = [
         ./configuration.nix
         ({
-          nixpkgs.overlays = [ tkinter-fix-overlay psutil-fix-overlay ];
+          nixpkgs.overlays = [ tkinter-fix-overlay ];
         })
          nix-snapd.nixosModules.default { # snapd for NixOS            
             services.snap.enable = true;

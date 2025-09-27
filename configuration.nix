@@ -274,7 +274,17 @@
         uv
 
     ]) ++ (let
-      pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+      # The psutil package's test suite fails in the sandboxed build environment.
+      # We create an overridden python interpreter that uses a version of psutil
+      # with the tests disabled.
+      python311-overridden = pkgs.python311.override {
+        packageOverrides = pfinal: pprev: {
+          psutil = pprev.psutil.overrideAttrs (old: {
+            doCheck = false;
+          });
+        };
+      };
+      pythonEnv = python311-overridden.withPackages (ps: with ps; [
         firecrawl-py
         gensim # [Topic-modelling library (failed to build, said incompatible with Python 3.13 and 3.12)]
         git-filter-repo
