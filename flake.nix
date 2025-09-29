@@ -2,7 +2,8 @@
   description = "NixOS flake v0.3 for personal system with Garuda Nix Subsystem, and numerous other imputs.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs-python.url = "https://flakehub.com/f/cachix/nixpkgs-python/1.2.0.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2505.810395.tar.gz";
 
     garuda = {
       url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
@@ -34,7 +35,7 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    TagStudio = { 
+    TagStudio = {
       url = "https://github.com/TagStudioDev/TagStudio/archive/refs/tags/v9.5.3.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
@@ -42,42 +43,47 @@
 
   };
 
-  outputs = { 
-    self, 
-    hardware,
-    nixpkgs, 
-    garuda, 
-    nur, 
-    fh, 
-    nix-snapd, 
-    nixified-ai, 
-    TagStudio, flake-parts,
-    ... }: 
-  let
-    system = "x86_64-linux";
+  outputs =
+    { self
+    , hardware
+    , nixpkgs
+    , garuda
+    , nur
+    , fh
+    , nix-snapd
+    , nixified-ai
+    , TagStudio
+    , flake-parts
+    , nixpkgs-python
+    , ...
+    }:
+    let
+      system = "x86_64-linux";
 
-    # Overlay to fix tkinter build failure.
-    # The tcl package needs libtommath in propagatedBuildInputs for other packages
-    # (like python's tkinter) to find tommath.h.
-    tkinter-fix-overlay = final: prev: {
-      tcl = prev.tcl.overrideAttrs (old: {
-        buildInputs = builtins.filter (p: p.pname != "libtommath") (old.buildInputs or []);
-        propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ prev.libtommath ];
-      });
-    };
-  in
-  { 
-    nixosConfigurations.nixos = garuda.lib.garudaSystem {
-      inherit system;
-      modules = [
-        ./configuration.nix
-        ({
-          nixpkgs.overlays = [ tkinter-fix-overlay ];
-        })
-         nix-snapd.nixosModules.default { # snapd for NixOS            
+      # Overlay to fix tkinter build failure.
+      # The tcl package needs libtommath in propagatedBuildInputs for other packages
+      # (like python's tkinter) to find tommath.h.
+      tkinter-fix-overlay = final: prev: {
+        tcl = prev.tcl.overrideAttrs (old: {
+          buildInputs = builtins.filter (p: p.pname != "libtommath") (old.buildInputs or [ ]);
+          propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ prev.libtommath ];
+        });
+      };
+    in
+    {
+      nixosConfigurations.nixos = garuda.lib.garudaSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          ({
+            nixpkgs.overlays = [ tkinter-fix-overlay ];
+          })
+          nix-snapd.nixosModules.default
+          {
+            # snapd for NixOS            
             services.snap.enable = true;
-         }
-      ];
+          }
+        ];
+      };
     };
-  };
 }
