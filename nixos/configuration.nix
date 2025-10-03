@@ -80,6 +80,7 @@
     allowBroken = true;
     permittedInsecurePackages = [
       "qtwebengine-5.15.19"
+      "electron-35.7.5"
     ];
   };
 
