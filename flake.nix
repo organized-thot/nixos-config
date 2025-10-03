@@ -3,6 +3,7 @@
 
   inputs = {
     # Nixpkgs
+    stylix.url = "https://flakehub.com/f/nix-community/stylix/0.1.1208.tar.gz";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
@@ -13,7 +14,7 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
+    home-manager, stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
