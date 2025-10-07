@@ -29,7 +29,7 @@
     };
 
     TagStudio = { 
-      url = "https://github.com/TagStudioDev/TagStudio/archive/refs/tags/v9.5.3.tar.gz";
+      url = "github:TagStudioDev/TagStudio/137c750595fb63a3c3297849f55e9bc32b4fe613";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
