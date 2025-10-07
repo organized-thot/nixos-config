@@ -2,29 +2,29 @@
   description = "NixOS flake v0.3 for personal system with Garuda Nix Subsystem, and numerous other imputs.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/8913c168d1c56dc49a7718685968f38752171c3b";
 
     garuda = {
-      url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/a20c1e2022dd197da22cb9b470840f5ffab105a2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/\*.tar.gz";
+    fh.url = "github:DeterminateSystems/fh/3abaad486737b012e3ecef83e15b4c98b8293424";
 
-    hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.2295.tar.gz";
+    hardware.url = "github:NixOS/nixos-hardware/3441b5242af7577230a78ffb03542add264179ab";
 
     nur = {
-      url = "github:nix-community/NUR";
+      url = "github:nix-community/NUR/3db8cd4bcccced0748d3896068ac2ead64b640a4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-snapd = {
-      url = "https://flakehub.com/f/nix-community/nix-snapd/0.1.62+rev-355a1ed0141b6fd3093e3cb7b3492e6e67913681.tar.gz";
+      url = "github:nix-community/nix-snapd/355a1ed0141b6fd3093e3cb7b3492e6e67913681";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixified-ai = {
-      url = "https://flakehub.com/f/nixified-ai/flake/0.1.76.tar.gz";
+      url = "github:nixified-ai/flake/7172cd645d145400feaad9983e05faff72e3113f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
