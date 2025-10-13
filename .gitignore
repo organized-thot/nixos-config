@@ -3,3 +3,6 @@ flake.lock
 shells
 nixos/nix-fast-build_result.json
 result
+logs
+shells
+nix-defexpr
