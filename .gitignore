@@ -1,8 +1,5 @@
 .aider*
-flake.lock
 shells
-nixos/nix-fast-build_result.json
-result
 logs
-shells
+nixos/nix-fast-build_result.json
 nix-defexpr
