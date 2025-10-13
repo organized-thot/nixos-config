@@ -4,3 +4,4 @@ logs
 nixos/nix-fast-build_result.json
 nix-defexpr
 templates
+.github
