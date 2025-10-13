@@ -7,7 +7,7 @@ pkgs.mkShellNoCC {
   packages = with pkgs; [
 
   # mDNS
-    mdns #  Public domain mDNS/DNS-SD library in C
+#    mdns #  Public domain mDNS/DNS-SD library in C
     mdns-scanner #  Scan a network and create a list of IPs and associated hostnames, including mDNS hostnames and other aliases
     nssmdns #  MDNS Name Service Switch (NSS) plug-in
     python313Packages.aiohttp-asyncmdnsresolver #  Module to resolve mDNS with aiohttp
@@ -34,7 +34,7 @@ pkgs.mkShellNoCC {
     sharing #  Command-line tool to share directories and files to mobile devices
 
   # DEVICE CONTROL
-    gammu #  Command line utility and library to control mobile phones  
+#    gammu #  Command line utility and library to control mobile phones  
     micromdm #  Mobile Device Management server for Apple Devices, focused on giving you all the power through an API
 
     ios-safari-remote-debug
@@ -42,7 +42,7 @@ pkgs.mkShellNoCC {
 
     checkra1n
     rcodesign  
-    xpwn 
+#    xpwn 
 
     bark-server
    

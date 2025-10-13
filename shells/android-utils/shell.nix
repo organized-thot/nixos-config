@@ -66,7 +66,7 @@ pkgs.mkShellNoCC {
 
   # SYSTEM TOOLS
     mvt #  Tool to facilitate the consensual forensic analysis of Android and iOS devices
-    snapdragon-profiler #  Profiler for Android devices running Snapdragon chips
+    # snapdragon-profiler #  Profiler for Android devices running Snapdragon chips
     android-udev-rules #  Android udev rules list aimed to be the most comprehensive on the net
     universal-android-debloater #  Tool to debloat non-rooted Android devices
 
