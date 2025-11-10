@@ -7,3 +7,4 @@ templates
 .github
 flakes
 scripts/
+nix-install.sh
