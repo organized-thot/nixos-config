@@ -183,6 +183,7 @@
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjpA7B2L6g5ChvNeGFhzHyy/crfK7Auy5aZaEGxxpwn" ];
 
     packages = (with pkgs; [
+    # TODO: Add local-ai package once not broken
        #ai
         aichat # Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal
         aider-chat-full
@@ -191,7 +192,6 @@
         litellm # Use any LLM as a drop in replacement for gpt-3.5-turbo. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs)
         llama-cpp
         lmstudio # LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)
-# Marked as broken        local-ai # OpenAI alternative to run local LLMs, image and audio generation
         mcp-nixos
         mistralclient # OpenStack Mistral Command-line Client
         mods # AI on the command line
