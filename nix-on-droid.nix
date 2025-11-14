@@ -12,6 +12,12 @@
   # GIT
     git
     gh
+
+  # CLI TOOLS
+    bat
+    hostname
+    which
+
     # Some common stuff that people expect to have
     #procps
     #killall
